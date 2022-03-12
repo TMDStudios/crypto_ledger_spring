@@ -12,8 +12,15 @@
 <body>
 
 <h1>Crypto Ledger</h1>
-<h4><a href="/login">Log In</a></h4>
-<h4><a href="/register">Register</a></h4>
+
+<c:if test="${user!=null}">
+	<p>Hello ${user.username}</p>
+	<h4><a href="/logout">Log Out</a></h4>
+</c:if>
+<c:if test="${user==null}">
+	<h4><a href="/login">Log In</a></h4>
+	<h4><a href="/register">Register</a></h4>
+</c:if>
 
 </body>
 </html>
