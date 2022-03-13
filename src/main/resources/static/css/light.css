@@ -1,0 +1,96 @@
+body {
+	max-width: 1080px;
+	margin: auto;
+}
+h1 {
+	text-align: center;
+}
+table {
+	margin-left: auto;
+	margin-right: auto;
+	width: 100%;
+	display: table;
+}
+th {
+	border-bottom: 1px solid #ced7dd;
+	border-top: 1px solid #ced7dd;
+}
+td {
+	padding: 16px;
+	display: table-cell;
+	text-align: center;
+	border-bottom: 1px solid #ced7dd;
+}
+.in-line {
+	display: inline-block;
+}
+.center {
+	text-align: center;
+}
+.float-right {
+	text-align: right;
+}
+.float-left {
+	text-align: left;
+}
+.input {
+	width: 100%;
+}
+.card-item {
+	width: 80%;
+	height: 5%;
+	margin: auto;
+	text-align: center;
+	transition: 0.2s;
+	box-shadow: 0 0 0 0 rgb(87, 114, 187);
+	border-radius: 8px;
+}
+.card-item:hover {
+    box-shadow: 0 0 12px 0 rgb(20, 45, 82);
+}
+.logo-img {
+	width: 32px;
+	height: 32px;
+}
+.red {
+	color: red;
+}
+.green {
+	color: green;
+}
+.narrow {
+	width: 50px;
+}
+.blue-bg {
+	background-color: rgba(150, 212, 212, 0.2);
+}
+.label {
+	text-align: left;
+	width: 10vw;
+}
+.comment {
+	font-weight: bold;
+}
+.navbar {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+}
+.nav_item {
+    float: left;
+}
+.nav_login {
+    float: right;
+}
+.nav_link {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+.nav_link:hover {
+    background-color: #111;
+}

@@ -6,7 +6,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet" type="text/css" href="/css/style.css">
+<link rel="stylesheet" type="text/css" href="/css/light.css">
 <title>Crypto Ledger</title>
 </head>
 <body>
@@ -21,6 +21,8 @@
 	<h4><a href="/login">Log In</a></h4>
 	<h4><a href="/register">Register</a></h4>
 </c:if>
+<hr>
+<h4><a href="/prices">View Prices</a></h4>
 
 </body>
 </html>
