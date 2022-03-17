@@ -14,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.tmdstudios.cls.models.Coin;
@@ -142,6 +143,13 @@ public class MainController {
 //		model.addAttribute("myCoins", thisUser.getCoins());
 		 
 		return "view_prices.jsp";
+	}
+	
+	@GetMapping("/coins/{id}")
+	public String coinDetails(HttpSession session, Model model, @PathVariable("id") Long id) {
+		model.addAttribute("coin", coinService.findById(id));
+		 
+		return "coin_details.jsp";
 	}
 
 }
