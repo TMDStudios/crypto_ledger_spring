@@ -48,7 +48,7 @@
 					<td class="narrow">100+</td>
 				</c:if>
 	            <td class="narrow"><a href="/coins/${coin.id}"><img class="logo-img" src="${coin.logo}"/></a></td>
-	            <td colspan=2 class="float-left"><a href="/coins/${coin.id}">${coin.name} - ${coin.symbol}</a></td>
+	            <td colspan=2 class="float-left"><a class="link-light" href="/coins/${coin.id}">${coin.name} - ${coin.symbol}</a></td>
 	            <td>$<fmt:formatNumber pattern="0.000" value="${coin.price}"/></td>
 	            <c:if test="${coin.priceChangePercentage1d>=0}">
 					<td class="green"><img src="${upArrow}"/> <fmt:formatNumber pattern="0.000" value="${coin.priceChangePercentage1d}"/>%</td>
@@ -68,7 +68,7 @@
 				<c:if test="${coin.priceChangePercentage30d<0}">
 					<td class="red"><img src="${downArrow}"/> <fmt:formatNumber pattern="0.000" value="${coin.priceChangePercentage30d}"/>%</td>
 				</c:if>
-				<td><a href="/coins/${coin.id}">${coin.users.size()}</a></td>
+				<td><a class="link-light" href="/coins/${coin.id}">${coin.users.size()}</a></td>
             </tr>
 		</c:forEach>
 	</tbody>   

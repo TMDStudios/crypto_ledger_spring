@@ -1,3 +1,9 @@
+html,body,span,tbody,tfoot,thead,tr,th,td {
+    background: #000000; 
+    font-family: 'Lato', helvetica, arial, sans-serif; 
+    font-size: 16px; 
+    color: rgb(228, 228, 228);
+}
 body {
 	max-width: 1080px;
 	margin: auto;
@@ -42,11 +48,11 @@ td {
 	margin: auto;
 	text-align: center;
 	transition: 0.2s;
-	box-shadow: 0 0 0 0 rgb(87, 114, 187);
+	box-shadow: 0 0 0 0 rgb(188, 188, 188);
 	border-radius: 8px;
 }
 .card-item:hover {
-    box-shadow: 0 0 12px 0 rgb(20, 45, 82);
+    box-shadow: 0 0 12px 0 rgb(228, 228, 228);
 }
 .logo-img {
 	width: 32px;
@@ -70,6 +76,26 @@ td {
 }
 .comment {
 	font-weight: bold;
+}
+.link-light {
+	text-decoration: none;
+    color: rgb(228, 228, 228);
+}
+.link-light:hover {
+  	text-decoration: underline;
+}
+.banner-div {
+	width: 60%; 
+	margin: auto; 
+	text-align: center;
+}
+.banner {
+    box-shadow: 0 0 0 0 rgb(87, 114, 187);
+    transition: 0.2s;
+    border-radius: 8px;
+}
+.banner:hover {
+    box-shadow: 0 0 12px 0 rgb(137, 181, 248);
 }
 .navbar {
     list-style-type: none;

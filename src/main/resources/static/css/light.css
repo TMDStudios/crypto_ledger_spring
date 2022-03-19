@@ -71,6 +71,26 @@ td {
 .comment {
 	font-weight: bold;
 }
+.link-light {
+	text-decoration: none;
+    color: #333;
+}
+.link-light:hover {
+  	text-decoration: underline;
+}
+.banner-div {
+	width: 60%; 
+	margin: auto; 
+	text-align: center;
+}
+.banner {
+    box-shadow: 0 0 0 0 rgb(87, 114, 187);
+    transition: 0.2s;
+    border-radius: 8px;
+}
+.banner:hover {
+    box-shadow: 0 0 12px 0 rgb(20, 45, 82);
+}
 .navbar {
     list-style-type: none;
     margin: 0;

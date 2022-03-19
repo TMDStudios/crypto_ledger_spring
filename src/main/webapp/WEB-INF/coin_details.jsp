@@ -17,6 +17,17 @@
     <div class="nomics-ticker-widget" data-name="${coin.name}" data-base="${coin.symbol}" data-quote="USD"></div>
     <script src="https://widget.nomics.com/embed.js"></script>
 </div>
+<br>
+<br>
+<div class="banner-div">
+  <a href="https://tmdstudios.wordpress.com/py-learning-companion/">
+    <img
+      class="banner"
+      style="max-width: 100%"
+      src="https://tmdstudios.files.wordpress.com/2020/10/plclogo.png?w=600"
+    />
+  </a>
+</div>
 
 </body>
 </html>
