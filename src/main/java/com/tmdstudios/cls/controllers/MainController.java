@@ -16,6 +16,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.tmdstudios.cls.models.Coin;
 import com.tmdstudios.cls.models.LoginUser;
@@ -28,6 +31,7 @@ import com.tmdstudios.cls.services.UserService;
 public class MainController {
 	
 	private CoinDataService coinDataService = new CoinDataService();
+	private boolean showWatchlist = false;
 	
 	@Autowired
 	private UserService userService;
@@ -130,7 +134,13 @@ public class MainController {
 					coinService.addCoin(coin);
 				}
 			}
-			model.addAttribute("coins", coinService.allCoins());
+			if(showWatchlist) {
+				User thisUser = userService.findById(user.getId());
+				model.addAttribute("coins", thisUser.getCoins());
+			}else {
+				model.addAttribute("coins", coinService.allCoins());
+			}
+			
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -139,10 +149,25 @@ public class MainController {
 		session.setAttribute("starFull", "https://tmdstudios.files.wordpress.com/2022/03/goldstar.png");
 		session.setAttribute("upArrow", "https://tmdstudios.files.wordpress.com/2022/03/uparrow-1.png");
 		session.setAttribute("downArrow", "https://tmdstudios.files.wordpress.com/2022/03/downarrow-1.png");
+		session.setAttribute("showWatchlist", showWatchlist);
 //		User thisUser = userService.findById(user.getId());
 //		model.addAttribute("myCoins", thisUser.getCoins());
 		 
 		return "view_prices.jsp";
+	}
+	
+	@RequestMapping("/watchlist")
+	public String watchlist(HttpSession session, Model model) {
+	 
+//		User user = (User) session.getAttribute("user");
+//		if(user==null) {
+//			return "redirect:/logout";
+//		}
+		
+		showWatchlist = !showWatchlist;
+		session.setAttribute("showWatchlist", showWatchlist);
+		 
+		return "redirect:/prices";
 	}
 	
 	@GetMapping("/coins/{id}")

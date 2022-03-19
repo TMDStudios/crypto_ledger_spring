@@ -7,15 +7,25 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet" type="text/css" href="/css/light.css">
+<link rel="stylesheet" type="text/css" href="/css/dark.css">
 <title>Crypto Ledger</title>
 </head>
 <body>
 
 <ul class="navbar">
-    <li class="nav_item"><a class="nav_link" href="/dashboard">Welcome, you</a></li>
+    <li class="nav_item"><a class="nav_link" href="/">Home</a></li>
     <li class="nav_login"><a class="nav_link" href="/logout">Log Out</a></li>
 </ul>
+
+<c:if test="${user!=null}">
+	<c:if test="${showWatchlist}">
+	<h4 class="center"><a class="link-light" href="/watchlist">All Coins</a></h4>
+	</c:if>
+	<c:if test="${!showWatchlist}">
+		<h4 class="center"><a class="link-light" href="/watchlist">My Watchlist</a></h4>
+	</c:if>
+	<hr>
+</c:if>
 
 <br>
 
