@@ -24,5 +24,7 @@
 <hr>
 <h4><a href="/prices">View Prices</a></h4>
 
+<script type="text/javascript" src="../js/app.js"></script>
+
 </body>
 </html>

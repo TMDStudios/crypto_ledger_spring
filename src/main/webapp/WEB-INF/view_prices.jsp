@@ -84,8 +84,12 @@
 	</tbody>   
 </table>
 
+<br>
 <div style="margin: auto; text-align: center;">Coin prices provided by <a href="https://nomics.com/" target="_blank">
 https://nomics.com/</a></div>
+<br>
+
+<script type="text/javascript" src="../js/app.js"></script>
 
 </body>
 </html>
