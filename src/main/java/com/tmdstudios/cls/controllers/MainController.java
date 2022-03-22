@@ -73,7 +73,7 @@ public class MainController {
 	     
 	    if(result.hasErrors()) {
 	        model.addAttribute("newLogin", new LoginUser());
-	        return "login.jsp";
+	        return "register.jsp";
 	    }
 
 	    session.setAttribute("user", user);
@@ -83,6 +83,8 @@ public class MainController {
 	
 	@GetMapping("/logout")
 	public String logout(HttpSession session) {
+		showWatchlist = false;
+		session.setAttribute("showWatchlist", showWatchlist);
 		session.setAttribute("user", null); 
 	    return "redirect:/";
 	}
