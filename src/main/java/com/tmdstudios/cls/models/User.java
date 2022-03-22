@@ -22,6 +22,8 @@ import javax.validation.constraints.Size;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 @Table(name="users")
 public class User {
@@ -30,7 +32,7 @@ public class User {
     private Long id;
     
     @NotEmpty(message="Username is required!")
-    @Size(min=5, max=30, message="Username must be between 5 and 30 characters")
+    @Size(min=3, max=30, message="Username must be between 5 and 30 characters")
     private String username;
     
     private String email;
@@ -60,6 +62,7 @@ public class User {
     }
     
     @ManyToMany(fetch = FetchType.LAZY, cascade=CascadeType.ALL)
+    @JsonManagedReference
 	@JoinTable(
 			name = "users_coins",
 			joinColumns = @JoinColumn(name = "user_id"),

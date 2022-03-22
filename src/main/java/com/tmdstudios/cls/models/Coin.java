@@ -16,6 +16,8 @@ import javax.persistence.Table;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 @Table(name="coins")
 public class Coin {
@@ -37,6 +39,7 @@ public class Coin {
     private Date updatedAt;
     
     @ManyToMany(fetch = FetchType.LAZY, cascade=CascadeType.ALL)
+    @JsonBackReference
 	@JoinTable(
 			name = "users_coins",
 			joinColumns = @JoinColumn(name = "coin_id"),

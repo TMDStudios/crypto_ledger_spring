@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.tmdstudios.cls.models.Coin;
 import com.tmdstudios.cls.models.LoginUser;
 import com.tmdstudios.cls.models.User;
 import com.tmdstudios.cls.services.CoinService;
@@ -35,26 +36,10 @@ public class MainController {
 	}
 	
 	@GetMapping("/login")
-	public String auth(Model model) {
+	public String authLogin(Model model) {
 	    model.addAttribute("newUser", new User());
 	    model.addAttribute("newLogin", new LoginUser());
 	    return "login.jsp";
-	}
-	
-	@PostMapping("/register")
-	public String register(@Valid @ModelAttribute("newUser") User newUser, 
-			BindingResult result, Model model, HttpSession session) {
-
-	    User user = userService.register(newUser, result);
-	     
-	    if(result.hasErrors()) {
-	        model.addAttribute("newLogin", new LoginUser());
-	        return "login.jsp";
-	    }
-
-	    session.setAttribute("user", user);
-	 
-	    return "redirect:/";
 	}
 	
 	@PostMapping("/login")
@@ -73,6 +58,29 @@ public class MainController {
 	    return "redirect:/";
 	}
 	
+	@GetMapping("/register")
+	public String authRegister(Model model) {
+	    model.addAttribute("newUser", new User());
+	    model.addAttribute("newLogin", new LoginUser());
+	    return "register.jsp";
+	}
+	
+	@PostMapping("/register")
+	public String register(@Valid @ModelAttribute("newUser") User newUser, 
+			BindingResult result, Model model, HttpSession session) {
+
+	    User user = userService.register(newUser, result);
+	     
+	    if(result.hasErrors()) {
+	        model.addAttribute("newLogin", new LoginUser());
+	        return "login.jsp";
+	    }
+
+	    session.setAttribute("user", user);
+	 
+	    return "redirect:/";
+	}
+	
 	@GetMapping("/logout")
 	public String logout(HttpSession session) {
 		session.setAttribute("user", null); 
@@ -83,9 +91,12 @@ public class MainController {
 	public String viewPrices(HttpSession session, Model model) {
 	 
 		User user = (User) session.getAttribute("user");
-//		if(user==null) {
+		if(user==null) {
 //			return "redirect:/logout";
-//		}
+		}else {
+			User thisUser = userService.findById(user.getId());
+			model.addAttribute("myCoins", thisUser.getCoins());
+		}
 		
 		if(showWatchlist) {
 			User thisUser = userService.findById(user.getId());
@@ -99,8 +110,6 @@ public class MainController {
 		session.setAttribute("upArrow", "https://tmdstudios.files.wordpress.com/2022/03/uparrow-1.png");
 		session.setAttribute("downArrow", "https://tmdstudios.files.wordpress.com/2022/03/downarrow-1.png");
 		session.setAttribute("showWatchlist", showWatchlist);
-//		User thisUser = userService.findById(user.getId());
-//		model.addAttribute("myCoins", thisUser.getCoins());
 		 
 		return "view_prices.jsp";
 	}
@@ -115,6 +124,33 @@ public class MainController {
 		
 		showWatchlist = !showWatchlist;
 		session.setAttribute("showWatchlist", showWatchlist);
+		 
+		return "redirect:/prices";
+	}
+	
+	@RequestMapping("/coins/watch/{id}")
+	public String watchCoin(HttpSession session, @PathVariable("id") Long id) {
+	 
+		User user = (User) session.getAttribute("user");
+		if(user==null) {
+			return "redirect:/logout";
+		}
+		
+		Coin coin = coinService.findById(id);
+		boolean userFound = false;
+		for(User coinUser:coin.getUsers()) {
+			if(coinUser.getId()==user.getId()) {
+				userFound = true;
+				break;
+			}
+		}
+		User thisUser = userService.findById(user.getId());
+		if(userFound) {
+			coin.getUsers().remove(thisUser);
+		}else {
+			coin.getUsers().add(thisUser);
+		}
+		coinService.updateCoin(coin);
 		 
 		return "redirect:/prices";
 	}

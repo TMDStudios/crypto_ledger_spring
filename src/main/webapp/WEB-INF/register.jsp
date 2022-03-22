@@ -7,26 +7,33 @@
 <html>
 <head>
 <link rel="stylesheet" type="text/css" href="/css/light.css">
-<title>Log In</title>
+<title>Register</title>
 </head>
 <body>
 
-<h1>Log In</h1>
+<h1>Register</h1>
 
-<form:form action="/login" method="post" modelAttribute="newLogin">
+<form:form action="/register" method="post" modelAttribute="newUser">
 
 	<table>
 		<thead>
 	    	<tr class="blue-bg">
-	            <td colspan="2">Log In</td>
+	            <td colspan="2">New User</td>
 	        </tr>
 	    </thead>
 	    <thead>
-	        <tr class="blue-bg">
+	    	<tr class="blue-bg">
 	            <td class="label">Username:</td>
 	            <td class="float-left">
 	            	<form:errors path="username" class="text-danger"/>
 					<form:input class="input" path="username"/>
+	            </td>
+	        </tr>
+	        <tr class="blue-bg">
+	            <td class="label">Email (optional):</td>
+	            <td class="float-left">
+	            	<form:errors path="email" class="text-danger"/>
+					<form:input class="input" path="email" type="email"/>
 	            </td>
 	        </tr>
 	        <tr class="blue-bg">
@@ -37,7 +44,14 @@
 	            </td>
 	        </tr>
 	        <tr class="blue-bg">
-	        	<td colspan=2><input class="input" class="button" type="submit" value="Log In"/></td>
+	            <td class="label">Confirm PW:</td>
+	            <td class="float-left">
+	            	<form:errors path="confirm" class="text-danger"/>
+					<form:input class="input" path="confirm" type="password"/>
+	            </td>
+	        </tr>
+	        <tr class="blue-bg">
+	        	<td colspan=2><input class="input" class="button" type="submit" value="Register"/></td>
 	        </tr>
 	    </thead>
 	</table>

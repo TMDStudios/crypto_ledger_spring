@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.tmdstudios.cls.models.Coin;
+import com.tmdstudios.cls.models.User;
 import com.tmdstudios.cls.services.CoinService;
 
 @RestController
@@ -46,15 +47,20 @@ public class CoinController {
 				priceChangePercentage7d, 
 				priceChangePercentage30d
 				);
-//		System.out.println("NEW COIN ADDED! " + coin.getPrice());
-//		coinService.addCoin(coin);
 		
 		Coin coin = coinService.findBySymbol(symbol);
 		if(coin==null) {
 			coinService.addCoin(newCoin);
 		}else {
 			newCoin.setId(coin.getId());
+			newCoin.setUsers(coin.getUsers());
 			coinService.updateCoin(newCoin);
+//			List<User> users = coin.getUsers();
+//			Long coinId = coin.getId();
+//			coin = newCoin;
+//			coin.setId(coinId);
+//			coin.setUsers(users);
+//			coinService.updateCoin(coin);
 		}
 		
 		return coin;
