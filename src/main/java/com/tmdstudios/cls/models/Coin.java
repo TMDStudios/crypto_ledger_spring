@@ -47,10 +47,6 @@ public class Coin {
 	)
     List<User> users;
     
-//    @Column(updatable=false)
-//    @OneToMany(mappedBy="coin", fetch = FetchType.LAZY)
-//    private List<Comment> comments;
-    
     public Coin() {}
     
     public Coin(

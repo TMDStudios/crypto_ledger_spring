@@ -28,8 +28,19 @@
     />
   </a>
 </div>
+<hr>
 
-<script type="text/javascript" src="../js/app.js"></script>
+<form action="" method="post" id="form">
+	<span>
+	<input type="hidden" id="name" name="name" value="${coin.name}">
+	<input type="hidden" id="symbol" name="symbol" value="${coin.symbol}">
+	<input type="number" step="0.00000001" min="0" id="amount" name="amount" placeholder="Amount"/>
+	<input type="hidden" id="purchasePrice" name="purchasePrice" value="${coin.price}">
+	<input class="button" type="submit" value="Buy"/>
+	</span>
+</form>
+
+<script type="text/javascript" src="../js/buy.js"></script>
 
 </body>
 </html>

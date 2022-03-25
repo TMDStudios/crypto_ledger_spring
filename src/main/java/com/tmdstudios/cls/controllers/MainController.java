@@ -1,5 +1,7 @@
 package com.tmdstudios.cls.controllers;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
@@ -12,11 +14,14 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.tmdstudios.cls.models.Coin;
 import com.tmdstudios.cls.models.LoginUser;
+import com.tmdstudios.cls.models.OwnedCoin;
 import com.tmdstudios.cls.models.User;
 import com.tmdstudios.cls.services.CoinService;
+import com.tmdstudios.cls.services.OwnedCoinService;
 import com.tmdstudios.cls.services.UserService;
 
 @Controller
@@ -29,6 +34,9 @@ public class MainController {
 	
 	@Autowired
 	private CoinService coinService;
+	
+	@Autowired
+	private OwnedCoinService ownedCoinService;
 	
 	@GetMapping("/")
 	public String index(Model model) {
@@ -157,11 +165,32 @@ public class MainController {
 		return "redirect:/prices";
 	}
 	
-	@GetMapping("/coins/{id}")
+	@RequestMapping(value="/coins/{id}", method = { RequestMethod.GET, RequestMethod.POST })
 	public String coinDetails(HttpSession session, Model model, @PathVariable("id") Long id) {
 		model.addAttribute("coin", coinService.findById(id));
 		 
 		return "coin_details.jsp";
+	}
+	
+	@GetMapping("/home")
+	public String home(HttpSession session, Model model) {
+	 
+		User user = (User) session.getAttribute("user");
+		if(user==null) {
+			return "redirect:/logout";
+		}else {
+			User thisUser = userService.findById(user.getId());
+			List<OwnedCoin> ownedCoins = thisUser.getOwnedCoins();
+			model.addAttribute("ownedCoins", ownedCoins);
+			
+			for(OwnedCoin ownedCoin:ownedCoins) {
+				ownedCoin.setCurrentPrice(coinService.findBySymbol(ownedCoin.getSymbol()).getPrice());
+				ownedCoin.setPriceDifference(coinService.findBySymbol(ownedCoin.getSymbol()).getPrice()/ownedCoin.getPurchasePrice()-1);
+				ownedCoinService.updateOwnedCoin(ownedCoin);
+			}
+		}
+		 
+		return "home.jsp";
 	}
 
 }
