@@ -13,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
@@ -70,9 +71,10 @@ public class User {
 	)
     List<Coin> coins;
     
-//    @Column(updatable=false)
-//    @OneToMany(mappedBy="user", fetch = FetchType.LAZY)
-//    private List<Comment> comments;
+    @Column(updatable=false)
+    @OneToMany(mappedBy="owner", fetch = FetchType.LAZY)
+    @JsonManagedReference
+    private List<OwnedCoin> ownedCoins;
   
     public User() {}
     
@@ -123,6 +125,12 @@ public class User {
 	}
 	public void setCoins(List<Coin> coins) {
 		this.coins = coins;
+	}
+	public List<OwnedCoin> getOwnedCoins() {
+		return ownedCoins;
+	}
+	public void setOwnedCoins(List<OwnedCoin> ownedCoins) {
+		this.ownedCoins = ownedCoins;
 	}
 
 }

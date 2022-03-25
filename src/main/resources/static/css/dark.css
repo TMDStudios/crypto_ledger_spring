@@ -31,6 +31,10 @@ td {
 .center {
 	text-align: center;
 }
+.center-cell {
+	margin: auto;
+	text-align: center;
+}
 .float-right {
 	text-align: right;
 }
