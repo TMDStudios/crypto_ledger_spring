@@ -29,10 +29,6 @@ public class OwnedCoinController {
 	@Autowired
 	private CoinService coinService;
 	
-//	public OwnedCoinController(OwnedCoinService ownedCoinService) {
-//		this.ownedCoinService = ownedCoinService;
-//	}
-	
 	@RequestMapping("/api/ownedCoins")
 	public List<OwnedCoin> allOwnedCoins() {
 		return ownedCoinService.allOwnedCoins();
@@ -80,39 +76,6 @@ public class OwnedCoinController {
 		
 		return newOwnedCoin;
 	}
-	
-	@RequestMapping("/api/ownedCoins/{id}")
-	public OwnedCoin show(@PathVariable("id") Long id) {
-		OwnedCoin ownedCoin = ownedCoinService.findById(id);
-		return ownedCoin;
-	}
-	
-//	@RequestMapping(value="/api/ownedCoins/{id}", method=RequestMethod.PUT)
-//	public OwnedCoin update(
-//			@PathVariable("id") Long id,
-//			@RequestParam(value="name") String name, 
-//			@RequestParam(value="symbol") String symbol, 
-//			@RequestParam(value="logo") String logo, 
-//			@RequestParam(value="price") Double price,
-//			@RequestParam(value="ownedCoinRank") Long ownedCoinRank,
-//			@RequestParam(value="priceChangePercentage1d") Double priceChangePercentage1d,
-//			@RequestParam(value="priceChangePercentage7d") Double priceChangePercentage7d,
-//			@RequestParam(value="priceChangePercentage30d") Double priceChangePercentage30d
-//			) {
-//		OwnedCoin newOwnedCoin = new OwnedCoin(
-//				name, 
-//				symbol, 
-//				logo, 
-//				price, 
-//				ownedCoinRank, 
-//				priceChangePercentage1d, 
-//				priceChangePercentage7d, 
-//				priceChangePercentage30d
-//				);
-//		newOwnedCoin.setId(id);
-//		OwnedCoin ownedCoin = ownedCoinService.updateOwnedCoin(newOwnedCoin);
-//		return ownedCoin;
-//	}
 	
 	@RequestMapping(value="/api/ownedCoins/{id}", method=RequestMethod.DELETE)
 	public void destroy(@PathVariable("id") Long id) {

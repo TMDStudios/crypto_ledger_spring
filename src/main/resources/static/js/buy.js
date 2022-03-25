@@ -6,7 +6,7 @@ function validate(){
 		"&symbol="+document.getElementById("symbol").getAttribute("value")+
 		"&amount="+document.getElementById("amount").value+
 		"&purchasePrice="+document.getElementById("purchasePrice").getAttribute("value")+"");
-	if (confirm("Bought "+document.getElementById("amount").value+" of " + document.getElementById("name").getAttribute("value")+"!")) {
+	if (confirm("Bought "+document.getElementById("amount").value+" " + document.getElementById("symbol").getAttribute("value")+"!")) {
 		console.log("Clicked OK");
 	  	window.open("/home", "_self");
 	} else {
