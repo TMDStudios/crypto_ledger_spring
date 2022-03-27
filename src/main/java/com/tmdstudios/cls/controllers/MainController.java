@@ -185,7 +185,7 @@ public class MainController {
 			
 			for(OwnedCoin ownedCoin:ownedCoins) {
 				ownedCoin.setCurrentPrice(coinService.findBySymbol(ownedCoin.getSymbol()).getPrice());
-				ownedCoin.setPriceDifference(coinService.findBySymbol(ownedCoin.getSymbol()).getPrice()/ownedCoin.getPurchasePrice()-1);
+				ownedCoin.setPriceDifference(coinService.findBySymbol(ownedCoin.getSymbol()).getPrice()/ownedCoin.getPurchasePrice()*100-100);
 				ownedCoinService.updateOwnedCoin(ownedCoin);
 			}
 		}

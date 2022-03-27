@@ -11,6 +11,11 @@
 </head>
 <body>
 
+<ul class="navbar">
+    <li class="nav_item"><a class="nav_link" href="/">Home</a></li>
+    <li class="nav_login"><a class="nav_link" href="/logout">Log Out</a></li>
+</ul>
+
 <h1>${coin.name}</h1>
 
 <div align='center'>
@@ -28,8 +33,9 @@
     />
   </a>
 </div>
-<hr>
 
+<c:if test="${user!=null}">
+<hr>
 <form action="" method="post" id="form">
 	<span>
 	<input type="hidden" id="name" name="name" value="${coin.name}">
@@ -38,7 +44,8 @@
 	<input type="hidden" id="purchasePrice" name="purchasePrice" value="${coin.price}">
 	<input class="button" type="submit" value="Buy"/>
 	</span>
-</form>
+</form>	
+</c:if>
 
 <script type="text/javascript" src="../js/buy.js"></script>
 
