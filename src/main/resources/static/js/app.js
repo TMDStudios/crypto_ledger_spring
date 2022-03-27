@@ -7,9 +7,9 @@ function updateCoin(coin) {
 		"&symbol="+coin[1]+"&logo="+coin[2]+
 		"&price="+coin[3]+
 		"&coinRank="+coin[4]+
-		"&priceChangePercentage1d="+coin[4]+
-		"&priceChangePercentage7d="+coin[5]+
-		"&priceChangePercentage30d="+coin[6]+"");
+		"&priceChangePercentage1d="+coin[5]+
+		"&priceChangePercentage7d="+coin[6]+
+		"&priceChangePercentage30d="+coin[7]+"");
 }
 
 function getFile(myCallback) {

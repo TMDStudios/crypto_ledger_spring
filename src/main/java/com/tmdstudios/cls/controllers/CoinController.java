@@ -54,12 +54,6 @@ public class CoinController {
 			newCoin.setId(coin.getId());
 			newCoin.setUsers(coin.getUsers());
 			coinService.updateCoin(newCoin);
-//			List<User> users = coin.getUsers();
-//			Long coinId = coin.getId();
-//			coin = newCoin;
-//			coin.setId(coinId);
-//			coin.setUsers(users);
-//			coinService.updateCoin(coin);
 		}
 		
 		return coin;
