@@ -12,19 +12,14 @@
 </head>
 <body>
 
+<ul class="navbar">
+    <li class="nav_item"><a class="nav_link" href="/home">Home</a></li>
+    <li class="nav_item"><a class="nav_link" href="/prices">View Prices</a></li>
+    <li class="nav_login"><a class="nav_link" href="/logout">Log Out</a></li>
+</ul>
+
 <h1>Crypto Ledger</h1>
 
-<c:if test="${user!=null}">
-	<p>Hello ${user.username}</p>
-	<h4><a href="/logout">Log Out</a></h4>
-</c:if>
-<c:if test="${user==null}">
-	<h4><a href="/login">Log In</a></h4>
-	<h4><a href="/register">Register</a></h4>
-</c:if>
-<hr>
-<h4><a href="/prices">Dashboard</a></h4>
-<br>
 <table>
 	<thead>
     	<tr class="blue-bg">

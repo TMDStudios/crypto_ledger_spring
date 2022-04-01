@@ -12,7 +12,8 @@
 <body>
 
 <ul class="navbar">
-    <li class="nav_item"><a class="nav_link" href="/">Home</a></li>
+    <li class="nav_item"><a class="nav_link" href="/home">Home</a></li>
+    <li class="nav_item"><a class="nav_link" href="/prices">View Prices</a></li>
     <li class="nav_login"><a class="nav_link" href="/logout">Log Out</a></li>
 </ul>
 

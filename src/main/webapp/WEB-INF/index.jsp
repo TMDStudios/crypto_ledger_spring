@@ -11,18 +11,25 @@
 </head>
 <body>
 
+<ul class="navbar">
+    <li class="nav_item"><a class="nav_link" href="/home">Home</a></li>
+    <li class="nav_item"><a class="nav_link" href="/prices">View Prices</a></li>
+    <c:if test="${user!=null}">
+		<li class="nav_login"><a class="nav_link" href="/logout">Log Out</a></li>
+	</c:if>
+	<c:if test="${user==null}">
+		<li class="nav_item"><a class="nav_link" href="/login">Log In</a></li>
+		<li class="nav_login"><a class="nav_link" href="/register">Register</a></li>
+	</c:if>
+    
+</ul>
+
 <h1>Crypto Ledger</h1>
 
-<c:if test="${user!=null}">
-	<p>Hello ${user.username}</p>
-	<h4><a href="/logout">Log Out</a></h4>
-</c:if>
-<c:if test="${user==null}">
-	<h4><a href="/login">Log In</a></h4>
-	<h4><a href="/register">Register</a></h4>
-</c:if>
-<hr>
-<h4><a href="/prices">View Prices</a></h4>
+<p>Crypto Ledger (Spring) is the Java version of Crypto Ledger.</p>
+
+<p>The original project can be found here: 
+<a href="https://github.com/TMDStudios/crypto_ledger">https://github.com/TMDStudios/crypto_ledger</a></p>
 
 <script type="text/javascript" src="../js/app.js"></script>
 

@@ -63,7 +63,7 @@ public class MainController {
 	     
 	    session.setAttribute("user", user);
 	 
-	    return "redirect:/";
+	    return "redirect:/home";
 	}
 	
 	@GetMapping("/register")
@@ -126,11 +126,6 @@ public class MainController {
 	
 	@RequestMapping("/watchlist")
 	public String watchlist(HttpSession session, Model model) {
-	 
-//		User user = (User) session.getAttribute("user");
-//		if(user==null) {
-//			return "redirect:/logout";
-//		}
 		
 		showWatchlist = !showWatchlist;
 		session.setAttribute("showWatchlist", showWatchlist);
