@@ -1,5 +1,6 @@
 package com.tmdstudios.cls.controllers;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -70,11 +71,53 @@ public class OwnedCoinController {
 		if(ownedCoins.size()>0) {
 			OwnedCoin oldOwnedCoin = ownedCoins.get(ownedCoins.size()-1);
 			oldOwnedCoin.setMerged(true);
-			newOwnedCoin.setPriceDifference(currentPrice-purchasePrice);
+			newOwnedCoin.setPriceDifference(currentPrice/purchasePrice*100-100);
 			ownedCoinService.updateOwnedCoin(oldOwnedCoin);
 		}
 		
 		return newOwnedCoin;
+	}
+	
+	@RequestMapping(value="/api/sell", method=RequestMethod.POST)
+	public OwnedCoin sellOwnedCoin(
+			HttpSession session,
+			@RequestParam(value="id") Long id,  
+			@RequestParam(value="amount") Double amount
+			) {
+		
+		OwnedCoin ownedCoin = ownedCoinService.findById(id);
+		
+		if(ownedCoin.getTotalAmount() >= amount && amount > 0) {
+			ownedCoin.setSold(true);
+			ownedCoin.setDateSold(new Date());
+			ownedCoin.setSellPrice(ownedCoin.getCurrentPrice());
+			ownedCoin.setGain(ownedCoin.getSellPrice() * amount - ownedCoin.getPurchasePrice() * amount);
+			ownedCoin.setTotalAmount(ownedCoin.getTotalAmount() - amount);
+			ownedCoin.setTotalSpent(ownedCoin.getPurchasePrice() * amount);
+			ownedCoin.setTotalValue(ownedCoin.getTotalAmount()*ownedCoin.getCurrentPrice());
+			ownedCoin.setPriceDifference(ownedCoin.getCurrentPrice()/ownedCoin.getPurchasePrice()*100-100);
+			ownedCoinService.updateOwnedCoin(ownedCoin);
+		}
+		
+		if(ownedCoin.getTotalAmount() > 0) {
+			OwnedCoin remainingCoin = new OwnedCoin();
+
+			remainingCoin.setAmount(ownedCoin.getTotalAmount());
+			remainingCoin.setCurrentPrice(ownedCoin.getCurrentPrice());
+			remainingCoin.setName(ownedCoin.getName());
+			remainingCoin.setPurchasePrice(ownedCoin.getPurchasePrice());
+			remainingCoin.setSymbol(ownedCoin.getSymbol());
+			remainingCoin.setOwner(ownedCoin.getOwner());
+			remainingCoin.setValue(ownedCoin.getValue());
+			remainingCoin.setTotalAmount(ownedCoin.getTotalAmount());
+			remainingCoin.setTotalValue(ownedCoin.getTotalValue());
+			remainingCoin.setTotalSpent(ownedCoin.getTotalSpent());
+			remainingCoin.setPriceDifference(ownedCoin.getPriceDifference());
+			ownedCoinService.addOwnedCoin(remainingCoin);
+
+		}
+		
+		return ownedCoin;
 	}
 	
 	@RequestMapping(value="/api/ownedCoins/{id}", method=RequestMethod.DELETE)

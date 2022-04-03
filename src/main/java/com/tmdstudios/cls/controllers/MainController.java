@@ -167,7 +167,7 @@ public class MainController {
 		return "coin_details.jsp";
 	}
 	
-	@GetMapping("/home")
+	@RequestMapping(value="/home", method = { RequestMethod.GET, RequestMethod.POST })
 	public String home(HttpSession session, Model model) {
 	 
 		User user = (User) session.getAttribute("user");

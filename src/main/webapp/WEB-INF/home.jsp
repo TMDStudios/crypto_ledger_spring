@@ -54,7 +54,9 @@
 			<c:if test="${coin.priceDifference<0}">
 				<td class="red"><img src="${downArrow}"/> <fmt:formatNumber pattern="0.000" value="${coin.priceDifference}"/>%</td>
 			</c:if>
-			<td scope="col" class="center-cell">Buy/Sell</td>
+			<td scope="col" class="center-cell">
+			<button type="button" onclick="sell(document.getElementById('${coin.id}').value)" id="${coin.id}" value="${coin.id}">Sell</button>
+			</td>
 		</c:if>
 		</tr>
 		</c:forEach>
@@ -105,6 +107,7 @@
 </table>
 
 <script type="text/javascript" src="../js/app.js"></script>
+<script type="text/javascript" src="../js/sell.js"></script>
 
 </body>
 </html>
