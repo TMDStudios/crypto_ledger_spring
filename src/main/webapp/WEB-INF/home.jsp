@@ -89,7 +89,9 @@
 					<td colspan=6 class="red">Sold <fmt:formatNumber pattern="0.00000000" value="${coin.sellAmount}"/> at $<fmt:formatNumber pattern="0.00" value="${coin.sellPrice}"/> - Loss $<fmt:formatNumber pattern="0.000" value="${coin.gain*-1}"/></td>
 				</c:if>
 			</c:if>
-			<td scope="col" class="center-cell">Delete</td>
+			<td scope="col" class="center-cell">
+			<button type="button" onclick="deleteCoin(document.getElementById('${coin.id}').value)" id="${coin.id}" value="${coin.id}">Delete</button>
+			</td>
 		</c:if>
 		</tr>
 		</c:forEach>
@@ -98,6 +100,7 @@
 
 <script type="text/javascript" src="../js/app.js"></script>
 <script type="text/javascript" src="../js/sell.js"></script>
+<script type="text/javascript" src="../js/delete.js"></script>
 
 </body>
 </html>

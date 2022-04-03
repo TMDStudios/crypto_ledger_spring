@@ -121,7 +121,7 @@ public class OwnedCoinController {
 		return ownedCoin;
 	}
 	
-	@RequestMapping(value="/api/ownedCoins/{id}", method=RequestMethod.DELETE)
+	@RequestMapping(value="/api/delete/{id}", method=RequestMethod.DELETE)
 	public void destroy(@PathVariable("id") Long id) {
 		OwnedCoin ownedCoin = ownedCoinService.findById(id);
 		ownedCoinService.deleteOwnedCoin(ownedCoin);
