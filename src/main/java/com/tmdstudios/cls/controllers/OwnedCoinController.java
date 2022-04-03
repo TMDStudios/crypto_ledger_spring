@@ -91,6 +91,7 @@ public class OwnedCoinController {
 			ownedCoin.setSold(true);
 			ownedCoin.setDateSold(new Date());
 			ownedCoin.setSellPrice(ownedCoin.getCurrentPrice());
+			ownedCoin.setSellAmount(amount);
 			ownedCoin.setGain(ownedCoin.getSellPrice() * amount - ownedCoin.getPurchasePrice() * amount);
 			ownedCoin.setTotalAmount(ownedCoin.getTotalAmount() - amount);
 			ownedCoin.setTotalSpent(ownedCoin.getPurchasePrice() * amount);
