@@ -176,18 +176,6 @@ public class MainController {
 			return "redirect:/logout";
 		}else {
 			User thisUser = userService.findById(user.getId());
-			
-			
-			
-			
-			
-			// PUSH TO GIT, OWNED COINS ARE NOW IN DESCENDING ORDER!!
-			
-			
-			
-			
-			
-			
 			List<OwnedCoin> ownedCoins = ownedCoinService.findByOwnerDesc(thisUser);
 			model.addAttribute("ownedCoins", ownedCoins);
 			
