@@ -5,7 +5,6 @@ function deleteCoin(coinId){
 		xhttp.send();
 		
 		xhttp.onload = function() {
-		    console.log("Deleted Successfully!");
 			window.open("/home", "_self");
 		}	
 	}

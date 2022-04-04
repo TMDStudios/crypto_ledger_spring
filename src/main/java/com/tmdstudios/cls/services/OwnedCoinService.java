@@ -51,4 +51,13 @@ public class OwnedCoinService {
 		}
 	}
 	
+	public List<OwnedCoin> findByOwnerDesc(User owner) {
+		Optional<List<OwnedCoin>> optionalOwnedCoin = ownedCoinRepo.findByOwnerIsOrderByIdDesc(owner);
+		if(optionalOwnedCoin.isPresent()) {
+			return optionalOwnedCoin.get();
+		}else {
+			return null;
+		}
+	}
+	
 }

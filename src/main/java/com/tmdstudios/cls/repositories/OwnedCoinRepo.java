@@ -14,5 +14,6 @@ public interface OwnedCoinRepo extends CrudRepository<OwnedCoin, Long> {
 	// make this find all by owner
 	List<OwnedCoin> findAll();
 	Optional<List<OwnedCoin>> findBySymbolIsAndOwnerIs(String symbol, User owner);
+	Optional<List<OwnedCoin>> findByOwnerIsOrderByIdDesc(User owner);
 	OwnedCoin findByIdIs(Long id);
 }

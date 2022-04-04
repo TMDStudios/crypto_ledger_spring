@@ -1,5 +1,6 @@
 package com.tmdstudios.cls.controllers;
 
+import java.util.Collections;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -175,7 +176,19 @@ public class MainController {
 			return "redirect:/logout";
 		}else {
 			User thisUser = userService.findById(user.getId());
-			List<OwnedCoin> ownedCoins = thisUser.getOwnedCoins();
+			
+			
+			
+			
+			
+			// PUSH TO GIT, OWNED COINS ARE NOW IN DESCENDING ORDER!!
+			
+			
+			
+			
+			
+			
+			List<OwnedCoin> ownedCoins = ownedCoinService.findByOwnerDesc(thisUser);
 			model.addAttribute("ownedCoins", ownedCoins);
 			
 			for(OwnedCoin ownedCoin:ownedCoins) {
