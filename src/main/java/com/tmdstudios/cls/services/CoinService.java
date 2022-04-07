@@ -59,4 +59,13 @@ public class CoinService {
 		}
 	}
 	
+	public Coin findByRank(Long coinRank) {
+		Optional<Coin> optionalCoin = coinRepo.findByCoinRank(coinRank);
+		if(optionalCoin.isPresent()) {
+			return optionalCoin.get();
+		}else {
+			return null;
+		}
+	}
+	
 }

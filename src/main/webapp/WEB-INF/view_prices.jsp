@@ -40,7 +40,6 @@
             <th>24h %</th>
             <th>7d %</th>
             <th>30d %</th>
-            <th>Sentiment</th>
         </tr>
     </thead>
 	<tbody>
@@ -79,7 +78,6 @@
 				<c:if test="${coin.priceChangePercentage30d<0}">
 					<td class="red"><img src="${downArrow}"/> <fmt:formatNumber pattern="0.000" value="${coin.priceChangePercentage30d}"/>%</td>
 				</c:if>
-				<td><a class="link-light" href="/coins/${coin.id}">${coin.users.size()}</a></td>
             </tr>
 		</c:forEach>
 	</tbody>   

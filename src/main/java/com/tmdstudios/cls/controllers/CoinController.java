@@ -47,10 +47,14 @@ public class CoinController {
 				priceChangePercentage30d
 				);
 		
-		Coin coin = coinService.findBySymbol(symbol);
+//		Coin coin = coinService.findBySymbol(symbol);
+		Coin coin = coinService.findByRank(coinRank);
+		// test this! is the whole coin being updated?
 		if(coin==null) {
 			coinService.addCoin(newCoin);
 		}else {
+			coin.setCoinRank(null);
+			coinService.updateCoin(coin);
 			newCoin.setId(coin.getId());
 			newCoin.setUsers(coin.getUsers());
 			coinService.updateCoin(newCoin);
