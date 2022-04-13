@@ -12,9 +12,9 @@ function updateCoin(coin) {
 		"&priceChangePercentage30d="+coin[7]+"");
 }
 
-function getFile(myCallback) {
+function getFile(myCallback, page) {
   	let req = new XMLHttpRequest();
-	req.open('GET', "https://api.nomics.com/v1/currencies/ticker?key=eb3a7d733a1719cd0a2731a28b6c9bedcb052751&per-page=100");
+	req.open('GET', "https://api.nomics.com/v1/currencies/ticker?key=eb3a7d733a1719cd0a2731a28b6c9bedcb052751&per-page=100&page="+page);
   	req.onload = function() {
     	if (req.status == 200) {
 			// rename 1d, 7d, and 30d in order to use dot notation
@@ -34,4 +34,5 @@ function getFile(myCallback) {
   	req.send();
 }
 
-getFile(updateCoin);
+getFile(updateCoin, 1);
+setTimeout(() => { getFile(updateCoin, 2); }, 1500);
