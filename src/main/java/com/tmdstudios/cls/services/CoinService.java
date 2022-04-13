@@ -21,6 +21,10 @@ public class CoinService {
 		return coinRepo.findAllByOrderByCoinRankAsc();
 	}
 	
+	public List<Coin> topCoins(){
+		return coinRepo.getTop100();
+	}
+	
 	public List<Coin> getAssignedUsers(User user){
 		return coinRepo.findAllByUsers(user);
 	}

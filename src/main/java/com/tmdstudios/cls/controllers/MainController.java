@@ -113,7 +113,7 @@ public class MainController {
 			User thisUser = userService.findById(user.getId());
 			model.addAttribute("coins", thisUser.getCoins());
 		}else {
-			model.addAttribute("coins", coinService.allCoins());
+			model.addAttribute("coins", coinService.topCoins());
 		}
 		
 		session.setAttribute("starOutline", "https://tmdstudios.files.wordpress.com/2022/03/goldstaroutline-1.png");
@@ -180,9 +180,13 @@ public class MainController {
 			model.addAttribute("ownedCoins", ownedCoins);
 			
 			for(OwnedCoin ownedCoin:ownedCoins) {
-				ownedCoin.setCurrentPrice(coinService.findBySymbol(ownedCoin.getSymbol()).getPrice());
-				ownedCoin.setPriceDifference(coinService.findBySymbol(ownedCoin.getSymbol()).getPrice()/ownedCoin.getPurchasePrice()*100-100);
-				ownedCoinService.updateOwnedCoin(ownedCoin);
+				try {
+					ownedCoin.setCurrentPrice(coinService.findBySymbol(ownedCoin.getSymbol()).getPrice());
+					ownedCoin.setPriceDifference(coinService.findBySymbol(ownedCoin.getSymbol()).getPrice()/ownedCoin.getPurchasePrice()*100-100);
+					ownedCoinService.updateOwnedCoin(ownedCoin);
+				}catch(NullPointerException e){
+					System.out.println("Coin not found: "+ownedCoin.getSymbol());
+				}
 			}
 		}
 		 
