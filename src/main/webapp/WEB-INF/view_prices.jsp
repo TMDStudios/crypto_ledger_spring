@@ -61,22 +61,22 @@
 	            <td colspan=2 class="float-left"><a class="link-light" href="/coins/${coin.id}">${coin.name} - ${coin.symbol}</a></td>
 	            <td>$<fmt:formatNumber pattern="0.000" value="${coin.price}"/></td>
 	            <c:if test="${coin.priceChangePercentage1d>=0}">
-					<td class="green"><img src="${upArrow}"/> <fmt:formatNumber pattern="0.000" value="${coin.priceChangePercentage1d}"/>%</td>
+					<td class="green"><img src="${upArrow}"/> <fmt:formatNumber pattern="0.000" value="${coin.priceChangePercentage1d*100}"/>%</td>
 				</c:if>
 				<c:if test="${coin.priceChangePercentage1d<0}">
-					<td class="red"><img src="${downArrow}"/> <fmt:formatNumber pattern="0.000" value="${coin.priceChangePercentage1d}"/>%</td>
+					<td class="red"><img src="${downArrow}"/> <fmt:formatNumber pattern="0.000" value="${coin.priceChangePercentage1d*100}"/>%</td>
 				</c:if>
 				<c:if test="${coin.priceChangePercentage7d>=0}">
-					<td class="green"><img src="${upArrow}"/> <fmt:formatNumber pattern="0.000" value="${coin.priceChangePercentage7d}"/>%</td>
+					<td class="green"><img src="${upArrow}"/> <fmt:formatNumber pattern="0.000" value="${coin.priceChangePercentage7d*100}"/>%</td>
 				</c:if>
 				<c:if test="${coin.priceChangePercentage7d<0}">
-					<td class="red"><img src="${downArrow}"/> <fmt:formatNumber pattern="0.000" value="${coin.priceChangePercentage7d}"/>%</td>
+					<td class="red"><img src="${downArrow}"/> <fmt:formatNumber pattern="0.000" value="${coin.priceChangePercentage7d*100}"/>%</td>
 				</c:if>
 				<c:if test="${coin.priceChangePercentage30d>=0}">
-					<td class="green"><img src="${upArrow}"/> <fmt:formatNumber pattern="0.000" value="${coin.priceChangePercentage30d}"/>%</td>
+					<td class="green"><img src="${upArrow}"/> <fmt:formatNumber pattern="0.000" value="${coin.priceChangePercentage30d*100}"/>%</td>
 				</c:if>
 				<c:if test="${coin.priceChangePercentage30d<0}">
-					<td class="red"><img src="${downArrow}"/> <fmt:formatNumber pattern="0.000" value="${coin.priceChangePercentage30d}"/>%</td>
+					<td class="red"><img src="${downArrow}"/> <fmt:formatNumber pattern="0.000" value="${coin.priceChangePercentage30d*100}"/>%</td>
 				</c:if>
             </tr>
 		</c:forEach>
