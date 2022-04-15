@@ -43,7 +43,7 @@
     	<c:forEach var="coin" items="${ownedCoins}">
 		<tr>
 		<c:if test = "${!coin.sold&&!coin.merged}">
-			<td scope="col" class="center-cell"><a class="link-light" href="/coins/${coin.id}">${coin.name}</a></td>
+			<td scope="col" class="center-cell"><a class="link-light" href="/coins/${coin.coinRef}">${coin.name}</a></td>
 			<td scope="col" class="center-cell"><fmt:formatNumber pattern="0.00000000" value="${coin.totalAmount}"/> ${coin.symbol}</td>
 			<td scope="col" class="center-cell">$<fmt:formatNumber pattern="0.000" value="${coin.totalValue}"/></td>
 			<td scope="col" class="center-cell">$<fmt:formatNumber pattern="0.000" value="${coin.purchasePrice}"/></td>
@@ -83,7 +83,7 @@
     	<c:forEach var="coin" items="${ownedCoins}">
 		<tr>
 		<c:if test = "${coin.sold||coin.merged}">
-			<td scope="col" class="center-cell"><a class="link-light" href="/coins/${coin.id}">${coin.name}</a></td>
+			<td scope="col" class="center-cell"><a class="link-light" href="/coins/${coin.coinRef}">${coin.name}</a></td>
 			<c:if test="${coin.merged}">
 				<td colspan=6>Coin Merged | Original Purchase <fmt:formatNumber pattern="0.00000000" value="${coin.amount}"/> at $<fmt:formatNumber pattern="0.000" value="${coin.purchasePrice}"/></td>
 			</c:if>

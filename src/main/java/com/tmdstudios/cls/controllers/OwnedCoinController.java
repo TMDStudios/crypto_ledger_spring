@@ -41,9 +41,10 @@ public class OwnedCoinController {
 			@RequestParam(value="name") String name, 
 			@RequestParam(value="symbol") String symbol,  
 			@RequestParam(value="amount") Double amount,
-			@RequestParam(value="purchasePrice") Double purchasePrice
+			@RequestParam(value="purchasePrice") Double purchasePrice,
+			@RequestParam(value="coinRef") Long coinRef
 			) {
-		OwnedCoin newOwnedCoin = new OwnedCoin(name, symbol, amount, purchasePrice);
+		OwnedCoin newOwnedCoin = new OwnedCoin(name, symbol, amount, purchasePrice, coinRef);
 		
 		User owner = (User) session.getAttribute("user");
 		List<OwnedCoin> ownedCoins = ownedCoinService.findBySymbol(symbol, owner);
@@ -114,6 +115,7 @@ public class OwnedCoinController {
 			remainingCoin.setTotalValue(ownedCoin.getTotalValue());
 			remainingCoin.setTotalSpent(ownedCoin.getTotalSpent());
 			remainingCoin.setPriceDifference(ownedCoin.getPriceDifference());
+			remainingCoin.setCoinRef(ownedCoin.getCoinRef());
 			ownedCoinService.addOwnedCoin(remainingCoin);
 
 		}

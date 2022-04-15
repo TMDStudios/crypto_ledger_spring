@@ -42,6 +42,7 @@ public class OwnedCoin {
     private Double currentPrice = 0.0;
     private Double priceDifference = 0.0;
     private Double totalProfit = 0.0;
+    private Long coinRef;
     
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonBackReference
@@ -50,11 +51,12 @@ public class OwnedCoin {
     
     public OwnedCoin() {}
     
-    public OwnedCoin(String name, String symbol, Double amount, Double purchasePrice) {
+    public OwnedCoin(String name, String symbol, Double amount, Double purchasePrice, Long coinRef) {
     	this.name = name;
     	this.symbol = symbol;
     	this.amount = amount;
     	this.purchasePrice = purchasePrice;
+    	this.coinRef = coinRef;
     }
 
 	public Long getId() {
@@ -223,6 +225,14 @@ public class OwnedCoin {
 
 	public void setOwner(User owner) {
 		this.owner = owner;
+	}
+
+	public Long getCoinRef() {
+		return coinRef;
+	}
+
+	public void setCoinRef(Long coinRef) {
+		this.coinRef = coinRef;
 	}
     
 }

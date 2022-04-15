@@ -5,7 +5,8 @@ function validate(){
 	xhttp.send("name="+document.getElementById("name").getAttribute("value")+
 		"&symbol="+document.getElementById("symbol").getAttribute("value")+
 		"&amount="+document.getElementById("amount").value+
-		"&purchasePrice="+document.getElementById("purchasePrice").getAttribute("value")+"");
+		"&purchasePrice="+document.getElementById("purchasePrice").getAttribute("value")+""+
+		"&coinRef="+document.getElementById("coinId").value);
 	if (confirm("Bought "+document.getElementById("amount").value+" " + document.getElementById("symbol").getAttribute("value")+"!")) {
 		console.log("Clicked OK");
 	  	window.open("/home", "_self");

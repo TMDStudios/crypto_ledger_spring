@@ -49,17 +49,16 @@ public class CoinController {
 		
 //		Coin coin = coinService.findBySymbol(symbol);
 		Coin coin = coinService.findByRank(coinRank);
-		// test this! is the whole coin being updated?
 		if(coin==null) {
 			coinService.addCoin(newCoin);
 //			System.out.println("ADDED - "+newCoin.getName());
 		}else {
-			coin.setCoinRank(null);
-			coinService.updateCoin(coin);
+//			coin.setCoinRank(null);
+//			coinService.updateCoin(coin);
 			newCoin.setId(coin.getId());
 			newCoin.setUsers(coin.getUsers());
 			coinService.updateCoin(newCoin);
-//			System.out.println("UPDATED - "+coin.getName()+" and NewCOIN - "+newCoin.getName());
+//			System.out.println("UPDATED - "+coin.getName());
 		}
 		
 		return coin;

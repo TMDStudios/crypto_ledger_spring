@@ -49,6 +49,7 @@
 	<input type="hidden" id="symbol" name="symbol" value="${coin.symbol}">
 	<input type="number" step="0.00000001" min="0" id="amount" name="amount" placeholder="Amount"/>
 	<input type="hidden" id="purchasePrice" name="purchasePrice" value="${coin.price}">
+	<input type="hidden" id="coinId" name="coinId" value="${coin.id}">
 	<input class="button" type="submit" value="Buy"/>
 	</span>
 </form>	
