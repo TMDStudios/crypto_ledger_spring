@@ -45,9 +45,19 @@
 		<c:if test = "${!coin.sold&&!coin.merged}">
 			<td scope="col" class="center-cell"><a class="link-light" href="/coins/${coin.coinRef}">${coin.name}</a></td>
 			<td scope="col" class="center-cell"><fmt:formatNumber pattern="0.00000000" value="${coin.totalAmount}"/> ${coin.symbol}</td>
-			<td scope="col" class="center-cell">$<fmt:formatNumber pattern="0.000" value="${coin.totalValue}"/></td>
-			<td scope="col" class="center-cell">$<fmt:formatNumber pattern="0.000" value="${coin.purchasePrice}"/></td>
-			<td scope="col" class="center-cell">$<fmt:formatNumber pattern="0.000" value="${coin.currentPrice}"/></td>
+			<td scope="col" class="center-cell">$<fmt:formatNumber pattern="0.000" value="${coin.totalValue}"/></td>	
+			<c:if test="${coin.purchasePrice<0.001}">
+				<td scope="col" class="center-cell">&lt; $<fmt:formatNumber pattern="0.000" value="${coin.purchasePrice}"/></td>
+			</c:if>
+			<c:if test="${coin.purchasePrice>=0.001}">
+				<td scope="col" class="center-cell">$<fmt:formatNumber pattern="0.000" value="${coin.purchasePrice}"/></td>
+			</c:if>		
+			<c:if test="${coin.currentPrice<0.001}">
+				<td scope="col" class="center-cell">&lt; $<fmt:formatNumber pattern="0.000" value="${coin.currentPrice}"/></td>
+			</c:if>
+			<c:if test="${coin.currentPrice>=0.001}">
+				<td scope="col" class="center-cell">$<fmt:formatNumber pattern="0.000" value="${coin.currentPrice}"/></td>
+			</c:if>		
 			<c:if test="${coin.totalProfit>=0}">
 				<td class="green"><img src="${upArrow}"/> $<fmt:formatNumber pattern="0.000" value="${coin.totalProfit}"/></td>
 			</c:if>
@@ -85,14 +95,29 @@
 		<c:if test = "${coin.sold||coin.merged}">
 			<td scope="col" class="center-cell"><a class="link-light" href="/coins/${coin.coinRef}">${coin.name}</a></td>
 			<c:if test="${coin.merged}">
-				<td colspan=6>Coin Merged | Original Purchase <fmt:formatNumber pattern="0.00000000" value="${coin.amount}"/> at $<fmt:formatNumber pattern="0.000" value="${coin.purchasePrice}"/></td>
+				<c:if test="${coin.purchasePrice<0.001}">
+					<td colspan=6>Coin Merged | Original Purchase <fmt:formatNumber pattern="0.00000000" value="${coin.amount}"/> at &lt; $<fmt:formatNumber pattern="0.000" value="${coin.purchasePrice}"/></td>
+				</c:if>
+				<c:if test="${coin.purchasePrice>=0.001}">
+					<td colspan=6>Coin Merged | Original Purchase <fmt:formatNumber pattern="0.00000000" value="${coin.amount}"/> at $<fmt:formatNumber pattern="0.000" value="${coin.purchasePrice}"/></td>
+				</c:if>
 			</c:if>
 			<c:if test="${coin.sold}">
 				<c:if test="${coin.gain >= 0}">
-					<td colspan=6 class="green">Sold <fmt:formatNumber pattern="0.00000000" value="${coin.sellAmount}"/> at $<fmt:formatNumber pattern="0.00" value="${coin.sellPrice}"/> - Profit $<fmt:formatNumber pattern="0.000" value="${coin.gain}"/></td>
+					<c:if test="${coin.sellPrice<0.01}">
+						<td colspan=6 class="green">Sold <fmt:formatNumber pattern="0.00000000" value="${coin.sellAmount}"/> at &lt; $<fmt:formatNumber pattern="0.00" value="${coin.sellPrice}"/> - Profit $<fmt:formatNumber pattern="0.000" value="${coin.gain}"/></td>
+					</c:if>
+					<c:if test="${coin.sellPrice>=0.01}">
+						<td colspan=6 class="green">Sold <fmt:formatNumber pattern="0.00000000" value="${coin.sellAmount}"/> at $<fmt:formatNumber pattern="0.00" value="${coin.sellPrice}"/> - Profit $<fmt:formatNumber pattern="0.000" value="${coin.gain}"/></td>
+					</c:if>
 				</c:if>
 				<c:if test="${coin.gain < 0}">
-					<td colspan=6 class="red">Sold <fmt:formatNumber pattern="0.00000000" value="${coin.sellAmount}"/> at $<fmt:formatNumber pattern="0.00" value="${coin.sellPrice}"/> - Loss $<fmt:formatNumber pattern="0.000" value="${coin.gain*-1}"/></td>
+					<c:if test="${coin.sellPrice<0.01}">
+						<td colspan=6 class="red">Sold <fmt:formatNumber pattern="0.00000000" value="${coin.sellAmount}"/> at &lt; $<fmt:formatNumber pattern="0.00" value="${coin.sellPrice}"/> - Loss $<fmt:formatNumber pattern="0.000" value="${coin.gain*-1}"/></td>
+					</c:if>
+					<c:if test="${coin.sellPrice>=0.01}">
+						<td colspan=6 class="red">Sold <fmt:formatNumber pattern="0.00000000" value="${coin.sellAmount}"/> at $<fmt:formatNumber pattern="0.00" value="${coin.sellPrice}"/> - Loss $<fmt:formatNumber pattern="0.000" value="${coin.gain*-1}"/></td>
+					</c:if>
 				</c:if>
 			</c:if>
 			<td scope="col" class="center-cell">
