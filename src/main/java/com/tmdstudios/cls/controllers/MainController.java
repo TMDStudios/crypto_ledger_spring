@@ -170,6 +170,9 @@ public class MainController {
 	
 	@RequestMapping(value="/home", method = { RequestMethod.GET, RequestMethod.POST })
 	public String home(HttpSession session, Model model) {
+		Double overallTotal = 0.0;
+		Double currentProfit = 0.0;
+		Double overallProfit = 0.0;
 	 
 		User user = (User) session.getAttribute("user");
 		if(user==null) {
@@ -180,15 +183,27 @@ public class MainController {
 			model.addAttribute("ownedCoins", ownedCoins);
 			
 			for(OwnedCoin ownedCoin:ownedCoins) {
+				if(!ownedCoin.getSold()&&!ownedCoin.getMerged()) {
+					overallTotal += ownedCoin.getTotalValue();
+					currentProfit += ownedCoin.getTotalProfit();
+				}
+				if(ownedCoin.getSold()) {
+					overallProfit += ownedCoin.getGain();
+				}
 				try {
 					ownedCoin.setCurrentPrice(coinService.findBySymbol(ownedCoin.getSymbol()).getPrice());
 					ownedCoin.setPriceDifference(coinService.findBySymbol(ownedCoin.getSymbol()).getPrice()/ownedCoin.getPurchasePrice()*100-100);
+					ownedCoin.setTotalProfit(ownedCoin.getCurrentPrice()*ownedCoin.getTotalAmount()-ownedCoin.getPurchasePrice()*ownedCoin.getTotalAmount());
 					ownedCoinService.updateOwnedCoin(ownedCoin);
 				}catch(NullPointerException e){
 					System.out.println("Coin not found: "+ownedCoin.getSymbol());
 				}
 			}
 		}
+		
+		model.addAttribute("overallTotal", overallTotal);
+		model.addAttribute("currentProfit", currentProfit);
+		model.addAttribute("overallProfit", overallProfit);
 		 
 		return "home.jsp";
 	}

@@ -66,13 +66,13 @@ public class OwnedCoinController {
 		newOwnedCoin.setTotalAmount(totalAmount+amount);
 		newOwnedCoin.setTotalValue((totalAmount+amount)*currentPrice);
 		newOwnedCoin.setTotalSpent(totalSpent+currentPrice*amount);
-		newOwnedCoin.setPriceDifference(currentPrice-purchasePrice);
+		newOwnedCoin.setPriceDifference(currentPrice-purchasePrice*100-100);
 		ownedCoinService.addOwnedCoin(newOwnedCoin);
 		
 		if(ownedCoins.size()>0) {
 			OwnedCoin oldOwnedCoin = ownedCoins.get(ownedCoins.size()-1);
 			oldOwnedCoin.setMerged(true);
-			newOwnedCoin.setPriceDifference(currentPrice/purchasePrice*100-100);
+			oldOwnedCoin.setPriceDifference(currentPrice/purchasePrice*100-100);
 			ownedCoinService.updateOwnedCoin(oldOwnedCoin);
 		}
 		

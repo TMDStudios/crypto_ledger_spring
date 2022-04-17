@@ -123,3 +123,9 @@ td {
 .nav_link:hover {
     background-color: #111;
 }
+#loss {
+    color: red;
+}
+#gain {
+    color: chartreuse;
+}

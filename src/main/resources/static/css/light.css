@@ -7,6 +7,9 @@ body {
 h1 {
 	text-align: center;
 }
+h2 {
+	text-align: center;
+}
 table {
 	margin-left: auto;
 	margin-right: auto;
@@ -115,4 +118,10 @@ td {
 }
 .nav_link:hover {
     background-color: #111;
+}
+#loss {
+    color: red;
+}
+#gain {
+    color: forestgreen;
 }

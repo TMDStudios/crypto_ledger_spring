@@ -76,10 +76,23 @@
 		</c:if>
 		</tr>
 		</c:forEach>
+		<tr>
+			<td colspan="8"><a>Portfolio Value: $<fmt:formatNumber pattern="0.000" value="${overallTotal}"/> | Portfolio Profit:</a> 
+			<c:if test="${currentProfit>0}">
+				<a id="gain">$<fmt:formatNumber pattern="0.00" value="${currentProfit}"/></a>
+			</c:if>
+			<c:if test="${currentProfit==0}">
+				<a>$<fmt:formatNumber pattern="0.00" value="${currentProfit}"/></a>
+			</c:if>
+			<c:if test="${currentProfit<0}">
+				<a id="loss">$<fmt:formatNumber pattern="0.00" value="${currentProfit}"/></a>
+			</c:if>
+			</td>
+		</tr>
     </tbody>
 </table>
 
-<hr>
+<h2>Order History</h2>
 
 <table>
 	<thead>
@@ -126,6 +139,19 @@
 		</c:if>
 		</tr>
 		</c:forEach>
+		<tr>
+			<td colspan="8">Total Profit:  
+			<c:if test="${overallProfit>0}">
+				<a id="gain">$<fmt:formatNumber pattern="0.00" value="${overallProfit}"/></a>
+			</c:if>
+			<c:if test="${overallProfit==0}">
+				<a>$<fmt:formatNumber pattern="0.00" value="${overallProfit}"/></a>
+			</c:if>
+			<c:if test="${overallProfit<0}">
+				<a id="loss">$<fmt:formatNumber pattern="0.00" value="${overallProfit}"/></a>
+			</c:if>
+			</td>
+		</tr>
     </tbody>
 </table>
 
