@@ -1,6 +1,5 @@
 package com.tmdstudios.cls.controllers;
 
-import java.util.Collections;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -191,6 +190,7 @@ public class MainController {
 					overallProfit += ownedCoin.getGain();
 				}
 				try {
+					ownedCoin.setCoinRef(coinService.findBySymbol(ownedCoin.getSymbol()).getId()); // fixes coinRef issue?
 					ownedCoin.setCurrentPrice(coinService.findBySymbol(ownedCoin.getSymbol()).getPrice());
 					ownedCoin.setPriceDifference(coinService.findBySymbol(ownedCoin.getSymbol()).getPrice()/ownedCoin.getPurchasePrice()*100-100);
 					ownedCoin.setTotalProfit(ownedCoin.getCurrentPrice()*ownedCoin.getTotalAmount()-ownedCoin.getPurchasePrice()*ownedCoin.getTotalAmount());

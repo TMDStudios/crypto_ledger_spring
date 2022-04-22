@@ -60,12 +60,15 @@ public class OwnedCoinController {
 		}
 		
 		System.out.println("Found: "+ownedCoins.size());
+		totalSpent += currentPrice*amount;
+		totalAmount += amount;
 		
 		newOwnedCoin.setOwner(userService.findById(owner.getId()));
 		newOwnedCoin.setValue(currentPrice*amount);
-		newOwnedCoin.setTotalAmount(totalAmount+amount);
-		newOwnedCoin.setTotalValue((totalAmount+amount)*currentPrice);
-		newOwnedCoin.setTotalSpent(totalSpent+currentPrice*amount);
+		newOwnedCoin.setTotalAmount(totalAmount);
+		newOwnedCoin.setTotalValue(totalAmount*currentPrice);
+		newOwnedCoin.setTotalSpent(totalSpent);
+		newOwnedCoin.setPurchasePrice(totalSpent/totalAmount);
 		newOwnedCoin.setPriceDifference(currentPrice-purchasePrice*100-100);
 		ownedCoinService.addOwnedCoin(newOwnedCoin);
 		
