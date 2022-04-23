@@ -142,20 +142,33 @@ public class MainController {
 		}
 		
 		Coin coin = coinService.findById(id);
-		boolean userFound = false;
-		for(User coinUser:coin.getUsers()) {
-			if(coinUser.getId()==user.getId()) {
-				userFound = true;
+		User thisUser = userService.findById(user.getId());
+		boolean coinFound = false;
+		for(Coin userCoin:thisUser.getCoins()) {
+			if(userCoin.getSymbol()==coin.getSymbol()) {
+				coinFound=true;
+				thisUser.getCoins().remove(thisUser.getCoins().indexOf(userCoin));
 				break;
 			}
 		}
-		User thisUser = userService.findById(user.getId());
-		if(userFound) {
-			coin.getUsers().remove(thisUser);
-		}else {
-			coin.getUsers().add(thisUser);
+		if(!coinFound) {
+			thisUser.getCoins().add(coin);
 		}
-		coinService.updateCoin(coin);
+		userService.updateUser(thisUser);
+//		boolean userFound = false;
+//		for(User coinUser:coin.getUsers()) {
+//			if(coinUser.getId()==user.getId()) {
+//				userFound = true;
+//				break;
+//			}
+//		}
+//		User thisUser = userService.findById(user.getId());
+//		if(userFound) {
+//			coin.getUsers().remove(thisUser);
+//		}else {
+//			coin.getUsers().add(thisUser);
+//		}
+//		coinService.updateCoin(coin);
 		 
 		return "redirect:/prices";
 	}
