@@ -155,20 +155,6 @@ public class MainController {
 			thisUser.getCoins().add(coin);
 		}
 		userService.updateUser(thisUser);
-//		boolean userFound = false;
-//		for(User coinUser:coin.getUsers()) {
-//			if(coinUser.getId()==user.getId()) {
-//				userFound = true;
-//				break;
-//			}
-//		}
-//		User thisUser = userService.findById(user.getId());
-//		if(userFound) {
-//			coin.getUsers().remove(thisUser);
-//		}else {
-//			coin.getUsers().add(thisUser);
-//		}
-//		coinService.updateCoin(coin);
 		 
 		return "redirect:/prices";
 	}
