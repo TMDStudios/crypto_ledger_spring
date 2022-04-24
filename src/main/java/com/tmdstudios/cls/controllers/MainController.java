@@ -100,20 +100,6 @@ public class MainController {
 	@GetMapping("/prices")
 	public String viewPrices(HttpSession session, Model model) {
 	 
-//		User user = (User) session.getAttribute("user");
-//		if(user==null) {
-////			return "redirect:/logout";
-//		}else {
-//			User thisUser = userService.findById(user.getId());
-//			model.addAttribute("myCoins", thisUser.getCoins());
-//		}
-//		
-//		if(showWatchlist) {
-//			User thisUser = userService.findById(user.getId());
-//			model.addAttribute("coins", thisUser.getCoins());
-//		}else {
-//			model.addAttribute("coins", coinService.topCoins());
-//		}
 		if(session.getAttribute("userId") == null) {
 //			return "redirect:/logout";
 		}else {

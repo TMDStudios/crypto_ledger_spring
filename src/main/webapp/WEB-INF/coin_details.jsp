@@ -14,10 +14,10 @@
 <ul class="navbar">
     <li class="nav_item"><a class="nav_link" href="/home">Home</a></li>
     <li class="nav_item"><a class="nav_link" href="/prices">View Prices</a></li>
-    <c:if test="${user!=null}">
+    <c:if test="${userId!=null}">
 		<li class="nav_login"><a class="nav_link" href="/logout">Log Out</a></li>
 	</c:if>
-	<c:if test="${user==null}">
+	<c:if test="${userId==null}">
 		<li class="nav_item"><a class="nav_link" href="/login">Log In</a></li>
 		<li class="nav_login"><a class="nav_link" href="/register">Register</a></li>
 	</c:if>    
@@ -41,7 +41,7 @@
   </a>
 </div>
 
-<c:if test="${user!=null}">
+<c:if test="${userId!=null}">
 <hr>
 <form action="" method="post" id="form">
 	<span>

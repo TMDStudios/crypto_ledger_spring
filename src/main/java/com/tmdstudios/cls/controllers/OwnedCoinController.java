@@ -46,7 +46,8 @@ public class OwnedCoinController {
 			) {
 		OwnedCoin newOwnedCoin = new OwnedCoin(name, symbol, amount, purchasePrice, coinRef);
 		
-		User owner = (User) session.getAttribute("user");
+		Long userId = (Long) session.getAttribute("userId");		
+		User owner = userService.findById(userId);
 		List<OwnedCoin> ownedCoins = ownedCoinService.findBySymbol(symbol, owner);
 		
 		Double totalAmount = 0.0;
