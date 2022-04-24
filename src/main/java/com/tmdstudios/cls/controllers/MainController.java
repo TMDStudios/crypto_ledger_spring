@@ -61,7 +61,7 @@ public class MainController {
 	        return "login.jsp";
 	    }
 	     
-	    session.setAttribute("user", user);
+	    session.setAttribute("userId", user.getId());
 	 
 	    return "redirect:/home";
 	}
@@ -84,7 +84,7 @@ public class MainController {
 	        return "register.jsp";
 	    }
 
-	    session.setAttribute("user", user);
+	    session.setAttribute("userId", user.getId());
 	 
 	    return "redirect:/";
 	}
@@ -93,24 +93,39 @@ public class MainController {
 	public String logout(HttpSession session) {
 		showWatchlist = false;
 		session.setAttribute("showWatchlist", showWatchlist);
-		session.setAttribute("user", null); 
+		session.setAttribute("userId", null); 
 	    return "redirect:/";
 	}
 	
 	@GetMapping("/prices")
 	public String viewPrices(HttpSession session, Model model) {
 	 
-		User user = (User) session.getAttribute("user");
-		if(user==null) {
+//		User user = (User) session.getAttribute("user");
+//		if(user==null) {
+////			return "redirect:/logout";
+//		}else {
+//			User thisUser = userService.findById(user.getId());
+//			model.addAttribute("myCoins", thisUser.getCoins());
+//		}
+//		
+//		if(showWatchlist) {
+//			User thisUser = userService.findById(user.getId());
+//			model.addAttribute("coins", thisUser.getCoins());
+//		}else {
+//			model.addAttribute("coins", coinService.topCoins());
+//		}
+		if(session.getAttribute("userId") == null) {
 //			return "redirect:/logout";
 		}else {
-			User thisUser = userService.findById(user.getId());
-			model.addAttribute("myCoins", thisUser.getCoins());
+			Long userId = (Long) session.getAttribute("userId");		
+			User user = userService.findById(userId);
+			model.addAttribute("myCoins", user.getCoins());
 		}
 		
 		if(showWatchlist) {
-			User thisUser = userService.findById(user.getId());
-			model.addAttribute("coins", thisUser.getCoins());
+			Long userId = (Long) session.getAttribute("userId");
+			User user = userService.findById(userId);
+			model.addAttribute("coins", user.getCoins());
 		}else {
 			model.addAttribute("coins", coinService.topCoins());
 		}
@@ -135,26 +150,27 @@ public class MainController {
 	
 	@RequestMapping("/coins/watch/{id}")
 	public String watchCoin(HttpSession session, @PathVariable("id") Long id) {
-	 
-		User user = (User) session.getAttribute("user");
-		if(user==null) {
+		
+		if(session.getAttribute("userId") == null) {
 			return "redirect:/logout";
 		}
 		
+		Long userId = (Long) session.getAttribute("userId");		
+		User user = userService.findById(userId);
+		
 		Coin coin = coinService.findById(id);
-		User thisUser = userService.findById(user.getId());
 		boolean coinFound = false;
-		for(Coin userCoin:thisUser.getCoins()) {
+		for(Coin userCoin:user.getCoins()) {
 			if(userCoin.getSymbol()==coin.getSymbol()) {
 				coinFound=true;
-				thisUser.getCoins().remove(thisUser.getCoins().indexOf(userCoin));
+				user.getCoins().remove(user.getCoins().indexOf(userCoin));
 				break;
 			}
 		}
 		if(!coinFound) {
-			thisUser.getCoins().add(coin);
+			user.getCoins().add(coin);
 		}
-		userService.updateUser(thisUser);
+		userService.updateUser(user);
 		 
 		return "redirect:/prices";
 	}
@@ -171,13 +187,13 @@ public class MainController {
 		Double overallTotal = 0.0;
 		Double currentProfit = 0.0;
 		Double overallProfit = 0.0;
-	 
-		User user = (User) session.getAttribute("user");
-		if(user==null) {
+		
+		if(session.getAttribute("userId") == null) {
 			return "redirect:/logout";
 		}else {
-			User thisUser = userService.findById(user.getId());
-			List<OwnedCoin> ownedCoins = ownedCoinService.findByOwnerDesc(thisUser);
+			Long userId = (Long) session.getAttribute("userId");		
+			User user = userService.findById(userId);
+			List<OwnedCoin> ownedCoins = ownedCoinService.findByOwnerDesc(user);
 			model.addAttribute("ownedCoins", ownedCoins);
 			
 			for(OwnedCoin ownedCoin:ownedCoins) {
