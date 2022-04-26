@@ -71,7 +71,7 @@
 				<td class="red"><img src="${downArrow}"/> <fmt:formatNumber pattern="0.000" value="${coin.priceDifference}"/>%</td>
 			</c:if>
 			<td scope="col" class="center-cell">
-			<button type="button" onclick="sell(document.getElementById('${coin.id}').value)" id="${coin.id}" value="${coin.id}">Sell</button>
+			<button type="button" onclick="sell(document.getElementById('${coin.id}').value, ${coin.totalAmount})" id="${coin.id}" value="${coin.id}">Sell</button>
 			</td>
 		</c:if>
 		</tr>
