@@ -113,6 +113,13 @@ public class MainController {
 			User user = userService.findById(userId);
 			model.addAttribute("coins", user.getCoins());
 		}else {
+			// Workaround for coin rank issue
+			Long newRank = 1l;
+			for(Coin coin:coinService.topCoins()) {
+				coin.setCoinRank(newRank);
+				newRank++;
+				coinService.updateCoin(coin);
+			}
 			model.addAttribute("coins", coinService.topCoins());
 		}
 		
