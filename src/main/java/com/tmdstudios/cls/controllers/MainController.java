@@ -111,7 +111,12 @@ public class MainController {
 		if(showWatchlist) {
 			Long userId = (Long) session.getAttribute("userId");
 			User user = userService.findById(userId);
-			model.addAttribute("coins", user.getCoins());
+			Long newRank = 1l;
+			for(Coin coin:coinService.userCoins(user)) {
+				coin.setCoinRank(newRank);
+				newRank++;
+			}
+			model.addAttribute("coins", coinService.userCoins(user));
 		}else {
 			// Workaround for coin rank issue
 			Long newRank = 1l;

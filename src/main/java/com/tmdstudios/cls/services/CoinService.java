@@ -25,6 +25,10 @@ public class CoinService {
 		return coinRepo.getTop100();
 	}
 	
+	public List<Coin> userCoins(User user){
+		return coinRepo.getUserCoins(user);
+	}
+	
 	public List<Coin> getAssignedUsers(User user){
 		return coinRepo.findAllByUsers(user);
 	}
