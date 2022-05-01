@@ -28,6 +28,7 @@ import com.tmdstudios.cls.services.UserService;
 public class MainController {
 	
 	private boolean showWatchlist = false;
+	private boolean darkMode = true;
 	
 	@Autowired
 	private UserService userService;
@@ -219,6 +220,15 @@ public class MainController {
 		model.addAttribute("overallProfit", overallProfit);
 		 
 		return "home.jsp";
+	}
+	
+	@RequestMapping("/mode")
+	public String modeSwitch(HttpSession session, Model model) {
+		
+		darkMode = !darkMode;
+		session.setAttribute("darkMode", darkMode);
+		 
+		return "redirect:/home";
 	}
 
 }

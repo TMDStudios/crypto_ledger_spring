@@ -7,7 +7,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet" type="text/css" href="/css/light.css">
+<c:if test="${darkMode}">
+	<link rel="stylesheet" type="text/css" href="/css/dark.css">
+</c:if>
+<c:if test="${!darkMode}">
+	<link rel="stylesheet" type="text/css" href="/css/light.css">
+</c:if>
 <title>Crypto Ledger</title>
 </head>
 <body>
@@ -17,6 +22,14 @@
     <li class="nav_item"><a class="nav_link" href="/prices">View Prices</a></li>
     <c:if test="${userId!=null}">
 		<li class="nav_login"><a class="nav_link" href="/logout">Log Out</a></li>
+		<li class="nav_login">
+	    	<c:if test="${darkMode}">
+				<a class="nav_link" href="/mode">Light</a>
+			</c:if>
+			<c:if test="${!darkMode}">
+				<a class="nav_link" href="/mode">Dark</a>
+			</c:if>
+	    </li>
 	</c:if>
 	<c:if test="${userId==null}">
 		<li class="nav_item"><a class="nav_link" href="/login">Log In</a></li>
