@@ -6,7 +6,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet" type="text/css" href="/css/light.css">
+<c:if test="${darkMode}">
+	<link rel="stylesheet" type="text/css" href="/css/dark.css">
+</c:if>
+<c:if test="${!darkMode}">
+	<link rel="stylesheet" type="text/css" href="/css/light.css">
+</c:if>
 <title>Log In</title>
 </head>
 <body>
@@ -15,6 +20,14 @@
     <li class="nav_item"><a class="nav_link" href="/home">Home</a></li>
     <li class="nav_item"><a class="nav_link" href="/prices">View Prices</a></li>
     <c:if test="${user!=null}">
+    	<li class="nav_login">
+	    	<c:if test="${darkMode}">
+				<a class="nav_link" href="/mode">Light</a>
+			</c:if>
+			<c:if test="${!darkMode}">
+				<a class="nav_link" href="/mode">Dark</a>
+			</c:if>
+	    </li>
 		<li class="nav_login"><a class="nav_link" href="/logout">Log Out</a></li>
 	</c:if>
 	<c:if test="${user==null}">

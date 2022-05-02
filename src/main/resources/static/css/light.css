@@ -92,6 +92,9 @@ td {
     box-shadow: 0 0 0 0 rgb(87, 114, 187);
     transition: 0.2s;
     border-radius: 8px;
+    position: absolute;
+    bottom: 20px;
+    margin-left: -300px;
 }
 .banner:hover {
     box-shadow: 0 0 12px 0 rgb(20, 45, 82);

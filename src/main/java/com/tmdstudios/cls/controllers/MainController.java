@@ -40,7 +40,8 @@ public class MainController {
 	private OwnedCoinService ownedCoinService;
 	
 	@GetMapping("/")
-	public String index(Model model) {
+	public String index(Model model, HttpSession session) {
+		session.setAttribute("darkMode", darkMode);
 	    return "index.jsp";
 	}
 	
