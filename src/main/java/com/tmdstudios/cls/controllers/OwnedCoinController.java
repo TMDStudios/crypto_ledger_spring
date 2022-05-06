@@ -54,14 +54,16 @@ public class OwnedCoinController {
 		Double totalSpent = 0.0;
 		Double currentPrice = coinService.findBySymbol(symbol).getPrice();
 		
+		if(purchasePrice<=0) {purchasePrice=currentPrice;}
+		
 		for(OwnedCoin coin:ownedCoins) {
 			// only keep track of totals for last coin
 			totalAmount+=coin.getAmount();
 			totalSpent+=coin.getAmount()*coin.getPurchasePrice();
 		}
 		
-		System.out.println("Found: "+ownedCoins.size());
-		totalSpent += currentPrice*amount;
+//		System.out.println("Found: "+ownedCoins.size());
+		totalSpent += purchasePrice*amount;
 		totalAmount += amount;
 		
 		newOwnedCoin.setOwner(userService.findById(owner.getId()));
