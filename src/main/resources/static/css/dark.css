@@ -132,3 +132,20 @@ td {
 #gain {
     color: chartreuse;
 }
+.buy-form {
+	padding-top: 16px;
+	width: 60%;
+	margin: auto;
+}
+.buy-row {
+	display: flex;
+	justify-content: space-between;
+    align-items: center;
+}
+.buy-row input,.buy-btn {
+	width: 33%;
+	font-size: 1.2rem;
+	border-radius: 8px;
+	border: 2px solid white;
+	color: rgb(87, 114, 187);
+}

@@ -56,16 +56,18 @@
 
 <c:if test="${userId!=null}">
 <hr>
+<div class="buy-form">
 <form action="" method="post" id="form">
-	<span>
+	<span class="buy-row">
 	<input type="hidden" id="name" name="name" value="${coin.name}">
 	<input type="hidden" id="symbol" name="symbol" value="${coin.symbol}">
 	<input type="number" step="0.00000001" min="0" id="amount" name="amount" placeholder="Amount"/>
 	<input type="number" step="0.00000001" id="purchasePrice" name="purchasePrice" placeholder="${coin.price}">
 	<input type="hidden" id="coinId" name="coinId" value="${coin.id}">
-	<input class="button" type="submit" value="Buy"/>
+	<input class="buy-btn" type="submit" value="Buy"/>
 	</span>
 </form>	
+</div>
 </c:if>
 
 <script type="text/javascript" src="../js/buy.js"></script>
