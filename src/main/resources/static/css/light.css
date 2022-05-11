@@ -92,9 +92,9 @@ td {
     box-shadow: 0 0 0 0 rgb(87, 114, 187);
     transition: 0.2s;
     border-radius: 8px;
-    position: absolute;
-    bottom: 20px;
-    margin-left: -300px;
+    margin-top: 64px;
+    margin-bottom: 24px;
+    background-color: rgb(150, 167, 186);
 }
 .banner:hover {
     box-shadow: 0 0 12px 0 rgb(20, 45, 82);
@@ -146,7 +146,7 @@ td {
 	color: rgb(87, 114, 187);
 }
 .index-container {
-	padding: 10%;
+	padding: 5%;
 	margin: auto;
 	text-align: center;
 }
@@ -169,4 +169,13 @@ td {
 .index-container button:hover {
 	cursor:pointer;
     background-color: rgba(8, 97, 201, .5);
+}
+.donations {
+	width: 60%; 
+	height: 100%; 
+	margin: auto; 
+	text-align: center;
+}
+.donations a {
+	font-size: .8rem;
 }

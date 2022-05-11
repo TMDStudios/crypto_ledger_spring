@@ -42,6 +42,47 @@
 	<button onclick="register()">Create Account</button>
 </div>
 
+<table class="donations">
+    <tr>
+        <td colspan="3" style="padding: 16px; border: 0px solid white;">
+            <p>Please consider supporting Crypto Ledger with a small donation</p>
+        </td>
+    </tr>
+    <tr>
+        <td style="padding: 8px; border: 0px solid white;">
+            <a><img src="https://tmdstudios.files.wordpress.com/2021/02/btc48.png"></a>
+        </td>
+        <td style="padding: 8px; border: 0px solid white;">
+            <a>3QHJQs1f22HaCoGGxFm6381ibozkM7etuu</a>
+        </td>
+        <td style="padding: 8px; border: 0px solid white;">
+            <a><img src="https://tmdstudios.files.wordpress.com/2021/02/btc48.png"></a>
+        </td>
+    </tr>
+    <tr>
+        <td style="padding: 8px; border: 0px solid white;">
+            <a><img class="rounded-circle" src="https://tmdstudios.files.wordpress.com/2021/11/bch.png"></a>
+        </td>
+        <td style="padding: 8px; border: 0px solid white;">
+            <a>bitcoincash:pre38p5jd7aj3gevq6zmhrmezjxysh4euun0nqy6ta</a>
+        </td>
+        <td style="padding: 8px; border: 0px solid white;">
+            <a><img class="rounded-circle" src="https://tmdstudios.files.wordpress.com/2021/11/bch.png"></a>
+        </td>
+    </tr>
+    <tr>
+        <td style="padding: 8px; border: 0px solid white;">
+            <a><img src="https://tmdstudios.files.wordpress.com/2021/02/doge48.png"></a>
+        </td>
+        <td style="padding: 8px; border: 0px solid white;">
+            <a>DSitciuadURAPxRk43ChBuHXVseW3GB5LJ</a>
+        </td>
+        <td style="padding: 8px; border: 0px solid white;">
+            <a><img src="https://tmdstudios.files.wordpress.com/2021/02/doge48.png"></a>
+        </td>
+    </tr>
+</table>
+
 <div style="width: 60%; margin: auto; text-align: center">
 	<a href="https://play.google.com/store/apps/details?id=com.tmdstudios.cryptoledgerkotlin">
 		<img
