@@ -145,3 +145,28 @@ td {
 	border: 2px solid silver;
 	color: rgb(87, 114, 187);
 }
+.index-container {
+	padding: 10%;
+	margin: auto;
+	text-align: center;
+}
+.index-container p{
+	margin: 24px; 
+	text-align: center; 
+	font-size: 1.2rem;
+}
+.index-container button{
+	width: 50%;
+	padding: 8px;
+	margin: 12px;
+	font-size: 1.1rem;
+	border-radius: 8px;
+	border: 2px solid rgb(8, 97, 201);
+	color: white;
+	background-color: rgb(8, 97, 201);
+	transition: 0.2s;
+}
+.index-container button:hover {
+	cursor:pointer;
+    background-color: rgba(8, 97, 201, .5);
+}

@@ -34,5 +34,13 @@ function getFile(myCallback, page) {
   	req.send();
 }
 
+function login(){
+	window.open("/login","_self");
+}
+
+function register(){
+	window.open("/register","_self");
+}
+
 getFile(updateCoin, 1);
 setTimeout(() => { getFile(updateCoin, 2); }, 1500);

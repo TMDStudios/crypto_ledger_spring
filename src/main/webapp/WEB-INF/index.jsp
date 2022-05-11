@@ -35,13 +35,12 @@
 		<li class="nav_login"><a class="nav_link" href="/register">Register</a></li>
 	</c:if>    
 </ul>
-
-<h1>Crypto Ledger</h1>
-
-<p>Crypto Ledger (Spring) is the Java version of Crypto Ledger.</p>
-
-<p>The original project can be found here: 
-<a href="https://github.com/TMDStudios/crypto_ledger">https://github.com/TMDStudios/crypto_ledger</a></p>
+<div class="index-container">
+	<p>LOG IN TO START</p>
+	<button onclick="login()">Log In</button>
+	<p>Don't have an account?</p>
+	<button onclick="register()">Create Account</button>
+</div>
 
 <div style="width: 60%; margin: auto; text-align: center">
 	<a href="https://play.google.com/store/apps/details?id=com.tmdstudios.cryptoledgerkotlin">
