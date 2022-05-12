@@ -39,33 +39,32 @@
 <h1>Log In</h1>
 
 <form:form action="/login" method="post" modelAttribute="newLogin">
+	<div class="login-block">
+		<div>
+			<label>Username:</label>
+		</div>
+		<div>
+			<form:errors path="username" class="text-danger"/>
+		</div>
+		<div>
+			<form:input path="username"/>
+		</div>
+		
+		<div>
+			<label>Password:</label>
+		</div>
+		<div>
+			<form:errors path="password" class="text-danger"/>
+		</div>
+		<div>
+			<form:input path="password" type="password"/>
+		</div>
 
-	<table>
-		<thead>
-	    	<tr class="blue-bg">
-	            <td colspan="2">Log In</td>
-	        </tr>
-	    </thead>
-	    <thead>
-	        <tr class="blue-bg">
-	            <td class="label">Username:</td>
-	            <td class="float-left">
-	            	<form:errors path="username" class="text-danger"/>
-					<form:input class="input" path="username"/>
-	            </td>
-	        </tr>
-	        <tr class="blue-bg">
-	            <td class="label">Password:</td>
-	            <td class="float-left">
-	            	<form:errors path="password" class="text-danger"/>
-					<form:input class="input" path="password" type="password"/>
-	            </td>
-	        </tr>
-	        <tr class="blue-bg">
-	        	<td colspan=2><input class="input" class="button" type="submit" value="Log In"/></td>
-	        </tr>
-	    </thead>
-	</table>
+		<div>
+			<input class="btn" type="submit" value="Log In"/>
+		</div>
+
+	</div>
 </form:form>
 
 <script type="text/javascript" src="../js/app.js"></script>
