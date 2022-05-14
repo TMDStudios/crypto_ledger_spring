@@ -104,7 +104,7 @@ td {
     margin: 0;
     padding: 0;
     overflow: hidden;
-    background-color: #333;
+    background-color: rgba(137, 181, 248, 0.2);
 }
 .nav_item {
     float: left;
@@ -114,13 +114,15 @@ td {
 }
 .nav_link {
     display: block;
-    color: white;
+    color: #111;
     text-align: center;
     padding: 14px 16px;
     text-decoration: none;
+    transition: 0.2s;
 }
 .nav_link:hover {
-    background-color: #111;
+	color: #343434;
+    background-color: rgba(137, 181, 248, 0.2);
 }
 #loss {
     color: red;
@@ -196,7 +198,8 @@ td {
 	padding: 8px;
 	font-size: 1.1rem;
 	border-radius: 8px;
-	border: 2px solid white;
+	border: 2px solid rgb(137, 181, 248);
+	background-color: #F1F1F1;
 }
 .login-block .btn {
 	text-align: center;
