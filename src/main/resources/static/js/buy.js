@@ -4,8 +4,11 @@ function validate(){
 	xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 	let purchasePrice = document.getElementById("purchasePrice").value;
 	console.log(document.getElementById("purchasePrice").value);
-	if(purchasePrice===null||purchasePrice<0){purchasePrice=0;}
-	console.log("PURCHASE PRICE - "+purchasePrice);
+	if(purchasePrice<0){
+		alert("Purchase price must be greater than zero!");
+		return false;
+	}
+	if(!purchasePrice){purchasePrice=0;}
 	xhttp.send("name="+document.getElementById("name").getAttribute("value")+
 		"&symbol="+document.getElementById("symbol").getAttribute("value")+
 		"&amount="+document.getElementById("amount").value+
