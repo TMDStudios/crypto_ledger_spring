@@ -20,6 +20,7 @@
     <li class="nav_item"><a class="nav_link" href="/home">Home</a></li>
     <li class="nav_item"><a class="nav_link" href="/prices">View Prices</a></li>
     <c:if test="${userId!=null}">
+    	<li class="nav_login"><a class="nav_link" href="/logout">Log Out</a></li>
     	<li class="nav_login">
 	    	<c:if test="${darkMode}">
 				<a class="nav_link" href="/mode">Light</a>
@@ -28,7 +29,6 @@
 				<a class="nav_link" href="/mode">Dark</a>
 			</c:if>
 	    </li>
-		<li class="nav_login"><a class="nav_link" href="/logout">Log Out</a></li>
 	</c:if>
 	<c:if test="${userId==null}">
 		<li class="nav_item"><a class="nav_link" href="/login">Log In</a></li>
@@ -43,16 +43,6 @@
     <script src="https://widget.nomics.com/embed.js"></script>
 </div>
 <br>
-<br>
-<div class="banner-div">
-  <a href="https://tmdstudios.wordpress.com/py-learning-companion/">
-    <img
-      class="banner"
-      style="max-width: 100%"
-      src="https://tmdstudios.files.wordpress.com/2020/10/plclogo.png?w=600"
-    />
-  </a>
-</div>
 
 <c:if test="${userId!=null}">
 <hr>
@@ -69,6 +59,17 @@
 </form>	
 </div>
 </c:if>
+
+<br>
+<div class="banner-div">
+  <a href="https://tmdstudios.wordpress.com/py-learning-companion/">
+    <img
+      class="banner"
+      style="max-width: 100%"
+      src="https://tmdstudios.files.wordpress.com/2020/10/plclogo.png?w=600"
+    />
+  </a>
+</div>
 
 <script type="text/javascript" src="../js/buy.js"></script>
 

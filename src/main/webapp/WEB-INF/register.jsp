@@ -39,47 +39,52 @@
 <h1>Register</h1>
 
 <form:form action="/register" method="post" modelAttribute="newUser">
+	<div class="login-block">
+		<div>
+			<label>Username:</label>
+		</div>
+		<div>
+			<form:errors path="username" class="text-danger"/>
+		</div>
+		<div>
+			<form:input path="username"/>
+		</div>
+		
+		<div>
+			<label>Email (optional):</label>
+		</div>
+		<div>
+			<form:errors path="email" class="text-danger"/>
+		</div>
+		<div>
+			<form:input path="email"/>
+		</div>
 
-	<table>
-		<thead>
-	    	<tr class="blue-bg">
-	            <td colspan="2">New User</td>
-	        </tr>
-	    </thead>
-	    <thead>
-	    	<tr class="blue-bg">
-	            <td class="label">Username:</td>
-	            <td class="float-left">
-	            	<form:errors path="username" class="text-danger"/>
-					<form:input class="input" path="username"/>
-	            </td>
-	        </tr>
-	        <tr class="blue-bg">
-	            <td class="label">Email (optional):</td>
-	            <td class="float-left">
-	            	<form:errors path="email" class="text-danger"/>
-					<form:input class="input" path="email" type="email"/>
-	            </td>
-	        </tr>
-	        <tr class="blue-bg">
-	            <td class="label">Password:</td>
-	            <td class="float-left">
-	            	<form:errors path="password" class="text-danger"/>
-					<form:input class="input" path="password" type="password"/>
-	            </td>
-	        </tr>
-	        <tr class="blue-bg">
-	            <td class="label">Confirm PW:</td>
-	            <td class="float-left">
-	            	<form:errors path="confirm" class="text-danger"/>
-					<form:input class="input" path="confirm" type="password"/>
-	            </td>
-	        </tr>
-	        <tr class="blue-bg">
-	        	<td colspan=2><input class="input" class="button" type="submit" value="Register"/></td>
-	        </tr>
-	    </thead>
-	</table>
+		<div>
+			<label>Password:</label>
+		</div>
+		<div>
+			<form:errors path="password" class="text-danger"/>
+		</div>
+		<div>
+			<form:input path="password" type="password"/>
+		</div>
+		
+		<div>
+			<label>Confirm PW:</label>
+		</div>
+		<div>
+			<form:errors path="confirm" class="text-danger"/>
+		</div>
+		<div>
+			<form:input path="confirm" type="password"/>
+		</div>
+
+		<div>
+			<input class="btn" type="submit" value="Register"/>
+		</div>
+
+	</div>
 </form:form>
 
 <script type="text/javascript" src="../js/app.js"></script>
