@@ -221,3 +221,9 @@ td {
 	text-align: center;
 	padding: 12px;
 }
+.sell-btn, .del-btn {
+	background-color: rgba(150, 212, 212, 0.2);
+	border-radius: 2px;
+	border: 1px solid #ced7dd;
+	padding: 2px 12px;
+}
