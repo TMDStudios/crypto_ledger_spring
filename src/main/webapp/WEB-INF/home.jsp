@@ -53,9 +53,8 @@
         </tr>
     </thead>
     <tbody>
-    	<c:forEach var="coin" items="${ownedCoins}">
+    	<c:forEach var="coin" items="${activeCoins}">
 		<tr>
-		<c:if test = "${!coin.sold&&!coin.merged}">
 			<td scope="col" class="center-cell"><a class="link-light" href="/coins/${coin.coinRef}">${coin.name}</a></td>
 			<td scope="col" class="center-cell"><fmt:formatNumber pattern="0.00000000" value="${coin.totalAmount}"/> ${coin.symbol}</td>
 			<td scope="col" class="center-cell">$<fmt:formatNumber pattern="0.000" value="${coin.totalValue}"/></td>	
@@ -86,7 +85,6 @@
 			<td scope="col" class="center-cell">
 			<button type="button" class="sell-btn" onclick="sell(document.getElementById('${coin.id}').value, ${coin.totalAmount})" id="${coin.id}" value="${coin.id}">Sell</button>
 			</td>
-		</c:if>
 		</tr>
 		</c:forEach>
 		<tr>
@@ -116,9 +114,8 @@
         </tr>
     </thead>
     <tbody>
-    	<c:forEach var="coin" items="${ownedCoins}">
+    	<c:forEach var="coin" items="${inactiveCoins}">
 		<tr>
-		<c:if test = "${coin.sold||coin.merged}">
 			<td scope="col" class="center-cell"><a class="link-light" href="/coins/${coin.coinRef}">${coin.name}</a></td>
 			<c:if test="${coin.merged}">
 				<c:if test="${coin.purchasePrice<0.001}">
@@ -149,7 +146,6 @@
 			<td scope="col" class="center-cell">
 			<button type="button" class="del-btn" onclick="deleteCoin(document.getElementById('${coin.id}').value)" id="${coin.id}" value="${coin.id}">Delete</button>
 			</td>
-		</c:if>
 		</tr>
 		</c:forEach>
 		<tr>

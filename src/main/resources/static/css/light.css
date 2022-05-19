@@ -13,6 +13,9 @@ table {
 	width: 100%;
 	display: table;
 }
+tr {
+	height: 48px;
+}
 th {
 	border-bottom: 1px solid #ced7dd;
 	border-top: 1px solid #ced7dd;

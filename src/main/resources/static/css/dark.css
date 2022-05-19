@@ -15,6 +15,10 @@ table {
 	width: 100%;
 	display: table;
 }
+tr {
+	height: 48px;
+	background-color: rgba(255, 255, 255, 0.05);
+}
 th {
 	border-bottom: 1px solid #ced7dd;
 	border-top: 1px solid #ced7dd;

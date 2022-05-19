@@ -1,5 +1,6 @@
 package com.tmdstudios.cls.controllers;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -194,15 +195,19 @@ public class MainController {
 			Long userId = (Long) session.getAttribute("userId");		
 			User user = userService.findById(userId);
 			List<OwnedCoin> ownedCoins = ownedCoinService.findByOwnerDesc(user);
-			model.addAttribute("ownedCoins", ownedCoins);
+			ArrayList<OwnedCoin> activeCoins = new ArrayList();
+			ArrayList<OwnedCoin> inactiveCoins = new ArrayList();
 			
 			for(OwnedCoin ownedCoin:ownedCoins) {
 				if(!ownedCoin.getSold()&&!ownedCoin.getMerged()) {
+					activeCoins.add(ownedCoin);
 					overallTotal += ownedCoin.getTotalValue();
 					currentProfit += ownedCoin.getTotalProfit();
-				}
-				if(ownedCoin.getSold()) {
+				}else if(ownedCoin.getSold()) {
+					inactiveCoins.add(ownedCoin);
 					overallProfit += ownedCoin.getGain();
+				}else {
+					inactiveCoins.add(ownedCoin);
 				}
 				try {
 					ownedCoin.setCoinRef(coinService.findBySymbol(ownedCoin.getSymbol()).getId()); // fixes coinRef issue?
@@ -214,6 +219,9 @@ public class MainController {
 					System.out.println("Coin not found: "+ownedCoin.getSymbol());
 				}
 			}
+			
+			model.addAttribute("activeCoins", activeCoins);
+			model.addAttribute("inactiveCoins", inactiveCoins);
 		}
 		
 		model.addAttribute("overallTotal", overallTotal);
