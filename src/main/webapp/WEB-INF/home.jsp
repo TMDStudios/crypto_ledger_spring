@@ -105,7 +105,7 @@
     </tbody>
 </table>
 
-<h2>Order History</h2>
+<h2 class="header">Order History</h2>
 
 <table>
 	<thead>

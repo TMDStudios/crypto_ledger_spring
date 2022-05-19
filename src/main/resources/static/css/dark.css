@@ -222,3 +222,7 @@ td {
 .text-danger {
 	color: red;
 }
+.header {
+	text-align: center;
+	padding: 12px;
+}

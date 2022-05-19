@@ -7,9 +7,6 @@ body {
 h1 {
 	text-align: center;
 }
-h2 {
-	text-align: center;
-}
 table {
 	margin-left: auto;
 	margin-right: auto;
@@ -219,4 +216,8 @@ td {
 }
 .text-danger {
 	color: red;
+}
+.header {
+	text-align: center;
+	padding: 12px;
 }
