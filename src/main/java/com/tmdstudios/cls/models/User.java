@@ -14,8 +14,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.PrePersist;
-import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.validation.constraints.NotEmpty;
@@ -50,16 +50,11 @@ public class User {
     @Column(updatable=false)
     @DateTimeFormat(pattern="yyyy-MM-dd")
     private Date createdAt;
-    @DateTimeFormat(pattern="yyyy-MM-dd")
-    private Date updatedAt;
     
     @PrePersist
     protected void onCreate(){
         this.createdAt = new Date();
-    }
-    @PreUpdate
-    protected void onUpdate(){
-        this.updatedAt = new Date();
+        this.settings = new Settings(this);
     }
     
     @ManyToMany(fetch = FetchType.LAZY, cascade=CascadeType.ALL)
@@ -75,6 +70,9 @@ public class User {
     @OneToMany(mappedBy="owner", fetch = FetchType.LAZY)
     @JsonManagedReference
     private List<OwnedCoin> ownedCoins;
+    
+    @OneToOne(mappedBy="user", cascade=CascadeType.ALL, fetch=FetchType.LAZY)
+    private Settings settings;
   
     public User() {}
     
@@ -114,12 +112,6 @@ public class User {
 	public void setCreatedAt(Date createdAt) {
 		this.createdAt = createdAt;
 	}
-	public Date getUpdatedAt() {
-		return updatedAt;
-	}
-	public void setUpdatedAt(Date updatedAt) {
-		this.updatedAt = updatedAt;
-	}
 	public List<Coin> getCoins() {
 		return coins;
 	}
@@ -131,6 +123,12 @@ public class User {
 	}
 	public void setOwnedCoins(List<OwnedCoin> ownedCoins) {
 		this.ownedCoins = ownedCoins;
+	}
+	public Settings getSettings() {
+		return settings;
+	}
+	public void setSettings(Settings settings) {
+		this.settings = settings;
 	}
 
 }

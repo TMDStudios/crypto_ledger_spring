@@ -20,9 +20,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.tmdstudios.cls.models.Coin;
 import com.tmdstudios.cls.models.LoginUser;
 import com.tmdstudios.cls.models.OwnedCoin;
+import com.tmdstudios.cls.models.Settings;
 import com.tmdstudios.cls.models.User;
 import com.tmdstudios.cls.services.CoinService;
 import com.tmdstudios.cls.services.OwnedCoinService;
+import com.tmdstudios.cls.services.SettingsService;
 import com.tmdstudios.cls.services.UserService;
 
 @Controller
@@ -33,6 +35,9 @@ public class MainController {
 	
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	private SettingsService settingsService;
 	
 	@Autowired
 	private CoinService coinService;
@@ -235,6 +240,15 @@ public class MainController {
 	public String modeSwitch(HttpSession session, Model model) {
 		
 		darkMode = !darkMode;
+		
+		Long userId = (Long) session.getAttribute("userId");		
+		User user = userService.findById(userId);
+		
+		Settings settings = settingsService.findByUser(user);
+		
+		settings.setDarkMode(darkMode);
+		settingsService.updateSettings(settings);
+		
 		session.setAttribute("darkMode", darkMode);
 		 
 		return "redirect:/home";
