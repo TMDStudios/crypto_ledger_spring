@@ -185,6 +185,9 @@ td {
 	margin: auto; 
 	text-align: center;
 }
+.donations tr {
+	background-color: #000000;
+}
 .donations a {
 	font-size: .8rem;
 }
