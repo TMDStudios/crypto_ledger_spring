@@ -1,5 +1,6 @@
 package com.tmdstudios.cls.services;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -33,6 +34,10 @@ public class OwnedCoinService {
 		ownedCoinRepo.delete(ownedCoin);
 	}
 	
+	public void deleteAllFromOwner(Long ownerId) {
+		ownedCoinRepo.deleteAllFromOwner(ownerId);
+	}
+	
 	public OwnedCoin findById(Long id) {
 		Optional<OwnedCoin> optionalOwnedCoin = ownedCoinRepo.findById(id);
 		if(optionalOwnedCoin.isPresent()) {
@@ -59,5 +64,13 @@ public class OwnedCoinService {
 			return null;
 		}
 	}
+	
+//	public void deleteAllFromUser(User owner) {
+//		ArrayList<Long> coinIds = new ArrayList<>();
+//		for(OwnedCoin coin: findByOwnerDesc(owner)) {
+//			coinIds.add(coin.getId());
+//		}
+//		ownedCoinRepo.deleteAllFromUser(coinIds);
+//	}
 	
 }

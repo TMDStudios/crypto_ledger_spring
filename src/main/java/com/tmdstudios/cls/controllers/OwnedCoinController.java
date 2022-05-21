@@ -134,4 +134,10 @@ public class OwnedCoinController {
 		OwnedCoin ownedCoin = ownedCoinService.findById(id);
 		ownedCoinService.deleteOwnedCoin(ownedCoin);
 	}
+	
+	@RequestMapping(value="/api/delete-all", method=RequestMethod.DELETE)
+	public void deleteAll(HttpSession session) {
+		Long userId = (Long) session.getAttribute("userId");
+		ownedCoinService.deleteAllFromOwner(userId);
+	}
 }

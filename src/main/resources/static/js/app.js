@@ -42,5 +42,17 @@ function register(){
 	window.open("/register","_self");
 }
 
+function resetLedger(){
+	if(confirm("Are you sure?\nThis cannot be undone!")==true){
+		let xhttp = new XMLHttpRequest();
+	  	xhttp.open("DELETE", "/api/delete-all");
+		xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+		xhttp.send();
+		alert("Done");
+	}else{
+		alert("Cancelled");
+	}
+}
+
 getFile(updateCoin, 1);
 setTimeout(() => { getFile(updateCoin, 2); }, 1500);

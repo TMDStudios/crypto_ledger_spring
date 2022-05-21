@@ -48,6 +48,12 @@
 	</div>
 	<div class="login-block">
 		<div>
+			<button class="red-btn" onclick="resetLedger()">Reset Ledger</button>
+		</div>
+	</div>
+	<hr>
+	<div class="login-block">
+		<div>
 			<input class="btn" type="submit" value="Submit"/>
 		</div>
 	</div>
@@ -63,6 +69,8 @@
     />
   </a>
 </div>
+
+<script type="text/javascript" src="../js/app.js"></script>
 
 </body>
 </html>

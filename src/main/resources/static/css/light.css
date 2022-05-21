@@ -213,9 +213,25 @@ td {
 	background-color: rgb(8, 97, 201);
 	transition: 0.2s;
 }
+.login-block .red-btn {
+	text-align: center;
+	width: 100%;
+	margin-top: 8px;
+	padding: 8px;
+	font-size: 1.1rem;
+	border-radius: 8px;
+	border: 2px solid rgb(200, 0, 0);
+	color: white;
+	background-color: rgb(200, 0, 0);
+	transition: 0.2s;
+}
 .login-block .btn:hover {
 	cursor:pointer;
     background-color: rgba(8, 97, 201, .5);
+}
+.login-block .red-btn:hover {
+	cursor:pointer;
+    background-color: rgba(200, 0, 0, .5);
 }
 .text-danger {
 	color: red;
