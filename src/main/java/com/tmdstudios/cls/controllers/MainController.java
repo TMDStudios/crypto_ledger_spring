@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.tmdstudios.cls.models.Coin;
 import com.tmdstudios.cls.models.LoginUser;
@@ -234,6 +235,36 @@ public class MainController {
 		model.addAttribute("overallProfit", overallProfit);
 		 
 		return "home.jsp";
+	}
+	
+	@GetMapping("/settings")
+	public String settings(HttpSession session, Model model) {
+		Long userId = (Long) session.getAttribute("userId");		
+		User user = userService.findById(userId);
+		model.addAttribute("user", user);
+		return "settings.jsp";
+	}
+	
+	@PostMapping("/settings")
+	public String updateSettings(
+			HttpSession session, 
+			Model model,
+			@RequestParam(value="darkMode", required=false) Boolean formDarkMode
+			) {
+		
+		Long userId = (Long) session.getAttribute("userId");		
+		User user = userService.findById(userId);
+		
+		Settings settings = settingsService.findByUser(user);
+		
+		// NEEDS BETTER SOLUTION
+		
+		settings.setDarkMode(formDarkMode==null ? false : true);
+		settingsService.updateSettings(settings);
+		
+		session.setAttribute("darkMode", settings.getDarkMode());
+		 
+		return "redirect:/settings";
 	}
 	
 	@RequestMapping("/mode")
