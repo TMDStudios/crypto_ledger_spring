@@ -201,8 +201,8 @@ public class MainController {
 			Long userId = (Long) session.getAttribute("userId");		
 			User user = userService.findById(userId);
 			List<OwnedCoin> ownedCoins = ownedCoinService.findByOwnerDesc(user);
-			ArrayList<OwnedCoin> activeCoins = new ArrayList();
-			ArrayList<OwnedCoin> inactiveCoins = new ArrayList();
+			ArrayList<OwnedCoin> activeCoins = new ArrayList<>();
+			ArrayList<OwnedCoin> inactiveCoins = new ArrayList<>();
 			
 			for(OwnedCoin ownedCoin:ownedCoins) {
 				if(!ownedCoin.getSold()&&!ownedCoin.getMerged()) {
@@ -265,24 +265,6 @@ public class MainController {
 		session.setAttribute("darkMode", settings.getDarkMode());
 		 
 		return "redirect:/settings";
-	}
-	
-	@RequestMapping("/mode")
-	public String modeSwitch(HttpSession session, Model model) {
-		
-		darkMode = !darkMode;
-		
-		Long userId = (Long) session.getAttribute("userId");		
-		User user = userService.findById(userId);
-		
-		Settings settings = settingsService.findByUser(user);
-		
-		settings.setDarkMode(darkMode);
-		settingsService.updateSettings(settings);
-		
-		session.setAttribute("darkMode", darkMode);
-		 
-		return "redirect:/home";
 	}
 
 }

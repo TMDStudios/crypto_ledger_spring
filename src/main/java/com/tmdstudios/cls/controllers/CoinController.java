@@ -2,6 +2,7 @@ package com.tmdstudios.cls.controllers;
 
 import java.util.List;
 
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -20,6 +21,7 @@ public class CoinController {
 		this.coinService = coinService;
 	}
 	
+	@CrossOrigin(origins = "http://localhost:3000")
 	@RequestMapping("/api/coins")
 	public List<Coin> allCoins() {
 		return coinService.allCoins();

@@ -22,14 +22,7 @@
     <li class="nav_item"><a class="nav_link" href="/prices">View Prices</a></li>
     <c:if test="${userId!=null}">
     	<li class="nav_login"><a class="nav_link" href="/logout">Log Out</a></li>
-    	<li class="nav_login">
-	    	<c:if test="${darkMode}">
-				<a class="nav_link" href="/mode">Light</a>
-			</c:if>
-			<c:if test="${!darkMode}">
-				<a class="nav_link" href="/mode">Dark</a>
-			</c:if>
-	    </li>
+		<li class="nav_login"><a class="nav_link" href="/settings">Settings</a></li>
 	</c:if>
 	<c:if test="${userId==null}">
 		<li class="nav_item"><a class="nav_link" href="/login">Log In</a></li>
