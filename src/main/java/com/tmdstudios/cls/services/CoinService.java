@@ -26,7 +26,7 @@ public class CoinService {
 	}
 	
 	public List<Coin> userCoins(User user){
-		return coinRepo.getUserCoins(user);
+		return coinRepo.getUserCoins(user.getId());
 	}
 	
 	public List<Coin> getAssignedUsers(User user){

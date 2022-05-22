@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.tmdstudios.cls.models.Coin;
@@ -23,6 +24,6 @@ public interface CoinRepo extends CrudRepository<Coin, Long> {
 	@Query(value = "SELECT * FROM coins ORDER BY coin_rank ASC LIMIT 100", nativeQuery = true) 
 	List<Coin> getTop100();
 	
-	@Query(value = "SELECT * FROM coins INNER JOIN users_coins ON users_coins.coin_id = coins.id WHERE users_coins.user_id=1 ORDER BY coins.coin_rank", nativeQuery = true) 
-	List<Coin> getUserCoins(User user);
+	@Query(value = "SELECT * FROM coins INNER JOIN users_coins ON users_coins.coin_id = coins.id WHERE users_coins.user_id=:owner_id ORDER BY coins.coin_rank", nativeQuery = true) 
+	List<Coin> getUserCoins(@Param("owner_id") Long ownerId);
 }
