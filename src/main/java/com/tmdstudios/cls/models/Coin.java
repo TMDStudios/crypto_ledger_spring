@@ -1,9 +1,10 @@
 package com.tmdstudios.cls.models;
 
-import java.sql.Date;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -12,6 +13,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -35,8 +38,21 @@ public class Coin {
     private Double priceChangePercentage7d;
     private Double priceChangePercentage30d;
     
+    @Column(updatable=false)
+    @DateTimeFormat(pattern="yyyy-MM-dd")
+    private Date createdAt;
+    
     @DateTimeFormat(pattern="yyyy-MM-dd")
     private Date updatedAt;
+    
+    @PrePersist
+    protected void onCreate(){
+        this.createdAt = new Date();
+    }
+    @PreUpdate
+    protected void onUpdate(){
+        this.updatedAt = new Date();
+    }
     
     @ManyToMany(fetch = FetchType.LAZY, cascade=CascadeType.ALL)
     @JsonBackReference
@@ -139,6 +155,13 @@ public class Coin {
 	public void setPriceChangePercentage30d(Double priceChangePercentage30d) {
 		this.priceChangePercentage30d = priceChangePercentage30d;
 	}
+	
+	public Date getCreatedAt() {
+		return createdAt;
+	}
+	public void setCreatedAt(Date createdAt) {
+		this.createdAt = createdAt;
+	}
 
 	public Date getUpdatedAt() {
 		return updatedAt;
@@ -147,7 +170,7 @@ public class Coin {
 	public void setUpdatedAt(Date updatedAt) {
 		this.updatedAt = updatedAt;
 	}
-
+	
 	public List<User> getUsers() {
 		return users;
 	}

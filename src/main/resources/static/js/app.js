@@ -1,3 +1,5 @@
+let allCoins = [];
+
 function updateCoin(coin) {
   	//document.getElementById("demo").innerHTML = coin;
   	let xhttp = new XMLHttpRequest();
@@ -12,7 +14,8 @@ function updateCoin(coin) {
 		"&priceChangePercentage30d="+coin[7]+"");
 }
 
-function getFile(myCallback, page) {
+function fetchData(myCallback, page) {
+	allCoins = []; // Keep track of updated coins
   	let req = new XMLHttpRequest();
 	req.open('GET', "https://api.nomics.com/v1/currencies/ticker?key=eb3a7d733a1719cd0a2731a28b6c9bedcb052751&per-page=100&page="+page);
   	req.onload = function() {
@@ -25,8 +28,32 @@ function getFile(myCallback, page) {
 			for (var i = 0; i < jsonData.length; i++) {
 				const c = jsonData[i];
 			    const coin = [c.name, c.symbol, c.logo_url, c.price, c.rank, c.oneDay.price_change_pct, c.sevenDay.price_change_pct, c.thirtyDay.price_change_pct];
+			    allCoins.push(c.symbol);
 			    myCallback(coin);
 			}
+			handleLeftovers();
+    	} else {
+      		myCallback("Error: " + req.status);
+    	}
+  	}
+  	req.send();
+}
+
+function handleLeftovers() {
+  	let req = new XMLHttpRequest();
+	req.open('GET', "/api/coins");
+  	req.onload = function() {
+    	if (req.status == 200) {
+			let leftoverCoins = [] // Filter out coins that have not been updated
+			const jsonData = JSON.parse(this.responseText);
+			for (var i = 0; i < jsonData.length; i++) {
+				if(allCoins.indexOf(jsonData[i].symbol)<0){leftoverCoins.push(jsonData[i])}
+			}
+			for (var i = 0; i < leftoverCoins.length; i++){
+				leftoverCoins[i].coinRank = 500+leftoverCoins.length
+				updateCoin(leftoverCoins[i]);
+			}
+			console.log("LEFTOVERS: "+leftoverCoins);
     	} else {
       		myCallback("Error: " + req.status);
     	}
@@ -54,5 +81,5 @@ function resetLedger(){
 	}
 }
 
-getFile(updateCoin, 1);
-setTimeout(() => { getFile(updateCoin, 2); }, 1500);
+fetchData(updateCoin, 1);
+//setTimeout(() => { getFile(updateCoin, 2); }, 1500);
