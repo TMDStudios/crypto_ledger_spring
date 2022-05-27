@@ -26,10 +26,14 @@ function fetchData(myCallback, page) {
 			const rawData3 = rawData2.replace(/30d/g, "thirtyDay");
 			const jsonData = JSON.parse(rawData3);
 			for (var i = 0; i < jsonData.length; i++) {
-				const c = jsonData[i];
-			    const coin = [c.name, c.symbol, c.logo_url, c.price, c.rank, c.oneDay.price_change_pct, c.sevenDay.price_change_pct, c.thirtyDay.price_change_pct];
-			    allCoins.push(c.symbol);
-			    myCallback(coin);
+				try{
+					const c = jsonData[i];
+				    const coin = [c.name, c.symbol, c.logo_url, c.price, c.rank, c.oneDay.price_change_pct, c.sevenDay.price_change_pct, c.thirtyDay.price_change_pct];
+				    allCoins.push(c.symbol);
+				    myCallback(coin);
+				}catch(e){
+					console.log(e);
+				}
 			}
 			handleLeftovers();
     	} else {
@@ -49,9 +53,20 @@ function handleLeftovers() {
 			for (var i = 0; i < jsonData.length; i++) {
 				if(allCoins.indexOf(jsonData[i].symbol)<0){leftoverCoins.push(jsonData[i])}
 			}
+			// Set leftover coin ranks to 500+
+			// Fetch updated prices?
 			for (var i = 0; i < leftoverCoins.length; i++){
-				leftoverCoins[i].coinRank = 500+leftoverCoins.length
-				updateCoin(leftoverCoins[i]);
+				console.log("updating: "+leftoverCoins[i].symbol);
+				const coin = [
+					leftoverCoins[i].name, 
+					leftoverCoins[i].symbol, 
+					leftoverCoins[i].logo, 
+					leftoverCoins[i].price, 
+					500+i, 
+					leftoverCoins[i].priceChangePercentage1d, 
+					leftoverCoins[i].priceChangePercentage7d, 
+					leftoverCoins[i].priceChangePercentage30d];
+				updateCoin(coin);
 			}
 			console.log("LEFTOVERS: "+leftoverCoins);
     	} else {
