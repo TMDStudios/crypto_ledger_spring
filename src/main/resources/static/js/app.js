@@ -1,7 +1,6 @@
 let allCoins = [];
 
 function updateCoin(coin) {
-  	//document.getElementById("demo").innerHTML = coin;
   	let xhttp = new XMLHttpRequest();
   	xhttp.open("POST", "/api/coins");
 	xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
@@ -96,5 +95,17 @@ function resetLedger(){
 	}
 }
 
+function watchCoin(coinId){
+	if(document.getElementById("starImg"+coinId).src == "https://tmdstudios.files.wordpress.com/2022/03/goldstaroutline-1.png"){
+		document.getElementById("starImg"+coinId).src = "https://tmdstudios.files.wordpress.com/2022/03/goldstar.png";
+	}else{
+		document.getElementById("starImg"+coinId).src = "https://tmdstudios.files.wordpress.com/2022/03/goldstaroutline-1.png";
+	}
+	
+	let xhttp = new XMLHttpRequest();
+  	xhttp.open("GET", "/coins/watch/"+coinId);
+	xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	xhttp.send();
+}
+
 fetchData(updateCoin, 1);
-//setTimeout(() => { getFile(updateCoin, 2); }, 1500);

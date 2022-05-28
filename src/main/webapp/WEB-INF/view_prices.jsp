@@ -65,10 +65,10 @@
 		<c:forEach var="coin" items="${coins}">
         	<tr class="card-item">
 	        	<c:if test="${!myCoins.contains(coin)}">
-					<td class="narrow"><a href="/coins/watch/${coin.id}"><img src="${starOutline}"/></a></td>
+					<td class="narrow"><img id="starImg${coin.id}" onclick="watchCoin(${coin.id})" src="${starOutline}"/></td>
 				</c:if>
 				<c:if test="${myCoins.contains(coin)}">
-					<td class="narrow"><a href="/coins/watch/${coin.id}"><img src="${starFull}"/></a></td>
+					<td class="narrow"><img id="starImg${coin.id}" onclick="watchCoin(${coin.id})" src="${starFull}"/></td>
 				</c:if>
 	            <c:if test="${coin.coinRank<=100}">
 					<td class="narrow">${coin.coinRank}</td>

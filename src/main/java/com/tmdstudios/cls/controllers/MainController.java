@@ -156,30 +156,27 @@ public class MainController {
 	}
 	
 	@RequestMapping("/coins/watch/{id}")
-	public String watchCoin(HttpSession session, @PathVariable("id") Long id) {
+	public void watchCoin(HttpSession session, @PathVariable("id") Long id) {
 		
-		if(session.getAttribute("userId") == null) {
-			return "redirect:/logout";
-		}
-		
-		Long userId = (Long) session.getAttribute("userId");		
-		User user = userService.findById(userId);
-		
-		Coin coin = coinService.findById(id);
-		boolean coinFound = false;
-		for(Coin userCoin:user.getCoins()) {
-			if(userCoin.getSymbol()==coin.getSymbol()) {
-				coinFound=true;
-				user.getCoins().remove(user.getCoins().indexOf(userCoin));
-				break;
+		if(session.getAttribute("userId") != null) {
+			Long userId = (Long) session.getAttribute("userId");		
+			User user = userService.findById(userId);
+			
+			Coin coin = coinService.findById(id);
+			boolean coinFound = false;
+			for(Coin userCoin:user.getCoins()) {
+				if(userCoin.getSymbol()==coin.getSymbol()) {
+					coinFound=true;
+					user.getCoins().remove(user.getCoins().indexOf(userCoin));
+					break;
+				}
 			}
+			if(!coinFound) {
+				user.getCoins().add(coin);
+			}
+			userService.updateUser(user);
 		}
-		if(!coinFound) {
-			user.getCoins().add(coin);
-		}
-		userService.updateUser(user);
-		 
-		return "redirect:/prices";
+		
 	}
 	
 	@RequestMapping(value="/coins/{id}", method = { RequestMethod.GET, RequestMethod.POST })
