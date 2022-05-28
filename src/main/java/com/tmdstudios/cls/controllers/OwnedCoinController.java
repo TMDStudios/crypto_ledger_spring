@@ -143,7 +143,7 @@ public class OwnedCoinController {
 	}
 	
 	@RequestMapping("/api/coins/watch/{id}")
-	public void watchCoin(HttpSession session, @PathVariable("id") Long id) {
+	public Boolean watchCoin(HttpSession session, @PathVariable("id") Long id) {
 		
 		if(session.getAttribute("userId") != null) {
 			Long userId = (Long) session.getAttribute("userId");		
@@ -162,7 +162,9 @@ public class OwnedCoinController {
 				user.getCoins().add(coin);
 			}
 			userService.updateUser(user);
+			return true;
 		}
+		return false;
 		
 	}
 }

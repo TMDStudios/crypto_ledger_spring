@@ -96,15 +96,19 @@ function resetLedger(){
 }
 
 function watchCoin(coinId){
-	if(document.getElementById("starImg"+coinId).src == "https://tmdstudios.files.wordpress.com/2022/03/goldstaroutline-1.png"){
-		document.getElementById("starImg"+coinId).src = "https://tmdstudios.files.wordpress.com/2022/03/goldstar.png";
-	}else{
-		document.getElementById("starImg"+coinId).src = "https://tmdstudios.files.wordpress.com/2022/03/goldstaroutline-1.png";
-	}
-	
 	let xhttp = new XMLHttpRequest();
   	xhttp.open("GET", "/api/coins/watch/"+coinId);
-	xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	xhttp.onload = ( function() {
+			if(this.responseText==="false"){
+				alert("Please log in to use this feature");
+			}else{
+				if(document.getElementById("starImg"+coinId).src == "https://tmdstudios.files.wordpress.com/2022/03/goldstaroutline-1.png"){
+					document.getElementById("starImg"+coinId).src = "https://tmdstudios.files.wordpress.com/2022/03/goldstar.png";
+				}else{
+					document.getElementById("starImg"+coinId).src = "https://tmdstudios.files.wordpress.com/2022/03/goldstaroutline-1.png";
+				}
+			}
+		});
 	xhttp.send();
 }
 

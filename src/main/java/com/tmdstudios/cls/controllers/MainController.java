@@ -109,9 +109,7 @@ public class MainController {
 	@GetMapping("/prices")
 	public String viewPrices(HttpSession session, Model model) {
 	 
-		if(session.getAttribute("userId") == null) {
-//			return "redirect:/logout";
-		}else {
+		if(session.getAttribute("userId") != null) {
 			Long userId = (Long) session.getAttribute("userId");		
 			User user = userService.findById(userId);
 			model.addAttribute("myCoins", user.getCoins());
@@ -120,20 +118,8 @@ public class MainController {
 		if(showWatchlist) {
 			Long userId = (Long) session.getAttribute("userId");
 			User user = userService.findById(userId);
-			Long newRank = 1l;
-			for(Coin coin:coinService.userCoins(user)) {
-				coin.setCoinRank(newRank);
-				newRank++;
-			}
 			model.addAttribute("coins", coinService.userCoins(user));
 		}else {
-			// Workaround for coin rank issue
-			Long newRank = 1l;
-			for(Coin coin:coinService.topCoins()) {
-				coin.setCoinRank(newRank);
-				newRank++;
-				coinService.updateCoin(coin);
-			}
 			model.addAttribute("coins", coinService.topCoins());
 		}
 		
