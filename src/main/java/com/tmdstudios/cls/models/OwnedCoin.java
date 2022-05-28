@@ -9,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.PrePersist;
 import javax.persistence.Table;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -25,6 +26,10 @@ public class OwnedCoin {
     private String symbol;
     @DateTimeFormat(pattern="yyyy-MM-dd")
     private Date dateBought;
+    @PrePersist
+	protected void onCreate() {
+		this.dateBought = new Date();
+	}
     @DateTimeFormat(pattern="yyyy-MM-dd")
     private Date dateSold;
     private Double sellPrice = 0.0;
