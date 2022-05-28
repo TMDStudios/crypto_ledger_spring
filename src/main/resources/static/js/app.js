@@ -103,7 +103,7 @@ function watchCoin(coinId){
 	}
 	
 	let xhttp = new XMLHttpRequest();
-  	xhttp.open("GET", "/coins/watch/"+coinId);
+  	xhttp.open("GET", "/api/coins/watch/"+coinId);
 	xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 	xhttp.send();
 }

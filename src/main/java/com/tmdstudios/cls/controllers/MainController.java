@@ -155,30 +155,6 @@ public class MainController {
 		return "redirect:/prices";
 	}
 	
-	@RequestMapping("/coins/watch/{id}")
-	public void watchCoin(HttpSession session, @PathVariable("id") Long id) {
-		
-		if(session.getAttribute("userId") != null) {
-			Long userId = (Long) session.getAttribute("userId");		
-			User user = userService.findById(userId);
-			
-			Coin coin = coinService.findById(id);
-			boolean coinFound = false;
-			for(Coin userCoin:user.getCoins()) {
-				if(userCoin.getSymbol()==coin.getSymbol()) {
-					coinFound=true;
-					user.getCoins().remove(user.getCoins().indexOf(userCoin));
-					break;
-				}
-			}
-			if(!coinFound) {
-				user.getCoins().add(coin);
-			}
-			userService.updateUser(user);
-		}
-		
-	}
-	
 	@RequestMapping(value="/coins/{id}", method = { RequestMethod.GET, RequestMethod.POST })
 	public String coinDetails(HttpSession session, Model model, @PathVariable("id") Long id) {
 		model.addAttribute("coin", coinService.findById(id));

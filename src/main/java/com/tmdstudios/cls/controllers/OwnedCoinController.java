@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.tmdstudios.cls.models.Coin;
 import com.tmdstudios.cls.models.OwnedCoin;
 import com.tmdstudios.cls.models.User;
 import com.tmdstudios.cls.services.CoinService;
@@ -139,5 +140,29 @@ public class OwnedCoinController {
 	public void deleteAll(HttpSession session) {
 		Long userId = (Long) session.getAttribute("userId");
 		ownedCoinService.deleteAllFromOwner(userId);
+	}
+	
+	@RequestMapping("/api/coins/watch/{id}")
+	public void watchCoin(HttpSession session, @PathVariable("id") Long id) {
+		
+		if(session.getAttribute("userId") != null) {
+			Long userId = (Long) session.getAttribute("userId");		
+			User user = userService.findById(userId);
+			
+			Coin coin = coinService.findById(id);
+			boolean coinFound = false;
+			for(Coin userCoin:user.getCoins()) {
+				if(userCoin.getSymbol()==coin.getSymbol()) {
+					coinFound=true;
+					user.getCoins().remove(user.getCoins().indexOf(userCoin));
+					break;
+				}
+			}
+			if(!coinFound) {
+				user.getCoins().add(coin);
+			}
+			userService.updateUser(user);
+		}
+		
 	}
 }
