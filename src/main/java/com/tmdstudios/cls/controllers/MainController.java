@@ -33,6 +33,8 @@ public class MainController {
 	
 	private boolean showWatchlist = false;
 	private boolean darkMode = true;
+	private int sortBy = 0;
+	private boolean ascending = true;
 	
 	@Autowired
 	private UserService userService;
@@ -108,7 +110,7 @@ public class MainController {
 	
 	@GetMapping("/prices")
 	public String viewPrices(HttpSession session, Model model) {
-	 
+
 		if(session.getAttribute("userId") != null) {
 			Long userId = (Long) session.getAttribute("userId");		
 			User user = userService.findById(userId);
@@ -120,7 +122,16 @@ public class MainController {
 			User user = userService.findById(userId);
 			model.addAttribute("coins", coinService.userCoins(user));
 		}else {
-			model.addAttribute("coins", coinService.topCoins());
+			if(sortBy==1) {
+				ascending = !ascending;
+				if(ascending) {
+					model.addAttribute("coins", coinService.topCoins());
+				}else {
+					model.addAttribute("coins", coinService.topCoinsDesc());
+				}
+			}else {
+				model.addAttribute("coins", coinService.topCoins());
+			}
 		}
 		
 		session.setAttribute("starOutline", "https://tmdstudios.files.wordpress.com/2022/03/goldstaroutline-1.png");
@@ -137,6 +148,14 @@ public class MainController {
 		
 		showWatchlist = !showWatchlist;
 		session.setAttribute("showWatchlist", showWatchlist);
+		 
+		return "redirect:/prices";
+	}
+	
+	@RequestMapping("/sort/{sortType}")
+	public String sort(@PathVariable("sortType") Integer sortType) {
+		
+		sortBy = sortType;
 		 
 		return "redirect:/prices";
 	}

@@ -24,6 +24,9 @@ public interface CoinRepo extends CrudRepository<Coin, Long> {
 	@Query(value = "SELECT * FROM coins ORDER BY coin_rank ASC LIMIT 100", nativeQuery = true) 
 	List<Coin> getTop100();
 	
+	@Query(value = "SELECT * FROM coins WHERE coin_rank <= 100 ORDER BY coin_rank DESC LIMIT 100", nativeQuery = true) 
+	List<Coin> getTop100desc();
+	
 	@Query(value = "SELECT * FROM coins INNER JOIN users_coins ON users_coins.coin_id = coins.id WHERE users_coins.user_id=:owner_id ORDER BY coins.coin_rank", nativeQuery = true) 
 	List<Coin> getUserCoins(@Param("owner_id") Long ownerId);
 }
