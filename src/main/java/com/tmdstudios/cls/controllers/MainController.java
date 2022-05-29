@@ -120,7 +120,16 @@ public class MainController {
 		if(showWatchlist) {
 			Long userId = (Long) session.getAttribute("userId");
 			User user = userService.findById(userId);
-			model.addAttribute("coins", coinService.userCoins(user));
+			if(sortBy==1) {
+				ascending = !ascending;
+				if(ascending) {
+					model.addAttribute("coins", coinService.userCoins(user));
+				}else {
+					model.addAttribute("coins", coinService.userCoinsDesc(user));
+				}
+			}else {
+				model.addAttribute("coins", coinService.userCoins(user));
+			}
 		}else {
 			if(sortBy==1) {
 				ascending = !ascending;

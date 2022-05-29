@@ -33,6 +33,10 @@ public class CoinService {
 		return coinRepo.getUserCoins(user.getId());
 	}
 	
+	public List<Coin> userCoinsDesc(User user){
+		return coinRepo.getUserCoinsDesc(user.getId());
+	}
+	
 	public List<Coin> getAssignedUsers(User user){
 		return coinRepo.findAllByUsers(user);
 	}
