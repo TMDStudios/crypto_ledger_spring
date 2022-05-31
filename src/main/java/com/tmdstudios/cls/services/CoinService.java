@@ -29,12 +29,28 @@ public class CoinService {
 		return coinRepo.getTop100desc();
 	}
 	
+	public List<Coin> topCoinsName(){
+		return coinRepo.getTop100Name();
+	}
+	
+	public List<Coin> topCoinsNameDesc(){
+		return coinRepo.getTop100NameDesc();
+	}
+	
 	public List<Coin> userCoins(User user){
 		return coinRepo.getUserCoins(user.getId());
 	}
 	
 	public List<Coin> userCoinsDesc(User user){
 		return coinRepo.getUserCoinsDesc(user.getId());
+	}
+	
+	public List<Coin> userCoinsName(User user){
+		return coinRepo.getUserCoinsName(user.getId());
+	}
+	
+	public List<Coin> userCoinsNameDesc(User user){
+		return coinRepo.getUserCoinsNameDesc(user.getId());
 	}
 	
 	public List<Coin> getAssignedUsers(User user){

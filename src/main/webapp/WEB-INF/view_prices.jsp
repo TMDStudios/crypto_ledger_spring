@@ -54,7 +54,7 @@
     	<tr>
             <th></th>
             <th><a class="link-light" href="/sort/1">Rank</a></th>
-            <th colspan=3>Coin</th>
+            <th colspan=3><a class="link-light" href="/sort/2">Coin</a></th>
             <th>Price</th>
             <th>24h %</th>
             <th>7d %</th>
