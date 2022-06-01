@@ -56,7 +56,7 @@
             <th><a class="link-light" href="/sort/1">Rank</a></th>
             <th colspan=3><a class="link-light" href="/sort/2">Coin</a></th>
             <th><a class="link-light" href="/sort/3">Price</a></th>
-            <th>24h %</th>
+            <th><a class="link-light" href="/sort/4">24h %</a></th>
             <th>7d %</th>
             <th>30d %</th>
         </tr>

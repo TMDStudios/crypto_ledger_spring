@@ -39,6 +39,12 @@ public interface CoinRepo extends CrudRepository<Coin, Long> {
 	@Query(value = "SELECT * FROM coins WHERE coin_rank <= 100 ORDER BY price DESC LIMIT 100", nativeQuery = true) 
 	List<Coin> getTop100PriceDesc();
 	
+	@Query(value = "SELECT * FROM coins ORDER BY price_change_percentage1d ASC LIMIT 100", nativeQuery = true) 
+	List<Coin> getTop1001d();
+	
+	@Query(value = "SELECT * FROM coins WHERE coin_rank <= 100 ORDER BY price_change_percentage1d DESC LIMIT 100", nativeQuery = true) 
+	List<Coin> getTop1001dDesc();
+	
 	@Query(value = "SELECT * FROM coins INNER JOIN users_coins ON users_coins.coin_id = coins.id WHERE users_coins.user_id=:owner_id ORDER BY coins.coin_rank", nativeQuery = true) 
 	List<Coin> getUserCoins(@Param("owner_id") Long ownerId);
 	
@@ -56,4 +62,10 @@ public interface CoinRepo extends CrudRepository<Coin, Long> {
 	
 	@Query(value = "SELECT * FROM coins INNER JOIN users_coins ON users_coins.coin_id = coins.id WHERE users_coins.user_id=:owner_id ORDER BY coins.price DESC", nativeQuery = true) 
 	List<Coin> getUserCoinsPriceDesc(@Param("owner_id") Long ownerId);
+	
+	@Query(value = "SELECT * FROM coins INNER JOIN users_coins ON users_coins.coin_id = coins.id WHERE users_coins.user_id=:owner_id ORDER BY coins.price_change_percentage1d", nativeQuery = true) 
+	List<Coin> getUserCoins1d(@Param("owner_id") Long ownerId);
+	
+	@Query(value = "SELECT * FROM coins INNER JOIN users_coins ON users_coins.coin_id = coins.id WHERE users_coins.user_id=:owner_id ORDER BY coins.price_change_percentage1d DESC", nativeQuery = true) 
+	List<Coin> getUserCoins1dDesc(@Param("owner_id") Long ownerId);
 }

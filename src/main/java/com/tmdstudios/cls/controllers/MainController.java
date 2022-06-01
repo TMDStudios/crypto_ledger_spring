@@ -141,6 +141,13 @@ public class MainController {
 				}else {
 					model.addAttribute("coins", coinService.userCoinsPriceDesc(user));
 				}
+			}else if(sortBy==4) {
+				ascending = !ascending;
+				if(ascending) {
+					model.addAttribute("coins", coinService.userCoins1d(user));
+				}else {
+					model.addAttribute("coins", coinService.userCoins1dDesc(user));
+				}
 			}else {
 				model.addAttribute("coins", coinService.userCoins(user));
 			}
@@ -165,6 +172,13 @@ public class MainController {
 					model.addAttribute("coins", coinService.topCoinsPrice());
 				}else {
 					model.addAttribute("coins", coinService.topCoinsPriceDesc());
+				}
+			}else if(sortBy==4) {
+				ascending = !ascending;
+				if(ascending) {
+					model.addAttribute("coins", coinService.topCoins1d());
+				}else {
+					model.addAttribute("coins", coinService.topCoins1dDesc());
 				}
 			}else {
 				model.addAttribute("coins", coinService.topCoins());
@@ -191,7 +205,7 @@ public class MainController {
 	
 	@RequestMapping("/sort/{sortType}")
 	public String sort(@PathVariable("sortType") Integer sortType) {
-		//0 - Default, 1 - Rank, 2 - Name
+		//0 - Default, 1 - Rank, 2 - Name, 3 - Price, 4 - Price change 1d
 
 		sortBy = sortType;
 		 
