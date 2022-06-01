@@ -134,6 +134,13 @@ public class MainController {
 				}else {
 					model.addAttribute("coins", coinService.userCoinsNameDesc(user));
 				}
+			}else if(sortBy==3) {
+				ascending = !ascending;
+				if(ascending) {
+					model.addAttribute("coins", coinService.userCoinsPrice(user));
+				}else {
+					model.addAttribute("coins", coinService.userCoinsPriceDesc(user));
+				}
 			}else {
 				model.addAttribute("coins", coinService.userCoins(user));
 			}
@@ -151,6 +158,13 @@ public class MainController {
 					model.addAttribute("coins", coinService.topCoinsName());
 				}else {
 					model.addAttribute("coins", coinService.topCoinsNameDesc());
+				}
+			}else if(sortBy==3) {
+				ascending = !ascending;
+				if(ascending) {
+					model.addAttribute("coins", coinService.topCoinsPrice());
+				}else {
+					model.addAttribute("coins", coinService.topCoinsPriceDesc());
 				}
 			}else {
 				model.addAttribute("coins", coinService.topCoins());
