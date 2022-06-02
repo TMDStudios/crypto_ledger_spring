@@ -79,10 +79,10 @@
 	            <td class="narrow"><a href="/coins/${coin.id}"><img class="logo-img" src="${coin.logo}"/></a></td>
 	            <td colspan=2 class="float-left"><a class="link-light" href="/coins/${coin.id}">${coin.name} - ${coin.symbol}</a></td>
 	            <c:if test="${coin.price<0.001}">
-					<td>&lt; $<fmt:formatNumber pattern="0.000" value="${coin.price}"/></td>
+					<td><p id="price${coin.symbol}">&lt; $<fmt:formatNumber pattern="0.000" value="${coin.price}"/></p></td>
 				</c:if>
 				<c:if test="${coin.price>=0.001}">
-					<td>$<fmt:formatNumber pattern="0.000" value="${coin.price}"/></td>
+					<td><p id="price${coin.symbol}">$<fmt:formatNumber pattern="0.000" value="${coin.price}"/></p></td>
 				</c:if>
 	            <c:if test="${coin.priceChangePercentage1d>=0}">
 					<td class="green"><img src="${upArrow}"/> <fmt:formatNumber pattern="0.000" value="${coin.priceChangePercentage1d*100}"/>%</td>

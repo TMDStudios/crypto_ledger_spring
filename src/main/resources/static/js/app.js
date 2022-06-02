@@ -4,6 +4,18 @@ function updateCoin(coin) {
   	let xhttp = new XMLHttpRequest();
   	xhttp.open("POST", "/api/coins");
 	xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	xhttp.onload = function() {
+		if(document.getElementById("price"+coin[1])!==null){
+			if(coin[4]<=100){
+				if(coin[3]<0.001){
+					document.getElementById("price"+coin[1]).innerHTML = "&lt; $0.001";
+				}else{
+					let coinPrice = parseFloat(coin[3]);
+					document.getElementById("price"+coin[1]).innerHTML = "$"+coinPrice.toFixed(3);
+				}
+			}
+		}
+	}
 	xhttp.send("name="+coin[0]+
 		"&symbol="+coin[1]+"&logo="+coin[2]+
 		"&price="+coin[3]+
@@ -113,3 +125,9 @@ function watchCoin(coinId){
 }
 
 fetchData(updateCoin, 1);
+
+function getPrices(){
+	fetchData(updateCoin, 1);
+	setTimeout(getPrices, 10000);
+};
+getPrices();
