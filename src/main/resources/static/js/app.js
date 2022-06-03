@@ -12,6 +12,15 @@ function updateCoin(coin) {
 				}else{
 					let coinPrice = parseFloat(coin[3]);
 					document.getElementById("price"+coin[1]).innerHTML = "$"+coinPrice.toFixed(3);
+					let oneDay = parseFloat(coin[5])*100;
+					document.getElementById("1d"+coin[1]).innerHTML = ""+oneDay.toFixed(3)+"%";
+					if(oneDay>=0){
+						document.getElementById("1dTd"+coin[1]).className = "green";
+						document.getElementById("1dImg"+coin[1]).src = "https://tmdstudios.files.wordpress.com/2022/03/uparrow-1.png";
+					}else{
+						document.getElementById("1dTd"+coin[1]).className = "red";
+						document.getElementById("1dImg"+coin[1]).src = "https://tmdstudios.files.wordpress.com/2022/03/downarrow-1.png";
+					}
 				}
 			}
 		}
@@ -124,10 +133,28 @@ function watchCoin(coinId){
 	xhttp.send();
 }
 
+function updateNow() {
+  	let req = new XMLHttpRequest();
+	req.open('GET', "/api/coins/1");
+  	req.onload = function() {
+    	if (req.status == 200) {
+			const jsonData = JSON.parse(this.responseText);
+			const timeUpdated = Date.parse(jsonData.updatedAt)
+			if(Date.now()-timeUpdated>5000){
+				fetchData(updateCoin, 1);
+				console.log("Time is "+Date.now());
+			}
+    	} else {
+      		myCallback("Error: " + req.status);
+    	}
+  	}
+  	req.send();
+}
+
 fetchData(updateCoin, 1);
 
 function getPrices(){
-	fetchData(updateCoin, 1);
-	setTimeout(getPrices, 10000);
+	updateNow();
+	setTimeout(getPrices, 5000);
 };
 getPrices();

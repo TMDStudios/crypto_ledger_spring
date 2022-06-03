@@ -85,10 +85,10 @@
 					<td><p id="price${coin.symbol}">$<fmt:formatNumber pattern="0.000" value="${coin.price}"/></p></td>
 				</c:if>
 	            <c:if test="${coin.priceChangePercentage1d>=0}">
-					<td class="green"><img src="${upArrow}"/> <fmt:formatNumber pattern="0.000" value="${coin.priceChangePercentage1d*100}"/>%</td>
+					<td id="1dTd${coin.symbol}" class="green"><img id="1dImg${coin.symbol}" src="${upArrow}"/> <span id="1d${coin.symbol}"><fmt:formatNumber pattern="0.000" value="${coin.priceChangePercentage1d*100}"/>%</span></td>
 				</c:if>
 				<c:if test="${coin.priceChangePercentage1d<0}">
-					<td class="red"><img src="${downArrow}"/> <fmt:formatNumber pattern="0.000" value="${coin.priceChangePercentage1d*100}"/>%</td>
+					<td id="1dTd${coin.symbol}" class="red"><img id="1dImg${coin.symbol}" src="${downArrow}"/> <span id="price${coin.symbol}"><fmt:formatNumber pattern="0.000" value="${coin.priceChangePercentage1d*100}"/>%</span></td>
 				</c:if>
 				<c:if test="${coin.priceChangePercentage7d>=0}">
 					<td class="green"><img src="${upArrow}"/> <fmt:formatNumber pattern="0.000" value="${coin.priceChangePercentage7d*100}"/>%</td>
