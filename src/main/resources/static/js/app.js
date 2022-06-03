@@ -12,6 +12,7 @@ function updateCoin(coin) {
 				}else{
 					let coinPrice = parseFloat(coin[3]);
 					document.getElementById("price"+coin[1]).innerHTML = "$"+coinPrice.toFixed(3);
+					
 					let oneDay = parseFloat(coin[5])*100;
 					document.getElementById("1d"+coin[1]).innerHTML = ""+oneDay.toFixed(3)+"%";
 					if(oneDay>=0){
@@ -20,6 +21,26 @@ function updateCoin(coin) {
 					}else{
 						document.getElementById("1dTd"+coin[1]).className = "red";
 						document.getElementById("1dImg"+coin[1]).src = "https://tmdstudios.files.wordpress.com/2022/03/downarrow-1.png";
+					}
+					
+					let sevenDay = parseFloat(coin[6])*100;
+					document.getElementById("7d"+coin[1]).innerHTML = ""+sevenDay.toFixed(3)+"%";
+					if(sevenDay>=0){
+						document.getElementById("7dTd"+coin[1]).className = "green";
+						document.getElementById("7dImg"+coin[1]).src = "https://tmdstudios.files.wordpress.com/2022/03/uparrow-1.png";
+					}else{
+						document.getElementById("7dTd"+coin[1]).className = "red";
+						document.getElementById("7dImg"+coin[1]).src = "https://tmdstudios.files.wordpress.com/2022/03/downarrow-1.png";
+					}
+					
+					let thirtyDay = parseFloat(coin[7])*100;
+					document.getElementById("30d"+coin[1]).innerHTML = ""+thirtyDay.toFixed(3)+"%";
+					if(thirtyDay>=0){
+						document.getElementById("30dTd"+coin[1]).className = "green";
+						document.getElementById("30dImg"+coin[1]).src = "https://tmdstudios.files.wordpress.com/2022/03/uparrow-1.png";
+					}else{
+						document.getElementById("30dTd"+coin[1]).className = "red";
+						document.getElementById("30dImg"+coin[1]).src = "https://tmdstudios.files.wordpress.com/2022/03/downarrow-1.png";
 					}
 				}
 			}
