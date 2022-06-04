@@ -1,4 +1,5 @@
 let allCoins = [];
+let paused = false;
 
 function updateCoin(coin) {
   	let xhttp = new XMLHttpRequest();
@@ -77,7 +78,10 @@ function fetchData(myCallback, page) {
 				}
 			}
 			handleLeftovers();
-    	} else {
+    	} else if(req.status == 429) {
+			paused = true;
+			console.log("Paused...");
+		} else {
       		myCallback("Error: " + req.status);
     	}
   	}
@@ -176,6 +180,12 @@ fetchData(updateCoin, 1);
 
 function getPrices(){
 	updateNow();
-	setTimeout(getPrices, 5000);
+	if(paused){
+		paused = false;
+		setTimeout(getPrices, 65000);
+	}else{
+		setTimeout(getPrices, 5000);
+	}
 };
+
 getPrices();
