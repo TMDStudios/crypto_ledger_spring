@@ -61,6 +61,14 @@ public class CoinService {
 		return coinRepo.getTop1007dDesc();
 	}
 	
+	public List<Coin> topCoins30d(){
+		return coinRepo.getTop10030d();
+	}
+	
+	public List<Coin> topCoins30dDesc(){
+		return coinRepo.getTop10030dDesc();
+	}
+	
 	public List<Coin> userCoins(User user){
 		return coinRepo.getUserCoins(user.getId());
 	}
@@ -99,6 +107,14 @@ public class CoinService {
 	
 	public List<Coin> userCoins7dDesc(User user){
 		return coinRepo.getUserCoins7dDesc(user.getId());
+	}
+	
+	public List<Coin> userCoins30d(User user){
+		return coinRepo.getUserCoins30d(user.getId());
+	}
+	
+	public List<Coin> userCoins30dDesc(User user){
+		return coinRepo.getUserCoins30dDesc(user.getId());
 	}
 	
 	public List<Coin> getAssignedUsers(User user){

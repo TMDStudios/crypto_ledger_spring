@@ -155,6 +155,13 @@ public class MainController {
 				}else {
 					model.addAttribute("coins", coinService.userCoins7dDesc(user));
 				}
+			}else if(sortBy==6) {
+				ascending = !ascending;
+				if(ascending) {
+					model.addAttribute("coins", coinService.userCoins30d(user));
+				}else {
+					model.addAttribute("coins", coinService.userCoins30dDesc(user));
+				}
 			}else {
 				model.addAttribute("coins", coinService.userCoins(user));
 			}
@@ -193,6 +200,13 @@ public class MainController {
 					model.addAttribute("coins", coinService.topCoins7d());
 				}else {
 					model.addAttribute("coins", coinService.topCoins7dDesc());
+				}
+			}else if(sortBy==6) {
+				ascending = !ascending;
+				if(ascending) {
+					model.addAttribute("coins", coinService.topCoins30d());
+				}else {
+					model.addAttribute("coins", coinService.topCoins30dDesc());
 				}
 			}else {
 				model.addAttribute("coins", coinService.topCoins());
