@@ -57,8 +57,8 @@
             <th colspan=3><a class="link-light" href="/sort/2">Coin</a></th>
             <th><a class="link-light" href="/sort/3">Price</a></th>
             <th><a class="link-light" href="/sort/4">24h %</a></th>
-            <th>7d %</th>
-            <th>30d %</th>
+            <th><a class="link-light" href="/sort/5">7d %</a></th>
+            <th><a class="link-light" href="/sort/6">30d %</a></th>
         </tr>
     </thead>
 	<tbody>
