@@ -35,6 +35,7 @@ public class MainController {
 	private boolean darkMode = true;
 	private int sortBy = 0;
 	private boolean ascending = true;
+	private String searchTerm = "";
 	
 	@Autowired
 	private UserService userService;
@@ -208,6 +209,13 @@ public class MainController {
 				}else {
 					model.addAttribute("coins", coinService.topCoins30dDesc());
 				}
+			}else if(sortBy==7) {
+				ascending = !ascending;
+				if(ascending) {
+					model.addAttribute("coins", coinService.searchCoins(searchTerm));
+				}else {
+					model.addAttribute("coins", coinService.searchCoins(searchTerm));
+				}
 			}else {
 				model.addAttribute("coins", coinService.topCoins());
 			}
@@ -236,6 +244,16 @@ public class MainController {
 		//0 - Default, 1 - Rank, 2 - Name, 3 - Price, 4 - Price change 1d, 5 - Price change 7d, 6 - Price change 30d
 
 		sortBy = sortType;
+		 
+		return "redirect:/prices";
+	}
+	
+	@RequestMapping("/search")
+	public String search(@RequestParam(value = "searchTerm", defaultValue = "") String searchTerm) {
+		//8 - Search for coin
+
+		sortBy = 7;
+		this.searchTerm = searchTerm;
 		 
 		return "redirect:/prices";
 	}

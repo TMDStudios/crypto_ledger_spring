@@ -29,6 +29,10 @@ public class CoinService {
 		return coinRepo.getTop100desc();
 	}
 	
+	public List<Coin> searchCoins(String coinName){
+		return coinRepo.searchCoins(coinName);
+	}
+	
 	public List<Coin> topCoinsName(){
 		return coinRepo.getTop100Name();
 	}

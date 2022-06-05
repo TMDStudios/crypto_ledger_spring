@@ -48,6 +48,14 @@
 </c:if>
 
 <br>
+<div class="search-container">
+    <form action="/search" method="get">
+		<span class="search-row">
+		<input type="text" min="0" id="searchTerm" name="searchTerm" placeholder="Search"/>
+		<input class="search-btn" type="submit" value="Search"/>
+		</span>
+	</form>	
+</div>
 
 <table>
 	<thead>
