@@ -81,6 +81,10 @@ public class CoinService {
 		return coinRepo.getUserCoinsDesc(user.getId());
 	}
 	
+	public List<Coin> searchUserCoins(User user, String coinName){
+		return coinRepo.searchUserCoins(user.getId(), coinName);
+	}
+	
 	public List<Coin> userCoinsName(User user){
 		return coinRepo.getUserCoinsName(user.getId());
 	}

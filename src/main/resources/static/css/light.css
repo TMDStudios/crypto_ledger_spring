@@ -304,3 +304,27 @@ input:checked + .slider:before {
 .slider.round:before {
   border-radius: 50%;
 }
+.search-container {
+	border-radius: 2px;
+	padding: 6px 12px 12px 12px;
+}
+.search-row {
+	display: flex;
+	justify-content: space-between;
+    align-items: center;
+}
+.search-container input {
+	width: 80%;
+	font-size: 1.2rem;
+	border-radius: 8px;
+	border: 2px solid silver;
+	color: rgb(87, 114, 187);
+	padding-left: 12px;
+}
+.search-container .search-btn {
+	width: 18%;
+	font-size: 1.2rem;
+	border-radius: 8px;
+	border: 2px solid silver;
+	color: rgb(87, 114, 187);
+}

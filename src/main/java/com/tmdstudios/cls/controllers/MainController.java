@@ -163,6 +163,8 @@ public class MainController {
 				}else {
 					model.addAttribute("coins", coinService.userCoins30dDesc(user));
 				}
+			}else if(sortBy==7) {
+				model.addAttribute("coins", coinService.searchUserCoins(user, searchTerm));
 			}else {
 				model.addAttribute("coins", coinService.userCoins(user));
 			}
@@ -210,12 +212,7 @@ public class MainController {
 					model.addAttribute("coins", coinService.topCoins30dDesc());
 				}
 			}else if(sortBy==7) {
-				ascending = !ascending;
-				if(ascending) {
-					model.addAttribute("coins", coinService.searchCoins(searchTerm));
-				}else {
-					model.addAttribute("coins", coinService.searchCoins(searchTerm));
-				}
+				model.addAttribute("coins", coinService.searchCoins(searchTerm));
 			}else {
 				model.addAttribute("coins", coinService.topCoins());
 			}
@@ -233,6 +230,8 @@ public class MainController {
 	@RequestMapping("/watchlist")
 	public String watchlist(HttpSession session, Model model) {
 		
+		sortBy = 0;
+		searchTerm="";
 		showWatchlist = !showWatchlist;
 		session.setAttribute("showWatchlist", showWatchlist);
 		 
@@ -250,6 +249,16 @@ public class MainController {
 	
 	@RequestMapping("/search")
 	public String search(@RequestParam(value = "searchTerm", defaultValue = "") String searchTerm) {
+		//7 - Search for coin
+
+		sortBy = 7;
+		this.searchTerm = searchTerm;
+		 
+		return "redirect:/prices";
+	}
+	
+	@RequestMapping("/watchlist/search")
+	public String watchlistSearch(@RequestParam(value = "searchTerm", defaultValue = "") String searchTerm) {
 		//8 - Search for coin
 
 		sortBy = 7;

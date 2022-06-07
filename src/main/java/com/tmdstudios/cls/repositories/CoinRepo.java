@@ -66,6 +66,9 @@ public interface CoinRepo extends CrudRepository<Coin, Long> {
 	@Query(value = "SELECT * FROM coins INNER JOIN users_coins ON users_coins.coin_id = coins.id WHERE users_coins.user_id=:owner_id ORDER BY coins.coin_rank DESC", nativeQuery = true) 
 	List<Coin> getUserCoinsDesc(@Param("owner_id") Long ownerId);
 	
+	@Query(value = "SELECT * FROM coins INNER JOIN users_coins ON users_coins.coin_id = coins.id WHERE users_coins.user_id=:owner_id AND coins.name LIKE %:name% ORDER BY coins.coin_rank", nativeQuery = true) 
+	List<Coin> searchUserCoins(@Param("owner_id") Long ownerId, @Param("name") String name);
+	
 	@Query(value = "SELECT * FROM coins INNER JOIN users_coins ON users_coins.coin_id = coins.id WHERE users_coins.user_id=:owner_id ORDER BY coins.name", nativeQuery = true) 
 	List<Coin> getUserCoinsName(@Param("owner_id") Long ownerId);
 	
