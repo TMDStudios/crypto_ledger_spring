@@ -157,6 +157,8 @@
     </tbody>
 </table>
 
+<br>
+
 <script type="text/javascript" src="../js/app.js"></script>
 <script type="text/javascript" src="../js/sell.js"></script>
 <script type="text/javascript" src="../js/delete.js"></script>

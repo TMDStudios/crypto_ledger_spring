@@ -313,7 +313,7 @@ public class MainController {
 			
 			model.addAttribute("activeCoins", activeCoins);
 //			model.addAttribute("inactiveCoins", inactiveCoins);
-			model.addAttribute("inactiveCoins", ownedCoinService.customHistory(user, 5));
+			model.addAttribute("inactiveCoins", ownedCoinService.customHistory(user, user.getSettings().getHistoryLength()));
 		}
 		
 		model.addAttribute("overallTotal", overallTotal);
@@ -335,7 +335,8 @@ public class MainController {
 	public String updateSettings(
 			HttpSession session, 
 			Model model,
-			@RequestParam(value="darkMode", required=false) Boolean formDarkMode
+			@RequestParam(value="darkMode", required=false) Boolean formDarkMode,
+			@RequestParam(value="historyLength", required=false) Integer historyLength
 			) {
 		
 		Long userId = (Long) session.getAttribute("userId");		
@@ -343,8 +344,9 @@ public class MainController {
 		
 		Settings settings = settingsService.findByUser(user);
 		
-		// NEEDS BETTER SOLUTION
+		settings.setHistoryLength(historyLength);
 		
+		// STILL NEEDS BETTER SOLUTION?
 		settings.setDarkMode(formDarkMode==null ? false : true);
 		settingsService.updateSettings(settings);
 		

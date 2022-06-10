@@ -41,6 +41,12 @@
 	</div>
 	<div class="login-block">
 		<div>
+			<p>Number of old transactions displayed on home page:</p>
+			<input type="number" name="historyLength" value="${user.settings.historyLength}"/>
+		</div>
+	</div>
+	<div class="login-block">
+		<div>
 			<button class="red-btn" onclick="resetLedger()">Reset Ledger</button>
 		</div>
 	</div>

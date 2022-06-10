@@ -17,7 +17,7 @@ public class Settings {
 	private Long id;
 	
 	private Boolean darkMode = true;
-	private Integer transactions = 0;
+	private Integer historyLength = 5;
 	
 	@OneToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="user_id")
@@ -45,14 +45,6 @@ public class Settings {
 		this.darkMode = darkMode;
 	}
 
-	public Integer getTransactions() {
-		return transactions;
-	}
-
-	public void setTransactions(Integer transactions) {
-		this.transactions = transactions;
-	}
-
 	public User getUser() {
 		return user;
 	}
@@ -60,6 +52,13 @@ public class Settings {
 	public void setUser(User user) {
 		this.user = user;
 	}
-	
+
+	public Integer getHistoryLength() {
+		return historyLength;
+	}
+
+	public void setHistoryLength(Integer historyLength) {
+		this.historyLength = historyLength;
+	}
 	
 }
