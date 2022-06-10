@@ -172,49 +172,50 @@ public class MainController {
 			if(sortBy==1) {
 				ascending = !ascending;
 				if(ascending) {
-					model.addAttribute("coins", coinService.topCoins());
+					model.addAttribute("coins", coinService.showCoins(1));
 				}else {
-					model.addAttribute("coins", coinService.topCoinsDesc());
+					model.addAttribute("coins", coinService.showCoins(2));
 				}
 			}else if(sortBy==2) {
 				ascending = !ascending;
 				if(ascending) {
-					model.addAttribute("coins", coinService.topCoinsName());
+					model.addAttribute("coins", coinService.showCoins(3));
 				}else {
-					model.addAttribute("coins", coinService.topCoinsNameDesc());
+					model.addAttribute("coins", coinService.showCoins(4));
 				}
 			}else if(sortBy==3) {
 				ascending = !ascending;
 				if(ascending) {
-					model.addAttribute("coins", coinService.topCoinsPrice());
+					model.addAttribute("coins", coinService.showCoins(5));
 				}else {
-					model.addAttribute("coins", coinService.topCoinsPriceDesc());
+					model.addAttribute("coins", coinService.showCoins(6));
 				}
 			}else if(sortBy==4) {
 				ascending = !ascending;
 				if(ascending) {
-					model.addAttribute("coins", coinService.topCoins1d());
+					model.addAttribute("coins", coinService.showCoins(7));
 				}else {
-					model.addAttribute("coins", coinService.topCoins1dDesc());
+					model.addAttribute("coins", coinService.showCoins(8));
 				}
 			}else if(sortBy==5) {
 				ascending = !ascending;
 				if(ascending) {
-					model.addAttribute("coins", coinService.topCoins7d());
+					model.addAttribute("coins", coinService.showCoins(9));
 				}else {
-					model.addAttribute("coins", coinService.topCoins7dDesc());
+					model.addAttribute("coins", coinService.showCoins(10));
 				}
 			}else if(sortBy==6) {
 				ascending = !ascending;
 				if(ascending) {
-					model.addAttribute("coins", coinService.topCoins30d());
+					model.addAttribute("coins", coinService.showCoins(11));
 				}else {
-					model.addAttribute("coins", coinService.topCoins30dDesc());
+					model.addAttribute("coins", coinService.showCoins(12));
 				}
 			}else if(sortBy==7) {
 				model.addAttribute("coins", coinService.searchCoins(searchTerm));
 			}else {
-				model.addAttribute("coins", coinService.topCoins());
+				ascending = false;
+				model.addAttribute("coins", coinService.showCoins(0));
 			}
 		}
 		
