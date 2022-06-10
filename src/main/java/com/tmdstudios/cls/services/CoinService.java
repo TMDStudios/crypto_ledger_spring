@@ -17,43 +17,60 @@ public class CoinService {
 		this.coinRepo = coinRepo;
 	}
 	
-	public List<Coin> showCoins(int sortBy){
-		switch(sortBy) {
-			case 1:
-				return coinRepo.getTop100();
-			case 2:
-				return coinRepo.getTop100desc();
-			case 3:
-				return coinRepo.getTop100Name();
-			case 4:
-				return coinRepo.getTop100NameDesc();
-			case 5:
-				return coinRepo.getTop100Price();
-			case 6:
-				return coinRepo.getTop100PriceDesc();
-			case 7:
-				return coinRepo.getTop1001d();
-			case 8:
-				return coinRepo.getTop1001dDesc();
-			case 9:
-				return coinRepo.getTop1007d();
-			case 10:
-				return coinRepo.getTop1007dDesc();
-			case 11:
-				return coinRepo.getTop10030d();
-			case 12:
-				return coinRepo.getTop10030dDesc();
-			default:
-				return coinRepo.findAllByOrderByCoinRankAsc();
-		}
-	}
-	
 	public List<Coin> allCoins(){
 		return coinRepo.findAllByOrderByCoinRankAsc();
 	}
 	
+	public List<Coin> topCoins(){
+		return coinRepo.getTop100();
+	}
+	
+	public List<Coin> topCoinsDesc(){
+		return coinRepo.getTop100desc();
+	}
+	
 	public List<Coin> searchCoins(String coinName){
 		return coinRepo.searchCoins(coinName);
+	}
+	
+	public List<Coin> topCoinsName(){
+		return coinRepo.getTop100Name();
+	}
+	
+	public List<Coin> topCoinsNameDesc(){
+		return coinRepo.getTop100NameDesc();
+	}
+	
+	public List<Coin> topCoinsPrice(){
+		return coinRepo.getTop100Price();
+	}
+	
+	public List<Coin> topCoinsPriceDesc(){
+		return coinRepo.getTop100PriceDesc();
+	}
+	
+	public List<Coin> topCoins1d(){
+		return coinRepo.getTop1001d();
+	}
+	
+	public List<Coin> topCoins1dDesc(){
+		return coinRepo.getTop1001dDesc();
+	}
+	
+	public List<Coin> topCoins7d(){
+		return coinRepo.getTop1007d();
+	}
+	
+	public List<Coin> topCoins7dDesc(){
+		return coinRepo.getTop1007dDesc();
+	}
+	
+	public List<Coin> topCoins30d(){
+		return coinRepo.getTop10030d();
+	}
+	
+	public List<Coin> topCoins30dDesc(){
+		return coinRepo.getTop10030dDesc();
 	}
 	
 	public List<Coin> userCoins(User user){
