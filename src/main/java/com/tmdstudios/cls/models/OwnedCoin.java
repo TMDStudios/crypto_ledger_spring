@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -32,6 +33,8 @@ public class OwnedCoin {
 	}
     @DateTimeFormat(pattern="yyyy-MM-dd")
     private Date dateSold;
+    @DateTimeFormat(pattern="yyyy-MM-dd")
+    private Date updatedAt;
     private Double sellPrice = 0.0;
     private Double sellAmount = 0.0;
     private Double totalSpent = 0.0;
@@ -238,6 +241,14 @@ public class OwnedCoin {
 
 	public void setCoinRef(Long coinRef) {
 		this.coinRef = coinRef;
+	}
+
+	public Date getUpdatedAt() {
+		return updatedAt;
+	}
+
+	public void setUpdatedAt(Date updatedAt) {
+		this.updatedAt = updatedAt;
 	}
     
 }

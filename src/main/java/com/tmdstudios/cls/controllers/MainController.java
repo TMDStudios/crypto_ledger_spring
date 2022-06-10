@@ -312,7 +312,8 @@ public class MainController {
 			}
 			
 			model.addAttribute("activeCoins", activeCoins);
-			model.addAttribute("inactiveCoins", inactiveCoins);
+//			model.addAttribute("inactiveCoins", inactiveCoins);
+			model.addAttribute("inactiveCoins", ownedCoinService.customHistory(user, 5));
 		}
 		
 		model.addAttribute("overallTotal", overallTotal);

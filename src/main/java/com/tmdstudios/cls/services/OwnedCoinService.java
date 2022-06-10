@@ -64,4 +64,8 @@ public class OwnedCoinService {
 		}
 	}
 	
+	public List<OwnedCoin> customHistory(User owner, Integer amount) {
+		return ownedCoinRepo.customHistory(owner.getId(), amount);
+	}
+	
 }

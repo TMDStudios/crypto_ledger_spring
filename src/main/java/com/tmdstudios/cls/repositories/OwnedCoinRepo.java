@@ -26,4 +26,7 @@ public interface OwnedCoinRepo extends CrudRepository<OwnedCoin, Long> {
 	@Modifying
 	@Query(value = "DELETE FROM owned_coins WHERE user_owned_coin_id = :owner_id", nativeQuery = true) 
 	void deleteAllFromOwner(@Param("owner_id") Long ownerId);
+	
+	@Query(value = "SELECT * FROM owned_coins WHERE user_owned_coin_id = :owner_id AND (sold = 1 OR merged = 1) ORDER BY updated_at DESC LIMIT :amount", nativeQuery = true) 
+	List<OwnedCoin> customHistory(@Param("owner_id") Long ownerId, @Param("amount") Integer amount);
 }

@@ -79,6 +79,7 @@ public class OwnedCoinController {
 		if(ownedCoins.size()>0) {
 			OwnedCoin oldOwnedCoin = ownedCoins.get(ownedCoins.size()-1);
 			oldOwnedCoin.setMerged(true);
+			oldOwnedCoin.setUpdatedAt(new Date());
 			oldOwnedCoin.setPriceDifference(currentPrice/purchasePrice*100-100);
 			ownedCoinService.updateOwnedCoin(oldOwnedCoin);
 		}
@@ -98,6 +99,7 @@ public class OwnedCoinController {
 		if(ownedCoin.getTotalAmount() >= amount && amount > 0) {
 			ownedCoin.setSold(true);
 			ownedCoin.setDateSold(new Date());
+			ownedCoin.setUpdatedAt(new Date());
 			ownedCoin.setSellPrice(ownedCoin.getCurrentPrice());
 			ownedCoin.setSellAmount(amount);
 			ownedCoin.setGain(ownedCoin.getSellPrice() * amount - ownedCoin.getPurchasePrice() * amount);
