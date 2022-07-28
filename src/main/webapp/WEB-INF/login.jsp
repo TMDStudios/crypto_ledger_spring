@@ -56,12 +56,16 @@
 		<div>
 			<input class="btn" type="submit" value="Log In"/>
 		</div>
+		
+		<br>
+		
+		<div>
+			<p><a href="#" onclick="resetPassword()">Reset Password</a></p>
+			<p><small>You can only reset your password if you entered an email when you created your account.</small></p>
+		</div>
 
 	</div>
 </form:form>
-
-<p><a href="#" onclick="resetPassword()">Reset Password</a></p>
-<p><small>You can only reset your password if you entered an email when you created your account.</small></p>
 
 <script type="text/javascript" src="../js/app.js"></script>
 <script type="text/javascript" src="../js/passwordReset.js"></script>

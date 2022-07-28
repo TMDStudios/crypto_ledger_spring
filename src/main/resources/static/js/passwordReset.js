@@ -1,19 +1,31 @@
 var userEmail = "";
 
+function validateEmail(email){
+    var re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return re.test(email);
+}
+
 function resetPassword(){
 	userEmail = prompt("Enter your email:");
-	
-	if(confirm("Reset Password?")==true){
-		let xhttp = new XMLHttpRequest();
-	  	xhttp.open("POST", "/api/reset-request");
-		xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-		xhttp.onload = function(){
-				alert("Password request email sent.\nPlease check your email.");
-				//confirmReset(this.responseText.split("token=")[1])
-			}
-		xhttp.send("email="+userEmail);
+	if(validateEmail(userEmail)){
+		if(confirm("Reset Password?")==true){
+			let xhttp = new XMLHttpRequest();
+		  	xhttp.open("POST", "/api/reset-request");
+			xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+			xhttp.onload = function(){
+					if(this.responseText.startsWith("Invalid")){
+						
+					}
+					console.log(this.responseText)
+					alert("Password request email sent.\nPlease check your email.");
+					//confirmReset(this.responseText.split("token=")[1])
+				}
+			xhttp.send("email="+userEmail);
+		}else{
+			alert("Cancelled");
+		}
 	}else{
-		alert("Cancelled");
+		alert("Please enter a valid email")
 	}
 }
 
