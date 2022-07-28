@@ -17,8 +17,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.tmdstudios.cls.models.Coin;
 import com.tmdstudios.cls.models.LoginUser;
 import com.tmdstudios.cls.models.OwnedCoin;
 import com.tmdstudios.cls.models.Settings;
@@ -99,6 +99,18 @@ public class MainController {
 	    session.setAttribute("userId", user.getId());
 	 
 	    return "redirect:/";
+	}
+	
+	@GetMapping("/reset-password/{token}")
+	public String resetPassword(@PathVariable("token") String token, Model model) {
+	    model.addAttribute("token", token);
+	    return "password_reset.jsp";
+	}
+	
+	@PostMapping("/reset-password/{token}")
+	public String updatePassword(RedirectAttributes redirectAttributes) {  
+		redirectAttributes.addFlashAttribute("message", "Your password has been reset!");
+	    return "redirect:/reset-password/{token}";
 	}
 	
 	@GetMapping("/logout")

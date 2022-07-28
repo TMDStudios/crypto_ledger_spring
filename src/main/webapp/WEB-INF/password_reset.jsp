@@ -12,7 +12,7 @@
 <c:if test="${!darkMode}">
 	<link rel="stylesheet" type="text/css" href="/css/light.css">
 </c:if>
-<title>Log In</title>
+<title>Reset Password</title>
 </head>
 <body>
 
@@ -29,41 +29,36 @@
 	</c:if>    
 </ul>
 
-<h1>Log In</h1>
+<h1>Reset Password</h1>
 
-<form:form action="/login" method="post" modelAttribute="newLogin">
-	<div class="login-block">
-		<div>
-			<label>Username:</label>
+<c:if test="${message==null}">
+    <form action="${token}" method="post">
+		<div class="login-block">		
+			<div>
+				<label>New Password:</label>
+			</div>
+			<div>
+				<input type=password id="pw" name="pw">
+			</div>
+			<div>
+				<label>Confirm New Password:</label>
+			</div>
+			<div>
+				<input type=password id="pwConfirm" name="pwConfirm">
+			</div>
+			
+			<div>
+				<input class="btn" type="submit" onclick="confirmReset('${token}', document.getElementById('pw').value)" value="Reset Password"/>
+			</div>
+	
 		</div>
-		<div>
-			<form:errors path="username" class="text-danger"/>
-		</div>
-		<div>
-			<form:input path="username"/>
-		</div>
-		
-		<div>
-			<label>Password:</label>
-		</div>
-		<div>
-			<form:errors path="password" class="text-danger"/>
-		</div>
-		<div>
-			<form:input path="password" type="password"/>
-		</div>
+	</form>
+</c:if>
+<c:if test="${message!=null}">
+    <p style="text-align: center;">${message}</p>
+    <a class="nav_link" href="/login">Log In</a>
+</c:if>
 
-		<div>
-			<input class="btn" type="submit" value="Log In"/>
-		</div>
-
-	</div>
-</form:form>
-
-<p><a href="#" onclick="resetPassword()">Reset Password</a></p>
-<p><small>You can only reset your password if you entered an email when you created your account.</small></p>
-
-<script type="text/javascript" src="../js/app.js"></script>
 <script type="text/javascript" src="../js/passwordReset.js"></script>
 
 </body>
