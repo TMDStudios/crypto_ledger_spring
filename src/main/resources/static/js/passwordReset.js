@@ -29,13 +29,27 @@ function resetPassword(){
 	}
 }
 
-function confirmReset(token, newPassword){
-	let xhttp = new XMLHttpRequest();
-  	xhttp.open("PUT", "/api/reset-password?token="+token);
-	xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-	xhttp.onload = function(){
-			console.log(this.responseText)
-		}
-	xhttp.send("email="+userEmail+"&password="+newPassword);
-	alert("Done");
+function confirmReset(token, newPassword, confirmPassword){
+	if(validatePassword(newPassword, confirmPassword)=="OK"){
+		let xhttp = new XMLHttpRequest();
+	  	xhttp.open("PUT", "/api/reset-password?token="+token);
+		xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+		xhttp.onload = function(){
+				alert(this.responseText)
+				//window.open("/reset-password/"+token, "_self");
+			}
+		xhttp.send("email="+userEmail+"&password="+newPassword);
+	}else{
+		alert(validatePassword(newPassword, confirmPassword))
+	}
+}
+
+function validatePassword(pw, newPw){
+	if(pw!=newPw){
+		return "Passwords must match"
+	}else if(pw.length<8){
+		return "Password must be 8 or more characters"
+	}else{
+		return "OK"
+	}
 }

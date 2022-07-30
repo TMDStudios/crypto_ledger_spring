@@ -108,8 +108,13 @@ public class MainController {
 	}
 	
 	@PostMapping("/reset-password/{token}")
-	public String updatePassword(RedirectAttributes redirectAttributes) {  
-		redirectAttributes.addFlashAttribute("message", "Your password has been reset!");
+	public String updatePassword(
+			RedirectAttributes redirectAttributes,
+			@RequestParam(value = "pw") String pw,
+			@RequestParam(value = "pwConfirm") String pwConfirm) {  
+		if(pw.equals(pwConfirm)&&pw.length()>=8) {
+			redirectAttributes.addFlashAttribute("message", "Your password has been reset!");
+		}
 	    return "redirect:/reset-password/{token}";
 	}
 	

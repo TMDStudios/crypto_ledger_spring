@@ -48,7 +48,7 @@
 			</div>
 			
 			<div>
-				<input class="btn" type="submit" onclick="confirmReset('${token}', document.getElementById('pw').value)" value="Reset Password"/>
+				<input class="btn" type="submit" onclick="confirmReset('${token}', document.getElementById('pw').value, document.getElementById('pwConfirm').value)" value="Reset Password"/>
 			</div>
 	
 		</div>
