@@ -12,7 +12,7 @@
 <c:if test="${!darkMode}">
 	<link rel="stylesheet" type="text/css" href="/css/light.css">
 </c:if>
-<title>${coin.symbol} - $${coin.price}</title>
+<title>API Docs</title>
 </head>
 <body>
 
@@ -30,28 +30,45 @@
 	</c:if>    
 </ul>
 
-<h1>${coin.name}</h1>
+<h1>Crypto Ledger API</h1>
 
-<div align='center'>
-    <div class="nomics-ticker-widget" data-name="${coin.name}" data-base="${coin.symbol}" data-quote="USD"></div>
-    <script src="https://widget.nomics.com/embed.js"></script>
+<div>
+	<p>The Crypto Ledger API currently supports four different functions. You can either fetch live prices or use your API key to access your 
+	personal ledger. You can also buy or sell coins.</p>
+	<p><strong style="color: red;"><u>NOTE:</u></strong> These links are not yet active.</p>
+	<p>
+		No API key is required to fetch coin prices. Simply use:
+    	<br>
+    	<mark>https://crypto-ledger.herokuapp.com/api/coins</mark>
+	</p>
+	<p>You will need an API key to see and/or modify your ledger. Click on the button below to generate your key.</p>
+	<p><strong style="color: red;"><u>Important:</u></strong> <b>Treat your API key like you would a password. Do not share it with
+    	anyone or display it publicly.</b>
+    </p>
+	<p>You can fetch your full ledger and buy/sell coins with the following URLs:</p>
+	<p>View full ledger:
+    	<br>
+    	<mark>https://crypto-ledger.herokuapp.com/api/get-user-ledger/YOUR_API_KEY</mark>
+    </p>
+	<p>Buy coins:
+    	<br>
+    	<mark>https://crypto-ledger.herokuapp.com/api/buy-coin-api/YOUR_API_KEY</mark>
+    </p>
+	<p>Sell coins:
+    	<br>
+    	<mark>https://crypto-ledger.herokuapp.com/api/sell-coin-api/YOUR_API_KEY</mark>
+    </p>
 </div>
-<br>
 
-<c:if test="${userId!=null}">
-<hr>
-<div class="buy-form">
-<form action="" method="post" id="form">
-	<span class="buy-row">
-	<input type="hidden" id="name" name="name" value="${coin.name}">
-	<input type="hidden" id="symbol" name="symbol" value="${coin.symbol}">
-	<input type="number" step="0.00000001" min="0" id="amount" name="amount" placeholder="Amount"/>
-	<input type="number" step="0.00000001" id="purchasePrice" name="purchasePrice" placeholder="${coin.price}">
-	<input type="hidden" id="coinId" name="coinId" value="${coin.id}">
-	<input class="buy-btn" type="submit" value="Buy"/>
-	</span>
-</form>	
-</div>
+<c:if test="${api_key!=null}">
+	<div id="center-content">Your API Key: ${api_key}</div>
+</c:if>
+<c:if test="${api_key==null}">
+	<div>
+		<form action="#" method="post">
+			<input type="submit" value="Get Token"/>
+		</form>
+	</div>
 </c:if>
 
 <br>

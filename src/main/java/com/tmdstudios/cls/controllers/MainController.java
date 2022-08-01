@@ -371,5 +371,16 @@ public class MainController {
 		 
 		return "redirect:/settings";
 	}
+	
+	@GetMapping("/api/docs")
+	public String apiDocs(Model model) {
+	    return "docs.jsp";
+	}
+	
+	@PostMapping("/api/docs")
+	public String getApiToken(RedirectAttributes redirectAttributes) {  
+		redirectAttributes.addFlashAttribute("api_key", "DISPLAY API KEY");
+	    return "redirect:/api/docs";
+	}
 
 }

@@ -21,7 +21,8 @@
     <li class="nav_item"><a class="nav_link" href="/prices">View Prices</a></li>
     <c:if test="${userId!=null}">
     	<li class="nav_login"><a class="nav_link" href="/logout">Log Out</a></li>
-		<li class="nav_login"><a class="nav_link" href="/settings">Settings</a></li>
+		<li class="nav_item"><a class="nav_link" href="/settings">Settings</a></li>
+		<li class="nav_item"><a class="nav_link" href="/api/docs">API Docs</a></li>
 	</c:if>
 	<c:if test="${userId==null}">
 		<li class="nav_item"><a class="nav_link" href="/login">Log In</a></li>
