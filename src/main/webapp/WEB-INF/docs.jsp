@@ -66,7 +66,7 @@
 <c:if test="${api_key==null}">
 	<div>
 		<form action="#" method="post">
-			<input type="submit" value="Get Token"/>
+			<input type="submit" value="Get API Key"/>
 		</form>
 	</div>
 </c:if>

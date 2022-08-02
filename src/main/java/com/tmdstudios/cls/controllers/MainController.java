@@ -378,8 +378,23 @@ public class MainController {
 	}
 	
 	@PostMapping("/api/docs")
-	public String getApiToken(RedirectAttributes redirectAttributes) {  
-		redirectAttributes.addFlashAttribute("api_key", "DISPLAY API KEY");
+	public String getApiToken(RedirectAttributes redirectAttributes, HttpSession session) {  
+		if(session.getAttribute("userId") == null) {
+			return "redirect:/logout";
+		}
+			
+		Long userId = (Long) session.getAttribute("userId");		
+		User user = userService.findById(userId);
+		
+		String apiKey = "";
+		
+		if(user.getApiKey()!=null) {
+			apiKey = user.getApiKey();
+		}else {
+			apiKey = userService.generateApiKey(user);
+		}
+		
+		redirectAttributes.addFlashAttribute("api_key", apiKey);
 	    return "redirect:/api/docs";
 	}
 

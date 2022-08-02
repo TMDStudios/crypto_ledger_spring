@@ -106,6 +106,14 @@ public class UserService {
 		return "Your password has been updated.";
 	}
 	
+	public String generateApiKey(User user) {
+		String apiKey = UUID.randomUUID().toString();
+		user.setConfirm(user.getPassword());
+		user.setApiKey(apiKey);
+		userRepo.save(user);
+		return apiKey;
+	}
+	
 	private String generateToken() {
 		StringBuilder token = new StringBuilder();
 		return token.append(UUID.randomUUID().toString()).append(UUID.randomUUID().toString()).toString();

@@ -50,6 +50,8 @@ public class User {
     
     private String token;
     
+    private String apiKey;
+    
     @Column(columnDefinition = "TIMESTAMP")
 	private LocalDateTime tokenCreationDate;
     
@@ -147,6 +149,12 @@ public class User {
 	}
 	public void setTokenCreationDate(LocalDateTime tokenCreationDate) {
 		this.tokenCreationDate = tokenCreationDate;
+	}
+	public String getApiKey() {
+		return apiKey;
+	}
+	public void setApiKey(String apiKey) {
+		this.apiKey = apiKey;
 	}
 
 }
