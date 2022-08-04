@@ -15,6 +15,7 @@ public interface UserRepo extends CrudRepository<User, Long> {
 	Optional<User> findByUsername(String username);
 	Optional<User> findByEmail(String email);
 	Optional<User> findByToken(String token);
+	Optional<User> findByApiKey(String apiKey);
 	User findByIdIs(Long id);
 	List<User> findAllByCoins(Coin coin);
 	List<User> findByCoinsNotContains(Coin coin);

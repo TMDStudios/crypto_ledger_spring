@@ -150,4 +150,13 @@ public class UserService {
 			return null;
 		}
 	}
+	
+	public User findByApiKey(String apiKey) {
+		Optional<User> optionalUser = userRepo.findByApiKey(apiKey);
+		if(optionalUser.isPresent()) {
+			return optionalUser.get();
+		}else {
+			return null;
+		}
+	}
 }
