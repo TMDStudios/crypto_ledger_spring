@@ -1,6 +1,11 @@
 function validate(){
 	let xhttp = new XMLHttpRequest();
-  	xhttp.open("POST", "/api/buy");
+	let apiKey = document.getElementById("apiKey").value;
+	if(apiKey.length==0){
+		alert("Invalid API Key!");
+		return false;
+	}
+  	xhttp.open("POST", "/api/buy/"+apiKey);
 	xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 	let purchasePrice = document.getElementById("purchasePrice").value;
 	console.log(document.getElementById("purchasePrice").value);
@@ -14,12 +19,8 @@ function validate(){
 		"&amount="+document.getElementById("amount").value+
 		"&purchasePrice="+purchasePrice+
 		"&coinRef="+document.getElementById("coinId").value);
-	if (confirm("Bought "+document.getElementById("amount").value+" " + document.getElementById("symbol").getAttribute("value")+"!")) {
-		console.log("Clicked OK");
-	  	window.open("/home", "_self");
-	} else {
-	  	console.log("Clicked Cancel");
-	}
+	alert("Bought "+document.getElementById("amount").value+" " + document.getElementById("symbol").getAttribute("value")+"!")
+	window.open("/home", "_self");
 	return false;
 }
 function init(){

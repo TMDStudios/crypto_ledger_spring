@@ -43,6 +43,7 @@
 <div class="buy-form">
 <form action="" method="post" id="form">
 	<span class="buy-row">
+	<input type="hidden" id="apiKey" name="apiKey" value="${apiKey}">
 	<input type="hidden" id="name" name="name" value="${coin.name}">
 	<input type="hidden" id="symbol" name="symbol" value="${coin.symbol}">
 	<input type="number" step="0.00000001" min="0" id="amount" name="amount" placeholder="Amount"/>

@@ -42,9 +42,10 @@ public class OwnedCoinController {
 		return ownedCoinService.findByOwnerDesc(user);
 	}
 	
-	@RequestMapping(value="/api/buy", method=RequestMethod.POST)
+	@RequestMapping(value="/api/buy/{apiKey}", method=RequestMethod.POST)
 	public OwnedCoin newOwnedCoin(
 			HttpSession session,
+			@PathVariable("apiKey") String apiKey,
 			@RequestParam(value="name") String name, 
 			@RequestParam(value="symbol") String symbol,  
 			@RequestParam(value="amount") Double amount,
@@ -52,9 +53,8 @@ public class OwnedCoinController {
 			@RequestParam(value="coinRef") Long coinRef
 			) {
 		OwnedCoin newOwnedCoin = new OwnedCoin(name, symbol, amount, purchasePrice, coinRef);
-		
-		Long userId = (Long) session.getAttribute("userId");		
-		User owner = userService.findById(userId);
+				
+		User owner = userService.findByApiKey(apiKey);
 		List<OwnedCoin> ownedCoins = ownedCoinService.findBySymbol(symbol, owner);
 		
 		Double totalAmount = 0.0;

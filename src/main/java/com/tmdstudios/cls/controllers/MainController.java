@@ -286,8 +286,14 @@ public class MainController {
 	
 	@RequestMapping(value="/coins/{id}", method = { RequestMethod.GET, RequestMethod.POST })
 	public String coinDetails(HttpSession session, Model model, @PathVariable("id") Long id) {
-		model.addAttribute("coin", coinService.findById(id));
-		 
+		if(session.getAttribute("userId") != null) {
+			Long userId = (Long) session.getAttribute("userId");		
+			User user = userService.findById(userId);
+			if(user.getApiKey()!=null) {
+				model.addAttribute("apiKey", user.getApiKey()); 
+			}
+		}
+		model.addAttribute("coin", coinService.findById(id));		
 		return "coin_details.jsp";
 	}
 	
