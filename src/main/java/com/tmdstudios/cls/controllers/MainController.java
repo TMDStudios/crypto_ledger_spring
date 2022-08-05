@@ -289,9 +289,7 @@ public class MainController {
 		if(session.getAttribute("userId") != null) {
 			Long userId = (Long) session.getAttribute("userId");		
 			User user = userService.findById(userId);
-			if(user.getApiKey()!=null) {
-				model.addAttribute("apiKey", user.getApiKey()); 
-			}
+			model.addAttribute("apiKey", user.getApiKey()); 
 		}
 		model.addAttribute("coin", coinService.findById(id));		
 		return "coin_details.jsp";
@@ -334,6 +332,7 @@ public class MainController {
 				}
 			}
 			
+			model.addAttribute("apiKey", user.getApiKey()); 
 			model.addAttribute("activeCoins", activeCoins);
 //			model.addAttribute("inactiveCoins", inactiveCoins);
 			model.addAttribute("inactiveCoins", ownedCoinService.customHistory(user, user.getSettings().getHistoryLength()));

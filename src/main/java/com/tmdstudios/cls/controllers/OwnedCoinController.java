@@ -93,13 +93,17 @@ public class OwnedCoinController {
 		return newOwnedCoin;
 	}
 	
-	@RequestMapping(value="/api/sell", method=RequestMethod.POST)
+	@RequestMapping(value="/api/sell/{apiKey}", method=RequestMethod.POST)
 	public OwnedCoin sellOwnedCoin(
 			HttpSession session,
+			@PathVariable("apiKey") String apiKey,
 			@RequestParam(value="id") Long id,  
 			@RequestParam(value="amount") Double amount
 			) {
 		
+		if(userService.findByApiKey(apiKey)==null) {
+			return null;
+		}
 		OwnedCoin ownedCoin = ownedCoinService.findById(id);
 		
 		if(ownedCoin.getTotalAmount() >= amount && amount > 0) {

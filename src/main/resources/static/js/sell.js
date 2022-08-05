@@ -4,7 +4,12 @@ function sell(coinId, coinTotal){
 			
 		if (amount <= coinTotal){
 			let xhttp = new XMLHttpRequest();
-		  	xhttp.open("POST", "/api/sell");
+			let apiKey = document.getElementById("apiKey").value;
+			if(apiKey.length==0){
+				alert("Invalid API Key!");
+				return false;
+			}
+		  	xhttp.open("POST", "/api/sell/"+apiKey);
 			xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 			xhttp.send("id="+coinId+"&amount="+amount);
 			if (confirm("Sold "+amount)) {
