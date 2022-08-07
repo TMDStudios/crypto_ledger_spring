@@ -36,7 +36,7 @@ public class OwnedCoinController {
 		return ownedCoinService.allOwnedCoins();
 	}
 	
-	@RequestMapping("/api/get-user-ledger/{apiKey}")
+	@RequestMapping("/api/user-ledger/{apiKey}")
 	public List<OwnedCoin> allOwnedCoins(@PathVariable("apiKey") String apiKey) {		
 		User user = userService.findByApiKey(apiKey);
 		return ownedCoinService.findByOwnerDesc(user);

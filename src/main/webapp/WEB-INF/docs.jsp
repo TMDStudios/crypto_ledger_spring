@@ -48,15 +48,15 @@
 	<p>You can fetch your full ledger and buy/sell coins with the following URLs:</p>
 	<p>View full ledger:
     	<br>
-    	<mark>https://crypto-ledger.herokuapp.com/api/get-user-ledger/YOUR_API_KEY</mark>
+    	<mark>https://crypto-ledger.herokuapp.com/api/user-ledger/YOUR_API_KEY</mark>
     </p>
 	<p>Buy coins:
     	<br>
-    	<mark>https://crypto-ledger.herokuapp.com/api/buy-coin-api/YOUR_API_KEY</mark>
+    	<mark>https://crypto-ledger.herokuapp.com/api/buy/YOUR_API_KEY</mark>
     </p>
 	<p>Sell coins:
     	<br>
-    	<mark>https://crypto-ledger.herokuapp.com/api/sell-coin-api/YOUR_API_KEY</mark>
+    	<mark>https://crypto-ledger.herokuapp.com/api/sell/YOUR_API_KEY</mark>
     </p>
 </div>
 
