@@ -2,6 +2,7 @@ package com.tmdstudios.cls.controllers;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,16 +11,18 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.tmdstudios.cls.models.Coin;
+import com.tmdstudios.cls.models.CoinData;
+import com.tmdstudios.cls.services.CoinDataService;
 import com.tmdstudios.cls.services.CoinService;
 
 @RestController
 public class CoinController {
 	
-	private final CoinService coinService;
-	
-	public CoinController(CoinService coinService) {
-		this.coinService = coinService;
-	}
+	@Autowired
+	private CoinService coinService;
+
+	@Autowired
+	private CoinDataService coinDataService;
 	
 	@CrossOrigin(origins = "http://localhost:3000")
 	@RequestMapping("/api/coins")
@@ -28,37 +31,17 @@ public class CoinController {
 	}
 	
 	@RequestMapping(value="/api/coins", method=RequestMethod.POST)
-	public Coin newCoin(
-			@RequestParam(value="name") String name, 
-			@RequestParam(value="symbol") String symbol, 
-			@RequestParam(value="logo") String logo, 
-			@RequestParam(value="price") Double price,
-			@RequestParam(value="coinRank") Long coinRank,
-			@RequestParam(value="priceChangePercentage1d") Double priceChangePercentage1d,
-			@RequestParam(value="priceChangePercentage7d") Double priceChangePercentage7d,
-			@RequestParam(value="priceChangePercentage30d") Double priceChangePercentage30d
-			) {
-		Coin newCoin = new Coin(
-				name, 
-				symbol, 
-				logo, 
-				price, 
-				coinRank, 
-				priceChangePercentage1d, 
-				priceChangePercentage7d, 
-				priceChangePercentage30d
-				);
-		
-		Coin coin = coinService.findBySymbol(symbol);
-		if(coin==null) {
-			coinService.addCoin(newCoin);
+	public CoinData newCoin(@RequestParam(value="jsonData") String jsonData) {
+		CoinData newCoinData = new CoinData(jsonData);	
+		if(coinDataService.getCoinData().isEmpty()) {
+			coinDataService.saveCoinData(newCoinData);
 		}else {
-			newCoin.setId(coin.getId());
-			newCoin.setUsers(coin.getUsers());
-			coinService.updateCoin(newCoin);
+			CoinData existingCoinData = coinDataService.getCoinData().get(0);
+			existingCoinData.setJsonData(jsonData);
+			coinDataService.saveCoinData(existingCoinData);
 		}
 		
-		return coin;
+		return newCoinData;
 	}
 	
 	@RequestMapping("/api/coins/{id}")

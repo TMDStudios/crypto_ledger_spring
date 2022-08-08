@@ -23,7 +23,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 @Table(name="coins")
-public class Coin {
+public class Coin implements Comparable<Coin> {
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -177,6 +177,14 @@ public class Coin {
 
 	public void setUsers(List<User> users) {
 		this.users = users;
+	}
+	
+	@Override
+	public int compareTo(Coin c) {
+		if(coinRank==null||c.coinRank==null) {
+			return 0;
+		}
+		return coinRank.compareTo(c.coinRank);
 	}
 
 }
