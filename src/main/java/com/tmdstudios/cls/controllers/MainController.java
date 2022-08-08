@@ -272,7 +272,13 @@ public class MainController {
 					coinData.sort(Comparator.comparing(Coin::getPriceChangePercentage30d).reversed());
 				}
 			}else if(sortBy==7) {
-				model.addAttribute("coins", coinService.searchCoins(searchTerm));
+				ArrayList<Coin> filteredCoinData = new ArrayList<Coin>();
+				for(Coin coin : coinData) {
+					if(coin.getName().toLowerCase().contains(searchTerm.toLowerCase())||coin.getSymbol().toLowerCase().contains(searchTerm.toLowerCase())) {
+						filteredCoinData.add(coin);
+					}
+					coinData = filteredCoinData;
+				}
 			}
 			model.addAttribute("coins", coinData);
 		}

@@ -316,7 +316,7 @@ input:checked + .slider:before {
 }
 .search-container {
 	border-radius: 2px;
-	padding: 6px 12px 12px 12px;
+	padding: 12px;
 }
 .search-row {
 	display: flex;

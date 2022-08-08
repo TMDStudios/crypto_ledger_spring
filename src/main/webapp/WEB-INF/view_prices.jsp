@@ -42,28 +42,21 @@
 	<c:if test="${showWatchlist}">
 		<h4 class="center"><a class="link-light" href="/watchlist">All Coins</a></h4>
 		<hr>
-		<div class="search-container">
-		    <form action="/search" method="get">
-				<span class="search-row">
-				<input type="text" min="0" id="searchTerm" name="searchTerm" placeholder="Search"/>
-				<input class="search-btn" type="submit" value="Search"/>
-				</span>
-			</form>	
-		</div>
 	</c:if>
 	<c:if test="${!showWatchlist}">
 		<h4 class="center"><a class="link-light" href="/watchlist">My Watchlist</a></h4>
 		<hr>
-		<div class="search-container">
-		    <form action="/watchlist/search" method="get">
-				<span class="search-row">
-				<input type="text" min="0" id="searchTerm" name="searchTerm" placeholder="Search"/>
-				<input class="search-btn" type="submit" value="Search"/>
-				</span>
-			</form>	
-		</div>
 	</c:if>
 </c:if>
+
+<div class="search-container">
+    <form action="/watchlist/search" method="get">
+		<span class="search-row">
+		<input type="text" min="0" id="searchTerm" name="searchTerm" placeholder="Search"/>
+		<input class="search-btn" type="submit" value="Search"/>
+		</span>
+	</form>	
+</div>
 
 <table>
 	<thead>
