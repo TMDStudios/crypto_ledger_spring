@@ -1,1 +1,1 @@
-web java -Dserver.port=$PORT -jar target/CryptoLedger-0.0.1-SNAPSHOT.war
+web java -Dserver.port=$PORT -jar target/cls-0.0.1-SNAPSHOT.war
