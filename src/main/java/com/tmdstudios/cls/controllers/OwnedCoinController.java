@@ -49,16 +49,16 @@ public class OwnedCoinController {
 			@RequestParam(value="name") String name, 
 			@RequestParam(value="symbol") String symbol,  
 			@RequestParam(value="amount") Double amount,
-			@RequestParam(value="purchasePrice") Double purchasePrice,
-			@RequestParam(value="coinRef") Long coinRef
+			@RequestParam(value="purchasePrice") Double purchasePrice
 			) {
-		OwnedCoin newOwnedCoin = new OwnedCoin(name, symbol, amount, purchasePrice, coinRef);
+		OwnedCoin newOwnedCoin = new OwnedCoin(name, symbol, amount, purchasePrice);
 				
 		User owner = userService.findByApiKey(apiKey);
 		List<OwnedCoin> ownedCoins = ownedCoinService.findBySymbol(symbol, owner);
 		
 		Double totalAmount = 0.0;
 		Double totalSpent = 0.0;
+		
 		Double currentPrice = coinService.findBySymbol(symbol).getPrice();
 		
 		if(purchasePrice<=0) {purchasePrice=currentPrice;}
@@ -105,11 +105,14 @@ public class OwnedCoinController {
 			return null;
 		}
 		OwnedCoin ownedCoin = ownedCoinService.findById(id);
+		Coin coin = coinService.findBySymbol(ownedCoin.getSymbol());
 		
 		if(ownedCoin.getTotalAmount() >= amount && amount > 0) {
 			ownedCoin.setSold(true);
 			ownedCoin.setDateSold(new Date());
 			ownedCoin.setUpdatedAt(new Date());
+			ownedCoin.setCurrentPrice(coin.getPrice());
+			ownedCoin.setPriceDifference(coin.getPrice()/ownedCoin.getPurchasePrice()*100-100);
 			ownedCoin.setSellPrice(ownedCoin.getCurrentPrice());
 			ownedCoin.setSellAmount(amount);
 			ownedCoin.setGain(ownedCoin.getSellPrice() * amount - ownedCoin.getPurchasePrice() * amount);
@@ -134,7 +137,6 @@ public class OwnedCoinController {
 			remainingCoin.setTotalValue(ownedCoin.getTotalValue());
 			remainingCoin.setTotalSpent(ownedCoin.getTotalSpent());
 			remainingCoin.setPriceDifference(ownedCoin.getPriceDifference());
-			remainingCoin.setCoinRef(ownedCoin.getCoinRef());
 			ownedCoinService.addOwnedCoin(remainingCoin);
 
 		}
@@ -154,24 +156,22 @@ public class OwnedCoinController {
 		ownedCoinService.deleteAllFromOwner(userId);
 	}
 	
-	@RequestMapping("/api/coins/watch/{id}")
-	public Boolean watchCoin(HttpSession session, @PathVariable("id") Long id) {
-		
+	@RequestMapping("/api/coins/watch/{symbol}")
+	public Boolean watchCoin(HttpSession session, @PathVariable("symbol") String symbol) {
 		if(session.getAttribute("userId") != null) {
 			Long userId = (Long) session.getAttribute("userId");		
 			User user = userService.findById(userId);
 			
-			Coin coin = coinService.findById(id);
 			boolean coinFound = false;
-			for(Coin userCoin:user.getCoins()) {
-				if(userCoin.getSymbol()==coin.getSymbol()) {
+			for(String userCoin:user.getCoins()) {
+				if(userCoin.equals(symbol)) {
 					coinFound=true;
 					user.getCoins().remove(user.getCoins().indexOf(userCoin));
 					break;
 				}
 			}
 			if(!coinFound) {
-				user.getCoins().add(coin);
+				user.getCoins().add(symbol);
 			}
 			userService.updateUser(user);
 			return true;

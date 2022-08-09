@@ -1,5 +1,5 @@
 let allCoins = [];
-let paused = false;
+//let timer = Date.now()%15000;
 let shortCoinData = [];
 
 function updateCoinData(jsonData) {
@@ -24,7 +24,18 @@ function fetchData(myCallback, page) {
 			for (var i = 0; i < jsonData.length; i++) {
 				try{
 					const c = jsonData[i];
-				    const coin = {
+					let coin = {
+						name: c.name, 
+						symbol: c.symbol, 
+						logo: c.logo_url, 
+						price: c.price, 
+						coinRank: c.rank, 
+						priceChangePercentage1d: 0, 
+						priceChangePercentage7d: 0, 
+						priceChangePercentage30d: 0
+					}
+				    try{
+						coin = {
 						name: c.name, 
 						symbol: c.symbol, 
 						logo: c.logo_url, 
@@ -33,8 +44,11 @@ function fetchData(myCallback, page) {
 						priceChangePercentage1d: c.oneDay.price_change_pct, 
 						priceChangePercentage7d: c.sevenDay.price_change_pct, 
 						priceChangePercentage30d: c.thirtyDay.price_change_pct};
+					}catch(e){
+						console.log("ISSUE WITH "+c.name+" ...ERROR: "+e);
+					}
+					shortCoinData.push(coin);
 				    allCoins.push(c.symbol);
-				    shortCoinData.push(coin);
 				    
 				    if(document.getElementById("price"+coin.symbol)!==null){
 						if(coin.coinRank<=100){
@@ -80,7 +94,12 @@ function fetchData(myCallback, page) {
 					console.log(e);
 				}
 			}
-			myCallback(JSON.stringify(shortCoinData));
+			console.log("Text length is "+shortCoinData.length);
+			if(shortCoinData.length<65000){
+				myCallback(JSON.stringify(shortCoinData));
+			}else{
+				console.log("Text length is "+shortCoinData.length);
+			}
 			
 			//handleLeftovers();
     	} else if(req.status == 429) {
@@ -146,51 +165,40 @@ function resetLedger(){
 	}
 }
 
-function watchCoin(coinId){
+function watchCoin(coinSymbol){
+	console.log(coinSymbol);
 	let xhttp = new XMLHttpRequest();
-  	xhttp.open("GET", "/api/coins/watch/"+coinId);
+  	xhttp.open("GET", "/api/coins/watch/"+coinSymbol);
 	xhttp.onload = ( function() {
 			if(this.responseText==="false"){
 				alert("Please log in to use this feature");
 			}else{
-				if(document.getElementById("starImg"+coinId).src == "https://tmdstudios.files.wordpress.com/2022/03/goldstaroutline-1.png"){
-					document.getElementById("starImg"+coinId).src = "https://tmdstudios.files.wordpress.com/2022/03/goldstar.png";
+				if(document.getElementById("starImg"+coinSymbol).src == "https://tmdstudios.files.wordpress.com/2022/03/goldstaroutline-1.png"){
+					document.getElementById("starImg"+coinSymbol).src = "https://tmdstudios.files.wordpress.com/2022/03/goldstar.png";
 				}else{
-					document.getElementById("starImg"+coinId).src = "https://tmdstudios.files.wordpress.com/2022/03/goldstaroutline-1.png";
+					document.getElementById("starImg"+coinSymbol).src = "https://tmdstudios.files.wordpress.com/2022/03/goldstaroutline-1.png";
 				}
 			}
 		});
 	xhttp.send();
 }
 
-function updateNow() {
-  	let req = new XMLHttpRequest();
-	req.open('GET', "/api/coins/1");
-  	req.onload = function() {
-    	if (req.status == 200) {
-			const jsonData = JSON.parse(this.responseText);
-			const timeUpdated = Date.parse(jsonData.updatedAt)
-			if(Date.now()-timeUpdated>5000){
-				fetchData(updateCoinData, 1);
-				console.log("Time is "+Date.now());
-			}
-    	} else {
-      		myCallback("Error: " + req.status);
-    	}
-  	}
-  	req.send();
-}
-
 fetchData(updateCoinData, 1);
 
 function getPrices(){
-	//updateNow();
-	/*if(paused){
-		paused = false;
-		setTimeout(getPrices, 65000);
-	}else{
-		setTimeout(getPrices, 5000);
-	}*/
+	fetchData(updateCoinData, 1);
 };
 
-getPrices();
+/*function getTimer() {
+	if(timer<0){
+		getPrices();
+		timer = 15000;
+		console.log("GETTING DATA");
+		getTimer();
+	}else{
+		timer-=1000;
+		setTimeout(getTimer, 1000);
+	}
+}*/
+
+//getTimer();

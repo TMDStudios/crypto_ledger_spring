@@ -1,67 +1,14 @@
 package com.tmdstudios.cls.models;
 
-import java.util.Date;
-import java.util.List;
-
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.PrePersist;
-import javax.persistence.PreUpdate;
-import javax.persistence.Table;
-
-import org.springframework.format.annotation.DateTimeFormat;
-
-import com.fasterxml.jackson.annotation.JsonBackReference;
-
-@Entity
-@Table(name="coins")
 public class Coin implements Comparable<Coin> {
-	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
     private String name;
     private String symbol;
-    
     private String logo;
     private Double price;
     private Long coinRank;
     private Double priceChangePercentage1d;
     private Double priceChangePercentage7d;
     private Double priceChangePercentage30d;
-    
-    @Column(updatable=false)
-    @DateTimeFormat(pattern="yyyy-MM-dd")
-    private Date createdAt;
-    
-    @DateTimeFormat(pattern="yyyy-MM-dd")
-    private Date updatedAt;
-    
-    @PrePersist
-    protected void onCreate(){
-        this.createdAt = new Date();
-    }
-    @PreUpdate
-    protected void onUpdate(){
-        this.updatedAt = new Date();
-    }
-    
-    @ManyToMany(fetch = FetchType.LAZY, cascade=CascadeType.ALL)
-    @JsonBackReference
-	@JoinTable(
-			name = "users_coins",
-			joinColumns = @JoinColumn(name = "coin_id"),
-			inverseJoinColumns = @JoinColumn(name = "user_id")
-	)
-    List<User> users;
     
     public Coin() {}
     
@@ -83,14 +30,6 @@ public class Coin implements Comparable<Coin> {
     	this.priceChangePercentage7d = priceChangePercentage7d;
     	this.priceChangePercentage30d = priceChangePercentage30d;
     }
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
 
 	public String getName() {
 		return name;
@@ -154,29 +93,6 @@ public class Coin implements Comparable<Coin> {
 
 	public void setPriceChangePercentage30d(Double priceChangePercentage30d) {
 		this.priceChangePercentage30d = priceChangePercentage30d;
-	}
-	
-	public Date getCreatedAt() {
-		return createdAt;
-	}
-	public void setCreatedAt(Date createdAt) {
-		this.createdAt = createdAt;
-	}
-
-	public Date getUpdatedAt() {
-		return updatedAt;
-	}
-
-	public void setUpdatedAt(Date updatedAt) {
-		this.updatedAt = updatedAt;
-	}
-	
-	public List<User> getUsers() {
-		return users;
-	}
-
-	public void setUsers(List<User> users) {
-		this.users = users;
 	}
 	
 	@Override

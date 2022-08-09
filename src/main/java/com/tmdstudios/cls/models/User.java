@@ -6,14 +6,12 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.PrePersist;
@@ -65,14 +63,8 @@ public class User {
         this.settings = new Settings(this);
     }
     
-    @ManyToMany(fetch = FetchType.LAZY, cascade=CascadeType.ALL)
-    @JsonManagedReference
-	@JoinTable(
-			name = "users_coins",
-			joinColumns = @JoinColumn(name = "user_id"),
-			inverseJoinColumns = @JoinColumn(name = "coin_id")
-	)
-    List<Coin> coins;
+    @ElementCollection
+    private List<String> coins;
     
     @Column(updatable=false)
     @OneToMany(mappedBy="owner", fetch = FetchType.LAZY)
@@ -120,10 +112,10 @@ public class User {
 	public void setCreatedAt(Date createdAt) {
 		this.createdAt = createdAt;
 	}
-	public List<Coin> getCoins() {
+	public List<String> getCoins() {
 		return coins;
 	}
-	public void setCoins(List<Coin> coins) {
+	public void setCoins(List<String> coins) {
 		this.coins = coins;
 	}
 	public List<OwnedCoin> getOwnedCoins() {

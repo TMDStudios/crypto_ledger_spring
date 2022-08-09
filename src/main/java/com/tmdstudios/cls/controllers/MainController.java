@@ -7,10 +7,6 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,7 +25,6 @@ import com.tmdstudios.cls.models.LoginUser;
 import com.tmdstudios.cls.models.OwnedCoin;
 import com.tmdstudios.cls.models.Settings;
 import com.tmdstudios.cls.models.User;
-import com.tmdstudios.cls.services.CoinDataService;
 import com.tmdstudios.cls.services.CoinService;
 import com.tmdstudios.cls.services.OwnedCoinService;
 import com.tmdstudios.cls.services.SettingsService;
@@ -52,9 +47,6 @@ public class MainController {
 	
 	@Autowired
 	private CoinService coinService;
-	
-	@Autowired
-	private CoinDataService coinDataService;
 	
 	@Autowired
 	private OwnedCoinService ownedCoinService;
@@ -136,35 +128,6 @@ public class MainController {
 	    return "redirect:/";
 	}
 	
-	private List<Coin> getCoinData() {
-		ArrayList<Coin> coinData = new ArrayList<Coin>();
-		
-		JSONParser parser = new JSONParser();
-		try {
-			JSONArray jsonCoinData = (JSONArray) parser.parse(coinDataService.getCoinData().get(0).getJsonData());
-			
-			for(int i = 0; i<jsonCoinData.size(); i++) {
-				JSONObject coinObject = (JSONObject) jsonCoinData.get(i);
-//				System.out.println(coinObject.get("symbol"));
-				Coin coin = new Coin(
-						coinObject.get("name").toString(), 
-						coinObject.get("symbol").toString(),
-						coinObject.get("logo").toString(),
-						Double.parseDouble(coinObject.get("price").toString()),
-						Long.parseLong(coinObject.get("coinRank").toString()),
-						Double.parseDouble(coinObject.get("priceChangePercentage1d").toString()),
-						Double.parseDouble(coinObject.get("priceChangePercentage7d").toString()),
-						Double.parseDouble(coinObject.get("priceChangePercentage30d").toString())
-						);
-				coinData.add(coin);
-			}
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
-
-		return coinData;
-	}
-	
 	@GetMapping("/prices")
 	public String viewPrices(HttpSession session, Model model) {
 
@@ -174,60 +137,71 @@ public class MainController {
 			model.addAttribute("myCoins", user.getCoins());
 		}
 		
-		List<Coin> coinData = getCoinData();
-//		System.out.println(coinData.get(0).getSymbol());
-//		System.out.println(coinData.get(0).getPrice());
+		List<Coin> coinData = coinService.getCoinData();
 		
 		if(showWatchlist) {
-//			Long userId = (Long) session.getAttribute("userId");
-//			User user = userService.findById(userId);
-//			if(sortBy==1) {
-//				ascending = !ascending;
-//				if(ascending) {
-//					model.addAttribute("coins", coinService.userCoins(user));
-//				}else {
-//					model.addAttribute("coins", coinService.userCoinsDesc(user));
-//				}
-//			}else if(sortBy==2) {
-//				ascending = !ascending;
-//				if(ascending) {
-//					model.addAttribute("coins", coinService.userCoinsName(user));
-//				}else {
-//					model.addAttribute("coins", coinService.userCoinsNameDesc(user));
-//				}
-//			}else if(sortBy==3) {
-//				ascending = !ascending;
-//				if(ascending) {
-//					model.addAttribute("coins", coinService.userCoinsPrice(user));
-//				}else {
-//					model.addAttribute("coins", coinService.userCoinsPriceDesc(user));
-//				}
-//			}else if(sortBy==4) {
-//				ascending = !ascending;
-//				if(ascending) {
-//					model.addAttribute("coins", coinService.userCoins1d(user));
-//				}else {
-//					model.addAttribute("coins", coinService.userCoins1dDesc(user));
-//				}
-//			}else if(sortBy==5) {
-//				ascending = !ascending;
-//				if(ascending) {
-//					model.addAttribute("coins", coinService.userCoins7d(user));
-//				}else {
-//					model.addAttribute("coins", coinService.userCoins7dDesc(user));
-//				}
-//			}else if(sortBy==6) {
-//				ascending = !ascending;
-//				if(ascending) {
-//					model.addAttribute("coins", coinService.userCoins30d(user));
-//				}else {
-//					model.addAttribute("coins", coinService.userCoins30dDesc(user));
-//				}
-//			}else if(sortBy==7) {
-//				model.addAttribute("coins", coinService.searchUserCoins(user, searchTerm));
-//			}else {
-//				model.addAttribute("coins", coinService.userCoins(user));
-//			}
+			Long userId = (Long) session.getAttribute("userId");
+			User user = userService.findById(userId);
+			ArrayList<Coin> userCoins = new ArrayList<Coin>();
+			
+			for(Coin coin : coinData) {
+				if(user.getCoins().contains(coin.getSymbol())) {
+					userCoins.add(coin);
+				}
+			}
+			
+			if(sortBy==1) {
+				ascending = !ascending;
+				if(ascending) {
+					userCoins.sort(Comparator.comparing(Coin::getCoinRank));
+				}else {
+					userCoins.sort(Comparator.comparing(Coin::getCoinRank).reversed());
+				}
+			}else if(sortBy==2) {
+				ascending = !ascending;
+				if(ascending) {
+					userCoins.sort(Comparator.comparing(Coin::getName));
+				}else {
+					userCoins.sort(Comparator.comparing(Coin::getName).reversed());
+				}
+			}else if(sortBy==3) {
+				ascending = !ascending;
+				if(ascending) {
+					userCoins.sort(Comparator.comparing(Coin::getPrice));
+				}else {
+					userCoins.sort(Comparator.comparing(Coin::getPrice).reversed());
+				}
+			}else if(sortBy==4) {
+				ascending = !ascending;
+				if(ascending) {
+					userCoins.sort(Comparator.comparing(Coin::getPriceChangePercentage1d));
+				}else {
+					userCoins.sort(Comparator.comparing(Coin::getPriceChangePercentage1d).reversed());
+				}
+			}else if(sortBy==5) {
+				ascending = !ascending;
+				if(ascending) {
+					userCoins.sort(Comparator.comparing(Coin::getPriceChangePercentage7d));
+				}else {
+					userCoins.sort(Comparator.comparing(Coin::getPriceChangePercentage7d).reversed());
+				}
+			}else if(sortBy==6) {
+				ascending = !ascending;
+				if(ascending) {
+					userCoins.sort(Comparator.comparing(Coin::getPriceChangePercentage30d));
+				}else {
+					userCoins.sort(Comparator.comparing(Coin::getPriceChangePercentage30d).reversed());
+				}
+			}else if(sortBy==7) {
+				ArrayList<Coin> filteredCoinData = new ArrayList<Coin>();
+				for(Coin coin : userCoins) {
+					if(coin.getName().toLowerCase().contains(searchTerm.toLowerCase())||coin.getSymbol().toLowerCase().contains(searchTerm.toLowerCase())) {
+						filteredCoinData.add(coin);
+					}
+					userCoins = filteredCoinData;
+				}
+			}
+			model.addAttribute("coins", userCoins);
 		}else {
 			if(sortBy==1) {
 				ascending = !ascending;
@@ -332,14 +306,16 @@ public class MainController {
 		return "redirect:/prices";
 	}
 	
-	@RequestMapping(value="/coins/{id}", method = { RequestMethod.GET, RequestMethod.POST })
-	public String coinDetails(HttpSession session, Model model, @PathVariable("id") Long id) {
+	@RequestMapping(value="/coins/{symbol}", method = { RequestMethod.GET, RequestMethod.POST })
+	public String coinDetails(HttpSession session, Model model, @PathVariable("symbol") String symbol) {
 		if(session.getAttribute("userId") != null) {
 			Long userId = (Long) session.getAttribute("userId");		
 			User user = userService.findById(userId);
 			model.addAttribute("apiKey", user.getApiKey()); 
 		}
-		model.addAttribute("coin", coinService.findById(id));		
+		
+		model.addAttribute("coin", coinService.findBySymbol(symbol));		
+		
 		return "coin_details.jsp";
 	}
 	
@@ -368,15 +344,6 @@ public class MainController {
 					overallProfit += ownedCoin.getGain();
 				}else {
 					inactiveCoins.add(ownedCoin);
-				}
-				try {
-					ownedCoin.setCoinRef(coinService.findBySymbol(ownedCoin.getSymbol()).getId()); // fixes coinRef issue?
-					ownedCoin.setCurrentPrice(coinService.findBySymbol(ownedCoin.getSymbol()).getPrice());
-					ownedCoin.setPriceDifference(coinService.findBySymbol(ownedCoin.getSymbol()).getPrice()/ownedCoin.getPurchasePrice()*100-100);
-					ownedCoin.setTotalProfit(ownedCoin.getCurrentPrice()*ownedCoin.getTotalAmount()-ownedCoin.getPurchasePrice()*ownedCoin.getTotalAmount());
-					ownedCoinService.updateOwnedCoin(ownedCoin);
-				}catch(NullPointerException e){
-					System.out.println("Coin not found: "+ownedCoin.getSymbol());
 				}
 			}
 			

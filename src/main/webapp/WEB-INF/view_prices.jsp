@@ -73,11 +73,11 @@
 	<tbody>
 		<c:forEach var="coin" items="${coins}">
         	<tr class="card-item">
-	        	<c:if test="${!myCoins.contains(coin)}">
-					<td class="narrow"><img id="starImg${coin.id}" onclick="watchCoin(${coin.id})" src="${starOutline}"/></td>
+	        	<c:if test="${!myCoins.contains(coin.symbol)}">
+					<td class="narrow"><img id="starImg${coin.symbol}" onclick="watchCoin('${coin.symbol}')" src="${starOutline}"/></td>
 				</c:if>
-				<c:if test="${myCoins.contains(coin)}">
-					<td class="narrow"><img id="starImg${coin.id}" onclick="watchCoin(${coin.id})" src="${starFull}"/></td>
+				<c:if test="${myCoins.contains(coin.symbol)}">
+					<td class="narrow"><img id="starImg${coin.symbol}" onclick="watchCoin('${coin.symbol}')" src="${starFull}"/></td>
 				</c:if>
 	            <c:if test="${coin.coinRank<=100}">
 					<td class="narrow">${coin.coinRank}</td>
@@ -85,8 +85,8 @@
 				<c:if test="${coin.coinRank>100}">
 					<td class="narrow">100+</td>
 				</c:if>
-	            <td class="narrow"><a href="/coins/${coin.id}"><img class="logo-img" src="${coin.logo}"/></a></td>
-	            <td colspan=2 class="float-left"><a class="link-light" href="/coins/${coin.id}">${coin.name} - ${coin.symbol}</a></td>
+	            <td class="narrow"><a href="/coins/${coin.symbol}"><img class="logo-img" src="${coin.logo}"/></a></td>
+	            <td colspan=2 class="float-left"><a class="link-light" href="/coins/${coin.symbol}">${coin.name} - ${coin.symbol}</a></td>
 	            <c:if test="${coin.price<0.001}">
 					<td><p id="price${coin.symbol}">&lt; $<fmt:formatNumber pattern="0.000" value="${coin.price}"/></p></td>
 				</c:if>
