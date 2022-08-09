@@ -24,6 +24,7 @@ public class CoinController {
 	@Autowired
 	private CoinService coinService;
 	
+	@CrossOrigin(origins = "https://crypto-ledger.herokuapp.com")
 	@RequestMapping("/api/coins")
 	public List<Coin> allCoins() {
 		return coinService.getCoinData();
