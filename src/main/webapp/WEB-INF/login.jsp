@@ -68,6 +68,7 @@
 	</div>
 </form:form>
 
+<input type="hidden" id="nomicsApi" name="nomicsApi" value="${nomicsApi}">
 <script type="text/javascript" src="../js/app.js"></script>
 <script type="text/javascript" src="../js/passwordReset.js"></script>
 

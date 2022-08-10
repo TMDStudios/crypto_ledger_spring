@@ -1,6 +1,7 @@
 let allCoins = [];
 //let timer = Date.now()%15000;
 let shortCoinData = [];
+let nomicsApi = document.getElementById("nomicsApi").value;
 
 function updateCoinData(jsonData) {
   	let xhttp = new XMLHttpRequest();
@@ -13,7 +14,7 @@ function fetchData(myCallback, page) {
 	allCoins = []; // Keep track of updated coins
 	shortCoinData = [];
   	let req = new XMLHttpRequest();
-	req.open('GET', "https://api.nomics.com/v1/currencies/ticker?key=eb3a7d733a1719cd0a2731a28b6c9bedcb052751&per-page=100&page="+page);
+	req.open('GET', "https://api.nomics.com/v1/currencies/ticker?key="+nomicsApi+"&per-page=100&page="+page);
   	req.onload = function() {
     	if (req.status == 200) {
 			// rename 1d, 7d, and 30d in order to use dot notation
@@ -94,7 +95,7 @@ function fetchData(myCallback, page) {
 					console.log(e);
 				}
 			}
-			console.log("Text length is "+shortCoinData.length);
+			//console.log("Text length is "+shortCoinData.length);
 			if(shortCoinData.length<65000){
 				myCallback(JSON.stringify(shortCoinData));
 			}else{

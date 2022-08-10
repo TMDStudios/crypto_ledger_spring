@@ -8,6 +8,7 @@ import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -33,6 +34,9 @@ import com.tmdstudios.cls.services.UserService;
 @Controller
 public class MainController {
 	
+	@Value("${NOMICS_API}")
+	private String nomicsApi;
+	
 	private boolean showWatchlist = false;
 	private boolean darkMode = true;
 	private int sortBy = 0;
@@ -54,6 +58,7 @@ public class MainController {
 	@GetMapping("/")
 	public String index(Model model, HttpSession session) {
 		session.setAttribute("darkMode", darkMode);
+		session.setAttribute("nomicsApi", nomicsApi);
 	    return "index.jsp";
 	}
 	
@@ -130,6 +135,8 @@ public class MainController {
 	
 	@GetMapping("/prices")
 	public String viewPrices(HttpSession session, Model model) {
+		
+		session.setAttribute("nomicsApi", nomicsApi);
 
 		if(session.getAttribute("userId") != null) {
 			Long userId = (Long) session.getAttribute("userId");		

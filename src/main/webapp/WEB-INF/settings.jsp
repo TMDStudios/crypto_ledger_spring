@@ -70,6 +70,7 @@
   </a>
 </div>
 
+<input type="hidden" id="nomicsApi" name="nomicsApi" value="${nomicsApi}">
 <script type="text/javascript" src="../js/app.js"></script>
 
 </body>

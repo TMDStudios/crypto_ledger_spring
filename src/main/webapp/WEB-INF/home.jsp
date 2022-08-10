@@ -161,6 +161,7 @@
 
 <br>
 
+<input type="hidden" id="nomicsApi" name="nomicsApi" value="${nomicsApi}">
 <script type="text/javascript" src="../js/app.js"></script>
 <script type="text/javascript" src="../js/sell.js"></script>
 <script type="text/javascript" src="../js/delete.js"></script>
