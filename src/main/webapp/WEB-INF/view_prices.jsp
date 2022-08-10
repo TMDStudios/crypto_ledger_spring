@@ -117,8 +117,7 @@
 </table>
 
 <br>
-<div style="margin: auto; text-align: center;">Coin prices provided by <a href="https://nomics.com/" target="_blank">
-https://nomics.com/</a></div>
+<div style="margin: auto; text-align: center;"><a href="https://nomics.com/" target="_blank"  class="link-light">Crypto Market Cap & Pricing Data Provided By Nomics</a></div>
 <br>
 <input type="hidden" id="nomicsApi" name="nomicsApi" value="${nomicsApi}">
 
