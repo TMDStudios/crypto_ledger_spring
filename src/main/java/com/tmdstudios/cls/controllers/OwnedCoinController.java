@@ -81,7 +81,8 @@ public class OwnedCoinController {
 		newOwnedCoin.setTotalSpent(totalSpent);
 		newOwnedCoin.setPurchasePrice(totalSpent/totalAmount);
 		newOwnedCoin.setCurrentPrice(currentPrice);
-		newOwnedCoin.setPriceDifference(currentPrice-purchasePrice*100-100);
+//		newOwnedCoin.setPriceDifference(currentPrice-purchasePrice*100-100);
+		newOwnedCoin.setPriceDifference((coin.getPrice()/(totalSpent/totalAmount))*100-100);
 		newOwnedCoin.setTotalProfit(currentPrice*totalAmount-totalSpent/totalAmount*totalAmount);
 		ownedCoinService.addOwnedCoin(newOwnedCoin);
 		
