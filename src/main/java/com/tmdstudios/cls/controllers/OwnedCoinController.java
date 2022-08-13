@@ -59,14 +59,15 @@ public class OwnedCoinController {
 		Double totalAmount = 0.0;
 		Double totalSpent = 0.0;
 		
-		Double currentPrice = coinService.findBySymbol(symbol).getPrice();
+		Coin coin = coinService.findBySymbol(symbol);
+		Double currentPrice = coin.getPrice();
 		
 		if(purchasePrice<=0) {purchasePrice=currentPrice;}
 		
-		for(OwnedCoin coin:ownedCoins) {
+		for(OwnedCoin ownedCoin:ownedCoins) {
 			// only keep track of totals for last coin
-			totalAmount+=coin.getAmount();
-			totalSpent+=coin.getAmount()*coin.getPurchasePrice();
+			totalAmount+=ownedCoin.getAmount();
+			totalSpent+=ownedCoin.getAmount()*ownedCoin.getPurchasePrice();
 		}
 		
 //		System.out.println("Found: "+ownedCoins.size());
@@ -79,7 +80,9 @@ public class OwnedCoinController {
 		newOwnedCoin.setTotalValue(totalAmount*currentPrice);
 		newOwnedCoin.setTotalSpent(totalSpent);
 		newOwnedCoin.setPurchasePrice(totalSpent/totalAmount);
+		newOwnedCoin.setCurrentPrice(currentPrice);
 		newOwnedCoin.setPriceDifference(currentPrice-purchasePrice*100-100);
+		newOwnedCoin.setTotalProfit(currentPrice*totalAmount-totalSpent/totalAmount*totalAmount);
 		ownedCoinService.addOwnedCoin(newOwnedCoin);
 		
 		if(ownedCoins.size()>0) {

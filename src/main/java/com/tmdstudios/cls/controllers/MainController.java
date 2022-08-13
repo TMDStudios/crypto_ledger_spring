@@ -343,6 +343,9 @@ public class MainController {
 			
 			for(OwnedCoin ownedCoin:ownedCoins) {
 				if(!ownedCoin.getSold()&&!ownedCoin.getMerged()) {
+					ownedCoin.setCurrentPrice(coinService.findBySymbol(ownedCoin.getSymbol()).getPrice());
+					ownedCoin.setPriceDifference(coinService.findBySymbol(ownedCoin.getSymbol()).getPrice()/ownedCoin.getPurchasePrice()*100-100);
+					ownedCoin.setTotalProfit(ownedCoin.getCurrentPrice()*ownedCoin.getTotalAmount()-ownedCoin.getPurchasePrice()*ownedCoin.getTotalAmount());
 					activeCoins.add(ownedCoin);
 					overallTotal += ownedCoin.getTotalValue();
 					currentProfit += ownedCoin.getTotalProfit();
