@@ -83,7 +83,7 @@ public class OwnedCoinController {
 		newOwnedCoin.setCurrentPrice(currentPrice);
 //		newOwnedCoin.setPriceDifference(currentPrice-purchasePrice*100-100);
 		newOwnedCoin.setPriceDifference((coin.getPrice()/(totalSpent/totalAmount))*100-100);
-		newOwnedCoin.setTotalProfit(currentPrice*totalAmount-totalSpent/totalAmount*totalAmount);
+		newOwnedCoin.setTotalProfit(currentPrice*totalAmount-totalSpent);
 		ownedCoinService.addOwnedCoin(newOwnedCoin);
 		
 		if(ownedCoins.size()>0) {
@@ -123,6 +123,7 @@ public class OwnedCoinController {
 			ownedCoin.setTotalAmount(ownedCoin.getTotalAmount() - amount);
 			ownedCoin.setTotalSpent(ownedCoin.getPurchasePrice() * amount);
 			ownedCoin.setTotalValue(ownedCoin.getTotalAmount()*ownedCoin.getCurrentPrice());
+			ownedCoin.setTotalProfit(coin.getPrice()*ownedCoin.getTotalAmount()-ownedCoin.getTotalSpent());
 			ownedCoin.setPriceDifference(ownedCoin.getCurrentPrice()/ownedCoin.getPurchasePrice()*100-100);
 			ownedCoinService.updateOwnedCoin(ownedCoin);
 		}
@@ -140,6 +141,7 @@ public class OwnedCoinController {
 			remainingCoin.setTotalAmount(ownedCoin.getTotalAmount());
 			remainingCoin.setTotalValue(ownedCoin.getTotalValue());
 			remainingCoin.setTotalSpent(ownedCoin.getTotalSpent());
+			remainingCoin.setTotalProfit(ownedCoin.getTotalAmount()*coin.getPrice()-ownedCoin.getTotalSpent());
 			remainingCoin.setPriceDifference(ownedCoin.getPriceDifference());
 			ownedCoinService.addOwnedCoin(remainingCoin);
 
