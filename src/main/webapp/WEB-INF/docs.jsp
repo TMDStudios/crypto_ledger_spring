@@ -35,7 +35,6 @@
 <div>
 	<p>The Crypto Ledger API currently supports four different functions. You can either fetch live prices or use your API key to access your 
 	personal ledger. You can also buy or sell coins.</p>
-	<p><strong style="color: red;"><u>NOTE:</u></strong> These links are not yet active.</p>
 	<p>
 		No API key is required to fetch coin prices. Simply use:
     	<br>
@@ -61,12 +60,12 @@
 </div>
 
 <c:if test="${api_key!=null}">
-	<div id="center-content">Your API Key: ${api_key}</div>
+	<div class="api-text" id="center-content">Your API Key: ${api_key}</div>
 </c:if>
 <c:if test="${api_key==null}">
 	<div>
 		<form action="#" method="post">
-			<input type="submit" value="Get API Key"/>
+			<input class="api-btn" type="submit" value="Get API Key"/>
 		</form>
 	</div>
 </c:if>

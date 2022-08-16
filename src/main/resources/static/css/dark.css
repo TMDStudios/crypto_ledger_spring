@@ -338,3 +338,14 @@ input:checked + .slider:before {
 	border: 2px solid white;
 	color: #36454f;
 }
+.api-text {
+	padding: 6px 0px;
+}
+.api-btn {
+	background-color: rgba(150, 212, 212, 0.2);
+	font-size: 1.1rem;
+	border-radius: 2px;
+	border: 1px solid #ced7dd;
+	color: white;
+	padding: 4px 32px;
+}
