@@ -3,6 +3,7 @@ package com.tmdstudios.cls.controllers;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Random;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -43,6 +44,24 @@ public class MainController {
 	private boolean ascending = true;
 	private String searchTerm = "";
 	
+	private String[] banners = {
+			"https://tmdstudios.files.wordpress.com/2021/02/plclogolight.png?h=120",
+			"https://tmdstudios.files.wordpress.com/2021/11/clbanner-1.png?h=120",
+			"https://tmdstudios.files.wordpress.com/2022/03/tmdlogowide.png?h=120",
+			"https://tmdstudios.files.wordpress.com/2022/03/nfts.png?h=120",
+			"https://tmdstudios.files.wordpress.com/2021/04/galagames.png?h=120",
+			"https://tmdstudios.files.wordpress.com/2019/02/bitcoinbanner.png?h=120"
+			};
+	
+	private String[] links = {
+			"https://play.google.com/store/apps/details?id=com.tmdstudios.python",
+			"https://play.google.com/store/apps/details?id=com.tmdstudios.cryptoledgerkotlin",
+			"https://tmdstudios.wordpress.com",
+			"https://tmdstudios.wordpress.com/nfts/",
+			"https://tmdstudios.wordpress.com/2021/04/06/gala-games/",
+			"https://freebitco.in/?r=15749838"
+			};
+	
 	@Autowired
 	private UserService userService;
 	
@@ -66,6 +85,11 @@ public class MainController {
 	public String authLogin(Model model) {
 	    model.addAttribute("newUser", new User());
 	    model.addAttribute("newLogin", new LoginUser());
+	    
+	    int indexVal = new Random().nextInt(banners.length);
+		model.addAttribute("banner", banners[indexVal]);
+		model.addAttribute("link", links[indexVal]);
+		
 	    return "login.jsp";
 	}
 	
@@ -89,6 +113,11 @@ public class MainController {
 	public String authRegister(Model model) {
 	    model.addAttribute("newUser", new User());
 	    model.addAttribute("newLogin", new LoginUser());
+	    
+	    int indexVal = new Random().nextInt(banners.length);
+		model.addAttribute("banner", banners[indexVal]);
+		model.addAttribute("link", links[indexVal]);
+	    
 	    return "register.jsp";
 	}
 	

@@ -78,7 +78,7 @@
     </tr>
 </table>
 
-<div style="width: 60%; margin: auto; text-align: center">
+<div class="banner-div">
 	<a href="https://play.google.com/store/apps/details?id=com.tmdstudios.cryptoledgerkotlin">
 		<img
 		  class="banner"

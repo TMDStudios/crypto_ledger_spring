@@ -77,6 +77,16 @@
 		<div>
 			<input class="btn" type="submit" value="Register"/>
 		</div>
+		
+		<div class="banner-div">
+			<a href="${link}">
+				<img
+				  class="banner"
+				  style="max-width: 100%"
+				  src="${banner}?w=600"
+				/>
+			</a>
+		</div>
 
 	</div>
 </form:form>
