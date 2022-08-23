@@ -82,13 +82,11 @@ public class MainController {
 	}
 	
 	@GetMapping("/login")
-	public String authLogin(Model model) {
+	public String authLogin(HttpSession session, Model model) {
 	    model.addAttribute("newUser", new User());
 	    model.addAttribute("newLogin", new LoginUser());
 	    
-	    int indexVal = new Random().nextInt(banners.length);
-		model.addAttribute("banner", banners[indexVal]);
-		model.addAttribute("link", links[indexVal]);
+	    setBanner(session);
 		
 	    return "login.jsp";
 	}
@@ -110,13 +108,11 @@ public class MainController {
 	}
 	
 	@GetMapping("/register")
-	public String authRegister(Model model) {
+	public String authRegister(HttpSession session, Model model) {
 	    model.addAttribute("newUser", new User());
 	    model.addAttribute("newLogin", new LoginUser());
 	    
-	    int indexVal = new Random().nextInt(banners.length);
-		model.addAttribute("banner", banners[indexVal]);
-		model.addAttribute("link", links[indexVal]);
+	    setBanner(session);
 	    
 	    return "register.jsp";
 	}
@@ -455,6 +451,12 @@ public class MainController {
 		
 		redirectAttributes.addFlashAttribute("api_key", apiKey);
 	    return "redirect:/api/docs";
+	}
+	
+	private void setBanner(HttpSession session) {
+		int indexVal = new Random().nextInt(banners.length);
+		session.setAttribute("banner", banners[indexVal]);
+		session.setAttribute("link", links[indexVal]);
 	}
 
 }
