@@ -4,11 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
-import java.net.URI;
 import java.net.URL;
-import java.net.http.HttpClient;
-import java.net.http.HttpRequest;
-import java.net.http.HttpResponse;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -49,7 +45,7 @@ public class CoinDataService {
 	public List<Coin> fetchData() throws IOException, InterruptedException {
 		
 		HttpURLConnection connection = null;
-		URL url = new URL("https://api.nomics.com/v1/currencies/ticker?key="+nomicsApi+"&per-page=10");
+		URL url = new URL("https://api.nomics.com/v1/currencies/ticker?key="+nomicsApi+"&per-page=100");
 		connection = (HttpURLConnection) url.openConnection();
 		connection.setRequestMethod("GET");
 		connection.setRequestProperty("Content-length", "0");
@@ -84,9 +80,7 @@ public class CoinDataService {
 			
 			for(int i = 0; i<jsonCoinData.size(); i++) {
 				JSONObject coinObject = (JSONObject) jsonCoinData.get(i);
-				JSONObject priceChange1d = (JSONObject) coinObject.get("oneDay");
-				JSONObject priceChange7d = (JSONObject) coinObject.get("sevenDay");
-				JSONObject priceChange30d = (JSONObject) coinObject.get("thirtyDay");
+				
 //				Coin coin = new Coin(
 //						coinObject.get("name").toString(), 
 //						coinObject.get("symbol").toString(),
@@ -99,21 +93,37 @@ public class CoinDataService {
 //						);
 //				coinData.add(coin);
 				JSONObject customCoinJson = new JSONObject();
-				customCoinJson.put("name", coinObject.get("name").toString());
-				customCoinJson.put("symbol", coinObject.get("symbol").toString());
-				customCoinJson.put("logo", coinObject.get("logo_url").toString());
-				customCoinJson.put("price", coinObject.get("price").toString());
-				customCoinJson.put("coinRank", coinObject.get("rank").toString());
-				customCoinJson.put("priceChangePercentage1d", priceChange1d.get("price_change_pct").toString());
-				customCoinJson.put("priceChangePercentage7d", priceChange7d.get("price_change_pct").toString());
-				customCoinJson.put("priceChangePercentage30d", priceChange30d.get("price_change_pct").toString());
+				
+				try {
+					JSONObject priceChange1d = (JSONObject) coinObject.get("oneDay");
+					JSONObject priceChange7d = (JSONObject) coinObject.get("sevenDay");
+					JSONObject priceChange30d = (JSONObject) coinObject.get("thirtyDay");
+					customCoinJson.put("name", coinObject.get("name").toString());
+					customCoinJson.put("symbol", coinObject.get("symbol").toString());
+					customCoinJson.put("logo", coinObject.get("logo_url").toString());
+					customCoinJson.put("price", coinObject.get("price").toString());
+					customCoinJson.put("coinRank", coinObject.get("rank").toString());
+					customCoinJson.put("priceChangePercentage1d", priceChange1d.get("price_change_pct").toString());
+					customCoinJson.put("priceChangePercentage7d", priceChange7d.get("price_change_pct").toString());
+					customCoinJson.put("priceChangePercentage30d", priceChange30d.get("price_change_pct").toString());
+				}catch(NullPointerException e) {
+					customCoinJson.put("name", coinObject.get("name").toString());
+					customCoinJson.put("symbol", coinObject.get("symbol").toString());
+					customCoinJson.put("logo", coinObject.get("logo_url").toString());
+					customCoinJson.put("price", coinObject.get("price").toString());
+					customCoinJson.put("coinRank", coinObject.get("rank").toString());
+					customCoinJson.put("priceChangePercentage1d", "0");
+					customCoinJson.put("priceChangePercentage7d", "0");
+					customCoinJson.put("priceChangePercentage30d", "0");
+				}
+				
 				jsonArray.add(customCoinJson);
 			}
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
 		
-//		System.out.println("JSON: "+jsonArray);
+		System.out.println("JSON: "+jsonArray);
 		
 		if(getCoinData().isEmpty()) {
 			saveCoinData(new CoinData(jsonArray.toString()));
