@@ -184,11 +184,11 @@ function watchCoin(coinSymbol){
 	xhttp.send();
 }
 
-fetchData(updateCoinData, 1);
+/*fetchData(updateCoinData, 1);
 
 function getPrices(){
 	fetchData(updateCoinData, 1);
-};
+};*/
 
 /*function getTimer() {
 	if(timer<0){
