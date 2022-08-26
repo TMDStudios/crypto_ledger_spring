@@ -384,7 +384,6 @@ public class MainController {
 			
 			model.addAttribute("apiKey", user.getApiKey()); 
 			model.addAttribute("activeCoins", activeCoins);
-//			model.addAttribute("inactiveCoins", inactiveCoins);
 			model.addAttribute("inactiveCoins", ownedCoinService.customHistory(user, user.getSettings().getHistoryLength()));
 		}
 		

@@ -74,24 +74,10 @@ public class CoinDataService {
 		JSONArray jsonArray = new JSONArray();
 		try {
 			JSONArray jsonCoinData = (JSONArray) parser.parse(sb.toString());
-//			System.out.println("JSON: "+jsonCoinData);
-			
-			
 			
 			for(int i = 0; i<jsonCoinData.size(); i++) {
 				JSONObject coinObject = (JSONObject) jsonCoinData.get(i);
 				
-//				Coin coin = new Coin(
-//						coinObject.get("name").toString(), 
-//						coinObject.get("symbol").toString(),
-//						coinObject.get("logo_url").toString(),
-//						Double.parseDouble(coinObject.get("price").toString()),
-//						Long.parseLong(coinObject.get("rank").toString()),
-//						Double.parseDouble(priceChange1d.get("price_change_pct").toString()),
-//						Double.parseDouble(priceChange7d.get("price_change_pct").toString()),
-//						Double.parseDouble(priceChange30d.get("price_change_pct").toString())
-//						);
-//				coinData.add(coin);
 				JSONObject customCoinJson = new JSONObject();
 				
 				try {
@@ -122,8 +108,6 @@ public class CoinDataService {
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
-		
-		System.out.println("JSON: "+jsonArray);
 		
 		if(getCoinData().isEmpty()) {
 			saveCoinData(new CoinData(jsonArray.toString()));
