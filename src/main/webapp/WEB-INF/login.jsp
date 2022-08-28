@@ -61,7 +61,7 @@
 		<br>
 		
 		<div>
-			<p><a href="#" onclick="resetPassword()">Reset Password</a></p>
+			<p><a class="nav_link" href="#" onclick="resetPassword()">Reset Password</a></p>
 			<p><small>You can only reset your password if you entered an email when you created your account.</small></p>
 		</div>
 		

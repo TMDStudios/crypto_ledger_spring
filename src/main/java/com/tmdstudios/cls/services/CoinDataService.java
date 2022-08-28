@@ -6,6 +6,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -52,7 +53,7 @@ public class CoinDataService {
         connection.connect();
         int status = connection.getResponseCode();
         
-        System.out.println("STATUS: "+status);
+        System.out.println("STATUS: "+status+" -- "+new Date());
         
         StringBuilder sb = new StringBuilder();
         
