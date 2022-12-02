@@ -169,7 +169,7 @@ public class MainController {
 			model.addAttribute("myCoins", user.getCoins());
 		}
 		
-		List<Coin> coinData = coinService.getCoinData();
+		List<Coin> coinData = coinService.getCoinData(showWatchlist);
 		
 		if(showWatchlist) {
 			Long userId = (Long) session.getAttribute("userId");

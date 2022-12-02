@@ -25,7 +25,7 @@ public class CoinController {
 	
 	@RequestMapping("/api/coins")
 	public List<Coin> allCoins() {
-		return coinService.getCoinData();
+		return coinService.getCoinData(false);
 	}
 	
 	@RequestMapping(value="/api/coins", method=RequestMethod.POST)

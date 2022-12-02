@@ -58,6 +58,8 @@
 	</form>	
 </div>
 
+<p class="center-small"><small>Prices are updated every 10 minutes</small></p>
+
 <table>
 	<thead>
     	<tr>

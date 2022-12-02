@@ -20,14 +20,16 @@ public class CoinService {
 		this.coinDataService = coinDataService;
 	}
 	
-	public List<Coin> getCoinData() {
+	public List<Coin> getCoinData(Boolean watchlist) {
+		int listSize = 50;
+		if(watchlist) {listSize=100;}
 		ArrayList<Coin> coinData = new ArrayList<Coin>();
 		
 		JSONParser parser = new JSONParser();
 		try {
 			JSONArray jsonCoinData = (JSONArray) parser.parse(coinDataService.getCoinData().get(0).getJsonData());
 			
-			for(int i = 0; i<jsonCoinData.size(); i++) {
+			for(int i = 0; i<listSize; i++) {
 				JSONObject coinObject = (JSONObject) jsonCoinData.get(i);
 				Coin coin = new Coin(
 						coinObject.get("name").toString(), 
@@ -49,7 +51,7 @@ public class CoinService {
 	}
 	
 	public Coin findBySymbol(String symbol) {
-		List<Coin> coinData = getCoinData();
+		List<Coin> coinData = getCoinData(false);
 		for(Coin coin : coinData) {
 			if(coin.getSymbol().toLowerCase().equals(symbol.toLowerCase())) {
 				return coin;

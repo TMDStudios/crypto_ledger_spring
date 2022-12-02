@@ -35,6 +35,12 @@ td {
 .center {
 	text-align: center;
 }
+.center-small {
+	position: relative;
+  	margin-top:-4px;
+  	margin-bottom:-2px;
+	text-align: center;
+}
 .center-cell {
 	margin: auto;
 	text-align: center;

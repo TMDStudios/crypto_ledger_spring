@@ -42,7 +42,7 @@ public class CoinDataService {
 	
 	@SuppressWarnings("unchecked")
 	@PostConstruct
-	@Scheduled(cron = "*/30 * * * * *")
+	@Scheduled(cron = "0 */10 * * * *")
 	public List<Coin> fetchData() throws IOException, InterruptedException {
 		
 		HttpURLConnection connection = null;
