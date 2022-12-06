@@ -38,7 +38,7 @@
 	<p>
 		No API key is required to fetch coin prices. Simply use:
     	<br>
-    	<mark>https://crypto-ledger.herokuapp.com/api/coins</mark>
+    	<mark>https://cls-prod-cls-z2mvyu.mo1.mogenius.io/api/coins</mark>
 	</p>
 	<p>You will need an API key to see and/or modify your ledger. Click on the button below to generate your key.</p>
 	<p><strong style="color: red;"><u>Important:</u></strong> <b>Treat your API key like you would a password. Do not share it with
@@ -47,15 +47,15 @@
 	<p>You can fetch your full ledger and buy/sell coins with the following URLs:</p>
 	<p>View full ledger:
     	<br>
-    	<mark>https://crypto-ledger.herokuapp.com/api/user-ledger/YOUR_API_KEY</mark>
+    	<mark>https://cls-prod-cls-z2mvyu.mo1.mogenius.io/api/user-ledger/YOUR_API_KEY</mark>
     </p>
 	<p>Buy coins:
     	<br>
-    	<mark>https://crypto-ledger.herokuapp.com/api/buy/YOUR_API_KEY</mark>
+    	<mark>https://cls-prod-cls-z2mvyu.mo1.mogenius.io/api/buy/YOUR_API_KEY</mark>
     </p>
 	<p>Sell coins:
     	<br>
-    	<mark>https://crypto-ledger.herokuapp.com/api/sell/YOUR_API_KEY</mark>
+    	<mark>https://cls-prod-cls-z2mvyu.mo1.mogenius.io/api/sell/YOUR_API_KEY</mark>
     </p>
 </div>
 
